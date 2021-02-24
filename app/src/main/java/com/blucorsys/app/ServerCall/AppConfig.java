@@ -19,5 +19,9 @@ public class AppConfig {
 
     public static String POSTJOB=BASE_URL+"insert_jobpost.php";
 
+    public static String GETLOCATION=BASE_URL+"get_location.php";
+
+    public static String GETDATE=BASE_URL+"get_datetime.php";
+
 
 }

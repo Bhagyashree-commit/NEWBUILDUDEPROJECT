@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -20,6 +24,7 @@ import com.blucorsys.app.CustomComponent.Constants;
 import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
+import com.blucorsys.app.labourcontractorapp.Contractor.CustomAdapter;
 import com.blucorsys.app.labourcontractorapp.Contractor.PostJob;
 import com.blucorsys.app.labourcontractorapp.R;
 
@@ -37,25 +42,23 @@ CustomLoader loader;
 Preferences pref;
 private ArrayList<String> categoryEng;
     private ArrayList<String> categoryID;
+    LinearLayout linlay;
+    CustomAdapter customAdapterTwo;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labour_profile);
-        spincat=findViewById(R.id.spinn_cat);
-        pref=new Preferences(this);
+        spincat = findViewById(R.id.spinn_cat);
+        linlay = findViewById(R.id.linlay);
+        pref = new Preferences(this);
         categoryEng = new ArrayList<String>();
         categoryID = new ArrayList<String>();
 
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+
         getCategory();
-//        spincat.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getCategory();
-//            }
-//        });
 
     }
 
@@ -109,5 +112,6 @@ private ArrayList<String> categoryEng;
                 e.printStackTrace();
             }
         }
+        spincat.setAdapter(new ArrayAdapter<String>(LabourProfile.this, android.R.layout.select_dialog_item, categoryEng));
     }
 }

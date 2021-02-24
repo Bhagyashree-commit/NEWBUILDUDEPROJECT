@@ -13,4 +13,8 @@ public class Constants {
     public static String CATID= "cat_id";
     public static String CATENG= "cat_english";
     public static String STATUS= "profile_status";
+    public static String LOC= "location";
+    public static String JOBID= "id";
+    public static String DATE= "DateTime";
+    public static String DATE1= "create_datetime";
 }

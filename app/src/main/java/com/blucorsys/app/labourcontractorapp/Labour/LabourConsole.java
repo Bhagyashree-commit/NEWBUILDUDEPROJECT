@@ -14,24 +14,30 @@ import com.blucorsys.app.labourcontractorapp.R;
 
 
 public class LabourConsole extends AppCompatActivity {
-CardView card44;
+CardView cardprofile,cardapply;
 TextView tv_name;
 Preferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labour_console);
-        card44=findViewById(R.id.card44);
+        cardprofile=findViewById(R.id.cardprofile);
+        cardapply=findViewById(R.id.cardapply);
         tv_name=findViewById(R.id.tv_name);
         pref=new Preferences(this);
         tv_name.setText(pref.get(Constants.FIRSTNAME));
-        card44.setOnClickListener(new View.OnClickListener() {
+        cardprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LabourConsole.this, LabourProfile.class));
             }
         });
-
+        cardapply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LabourConsole.this, JobApplication.class));
+            }
+        });
 
     }
 }
