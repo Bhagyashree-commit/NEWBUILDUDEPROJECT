@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_100"
     tools:context=".Labour.JobApplication">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/_5sdp"
         android:orientation="vertical">
         <RelativeLayout
             android:id="@+id/rel_lay"
@@ -51,84 +51,9 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/rel_lay1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:orientation="horizontal">
-            <Spinner
-                android:spinnerMode="dialog"
-                android:backgroundTint="@color/green_200"
-                android:background="@drawable/square_box"
-                android:id="@+id/spin_loc"
-                android:layout_alignParentLeft="true"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/white"
-                android:drawablePadding="@dimen/_5sdp"
-                android:padding="@dimen/_10sdp"
-                android:layout_width="@dimen/_190sdp"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:layout_height="match_parent"
-                android:text="Location"></Spinner>
-
-            <Spinner
-                android:spinnerMode="dialog"
-                android:backgroundTint="@color/red_300"
-                android:background="@drawable/square_box"
-                android:id="@+id/spin_date"
-                android:layout_alignParentRight="true"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/white"
-                android:drawablePadding="@dimen/_5sdp"
-                android:padding="@dimen/_10sdp"
-                android:layout_width="@dimen/_150sdp"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:layout_height="match_parent"
-                android:text="Date"></Spinner>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rel_lay2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Spinner
-                android:spinnerMode="dialog"
-                android:drawableRight="@drawable/ic_drop_down_arrow"
-                android:backgroundTint="@color/orange_300"
-                android:background="@drawable/square_box"
-                android:id="@+id/spincategory"
-                android:layout_alignParentLeft="true"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/white"
-                android:drawablePadding="@dimen/_5sdp"
-                android:padding="@dimen/_10sdp"
-                android:textSize="@dimen/_15sdp"
-                android:layout_width="@dimen/_210sdp"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:layout_height="@dimen/_40sdp"
-                android:text="Category"></Spinner>
 
 
-            <TextView
-                android:layout_toRightOf="@+id/spincategory"
-                android:backgroundTint="@color/pink_50"
-                android:background="@drawable/square_box"
-                android:id="@+id/tv_wages"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/black"
-                android:drawablePadding="@dimen/_5sdp"
-                android:padding="@dimen/_10sdp"
-                android:textSize="@dimen/_15sdp"
-                android:layout_width="@dimen/_100sdp"
-                android:textAllCaps="true"
-                android:layout_height="@dimen/_40sdp"
-                android:text="Wages"></TextView>
 
-        </RelativeLayout>
  <FrameLayout
      android:layout_width="match_parent"
      android:layout_height="match_parent"
@@ -136,23 +61,6 @@
 
 
 
-        <TextView
-            android:textAlignment="center"
-            android:layout_toRightOf="@+id/spincategory"
-            android:backgroundTint="@color/brown_600"
-            android:background="@drawable/square_box"
-            android:id="@+id/btn_apply"
-            android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:drawablePadding="@dimen/_5sdp"
-            android:padding="@dimen/_10sdp"
-            android:textSize="@dimen/_15sdp"
-            android:layout_width="match_parent"
-            android:textAllCaps="true"
-            android:layout_height="@dimen/_40sdp"
-            android:text="Apply"
-            android:gravity="center_horizontal"></TextView>
-    </LinearLayout>
+          </LinearLayout>
 
 </ScrollView>

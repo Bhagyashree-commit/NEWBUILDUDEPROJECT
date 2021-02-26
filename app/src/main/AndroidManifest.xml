@@ -23,11 +23,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LabourContractorApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Labour.JobApplication"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".Labour.JobApplication">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,7 +46,9 @@
             android:name=".Contractor.MapsActivityTwo"
             android:label="@string/title_activity_maps_two" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".SplashScreen"></activity>
+        <activity android:name=".SplashScreen">
+
+        </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".Choose_RoleActivity" />
         <activity android:name=".RegisterActivity" />
@@ -54,6 +58,7 @@
         <activity android:name=".Contractor.PostJob" />
         <activity android:name=".Labour.LabourConsole" />
         <activity android:name=".Labour.LabourProfile">
+
         </activity>
 
         <service android:name="com.blucorsys.app.firebase.MyFirebaseMessagingService" />

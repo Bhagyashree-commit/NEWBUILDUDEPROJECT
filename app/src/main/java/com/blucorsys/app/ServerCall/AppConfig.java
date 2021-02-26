@@ -23,5 +23,11 @@ public class AppConfig {
 
     public static String GETDATE=BASE_URL+"get_datetime.php";
 
+    public static String LABOURPROFILE=BASE_URL+"labour_profile.php";
+
+    public static String GETLABOURPROFILE=BASE_URL+"get_labour_profille.php";
+
+    public static String APPLYJOB=BASE_URL+"apply_job.php";
+
 
 }

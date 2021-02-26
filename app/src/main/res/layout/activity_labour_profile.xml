@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
            <RadioGroup
+               android:id="@+id/rg_gender"
                android:background="@drawable/square_box"
                android:layout_width="match_parent"
                android:paddingLeft="@dimen/_10sdp"
@@ -63,12 +64,14 @@
                android:orientation="horizontal"
                android:layout_height="wrap_content">
                <RadioButton
+                   android:id="@+id/rb_male"
                    android:fontFamily="sans-serif-condensed"
                    android:textSize="@dimen/_15sdp"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="MALE"></RadioButton>
               <RadioButton
+                  android:id="@+id/rb_female"
                   android:fontFamily="sans-serif-condensed"
                   android:textSize="@dimen/_15sdp"
                android:layout_width="wrap_content"
@@ -84,7 +87,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
-                android:id="@+id/et_compname"
+                android:id="@+id/et_location"
                 android:drawablePadding="@dimen/_5sdp"
                 android:drawableLeft="@drawable/location"
                 android:fontFamily="sans-serif-condensed"
@@ -123,7 +126,7 @@
                     android:layout_weight="1">
                     <EditText
                         android:inputType="number"
-                        android:id="@+id/et_location"
+                        android:id="@+id/et_pincode"
                         android:fontFamily="sans-serif-condensed"
                         android:textColor="@color/black"
                         android:padding="@dimen/_10sdp"
@@ -139,8 +142,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
-                    <EditText
-                        android:id="@+id/et_pincode"
+                    <TextView
+                        android:id="@+id/tv_dob"
                         android:fontFamily="sans-serif-condensed"
                         android:textColor="@color/black"
                         android:padding="@dimen/_10sdp"
@@ -149,7 +152,7 @@
                         android:layout_width="wrap_content"
                         android:textAllCaps="true"
                         android:layout_height="wrap_content"
-                        android:hint="BIRTH DATE*"></EditText>
+                        android:hint="BIRTH DATE*"></TextView>
                 </LinearLayout>
             </LinearLayout>
 
@@ -178,7 +181,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
-                android:id="@+id/et_email2"
+                android:id="@+id/et_wage"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="sans-serif-condensed"
                 android:textColor="@color/black"
@@ -198,7 +201,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
-                android:id="@+id/et_email"
+                android:id="@+id/et_adharnumber"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="sans-serif-condensed"
                 android:textColor="@color/black"
@@ -221,7 +224,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/btn_submitdeatils"
+                android:id="@+id/btn_submitlabordetails"
                 android:layout_width="144dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
