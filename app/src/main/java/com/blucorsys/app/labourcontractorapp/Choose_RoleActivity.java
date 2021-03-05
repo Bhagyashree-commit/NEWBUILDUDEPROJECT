@@ -30,6 +30,7 @@ import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
 
 import com.blucorsys.app.labourcontractorapp.Contractor.ContractorConsole;
+import com.blucorsys.app.labourcontractorapp.Contractor.ContractorProfile;
 import com.blucorsys.app.labourcontractorapp.Labour.LabourConsole;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -72,9 +73,7 @@ String mobile,password,usertype;
         cv1.setOnClickListener(this);
         cv2.setOnClickListener(this);
     getFCM_token();
-
     }
-
 
     public void getFCM_token()
     {
@@ -96,6 +95,7 @@ String mobile,password,usertype;
                     }
                 });
     }
+
 
     private Animation inFromLeftAnimation() {
         Animation inFromLeft = new TranslateAnimation(
@@ -128,16 +128,19 @@ String mobile,password,usertype;
         {
             case R.id.cv1:
                  mobile=pref.get(Constants.mobnum);
-                 password= pref.get(Constants.pass);
+                password= pref.get(Constants.pass);
                  usertype="Contractor";
+                Log.e("test",""+pref.get(Constants.mobnum));
+                Log.e("test2",""+pref.get(Constants.pass));
                 loginUser(mobile,password,usertype,token);
                 break;
             case R.id.cv2:
                  mobile=pref.get(Constants.mobnum);
                  password= pref.get(Constants.pass);
                  usertype="Labour";
+
                // startActivity(new Intent(Choose_RoleActivity.this, LabourConsole.class));
-                loginUser1(mobile,password,usertype,token);
+               loginUser1(mobile,password,usertype,token);
                 break;
 
         }
@@ -145,30 +148,33 @@ String mobile,password,usertype;
 
 
     private void loginUser(final String mobile,final String password,final String usertype,final String token) {
-       // loader.show();
+         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.LOGIN, new Response.Listener<String>() {
+                AppConfig.NEWLOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Login Response: " + response.toString());
-              //  loader.dismiss();
+                  loader.dismiss();
 
                 try {
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
-                        pref.set(Constants.USERID, object.getString("user_id"));
-                        pref.set(Constants.FIRSTNAME, object.getString("first_name"));
-                        pref.set(Constants.LASTNAME, object.getString("last_name"));
-                        pref.set(Constants.MOBILENUMBER, object.getString("mobileno"));
-                        pref.set(Constants.PREFLANG, object.getString("prefered_lang"));
-                        pref.set(Constants.STATUS, object.getString("profile_status"));
+                        pref.set(Constants.USERID,object.getString("user_id"));
+                        pref.set(Constants.FIRSTNAME,object.getString("first_name"));
+                        pref.set(Constants.LASTNAME,object.getString("last_name"));
+                        pref.set(Constants.MOBILENUMBER,object.getString("mobileno"));
+                        pref.set(Constants.PREFLANG,object.getString("prefered_lang"));
+                        pref.set(Constants.STATUS,object.getString("profile_status"));
+
                         pref.commit();
+
                         startActivity(new Intent(Choose_RoleActivity.this, ContractorConsole.class));
-                        Toast.makeText(getApplicationContext(), "Login Success!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(Choose_RoleActivity.this, LoginActivity.class));
                     }
                 } catch (JSONException e) {
                     // JSON error
@@ -202,31 +208,33 @@ String mobile,password,usertype;
     }
 
 
-    private void loginUser1(final String mobile,final String password,final String usertype,final String token) {
-        // loader.show();
+    private void loginUser1(final String mobile,final String password,final String usertype,final  String token) {
+         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.LOGIN, new Response.Listener<String>() {
+                AppConfig.NEWLOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Login Response: " + response.toString());
-                //  loader.dismiss();
+                  loader.dismiss();
 
                 try {
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
-                        pref.set(Constants.USERID, object.getString("user_id"));
-                        pref.set(Constants.FIRSTNAME, object.getString("first_name"));
-                        pref.set(Constants.LASTNAME, object.getString("last_name"));
-                        pref.set(Constants.MOBILENUMBER, object.getString("mobileno"));
-                        pref.set(Constants.PREFLANG, object.getString("prefered_lang"));
-                        pref.set(Constants.STATUS, object.getString("profile_status"));
+
+                        pref.set(Constants.USERID,object.getString("user_id"));
+                        pref.set(Constants.FIRSTNAME,object.getString("first_name"));
+                        pref.set(Constants.LASTNAME,object.getString("last_name"));
+                        pref.set(Constants.MOBILENUMBER,object.getString("mobileno"));
+                        pref.set(Constants.PREFLANG,object.getString("prefered_lang"));
+                        pref.set(Constants.STATUS,object.getString("profile_status"));
                         pref.commit();
-                        startActivity(new Intent(Choose_RoleActivity.this, LabourConsole.class));
-                        Toast.makeText(getApplicationContext(), "Login Success!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(Choose_RoleActivity.this,LabourConsole.class));
+                        Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(Choose_RoleActivity.this, LoginActivity.class));
                     }
                 } catch (JSONException e) {
                     // JSON error
@@ -258,5 +266,4 @@ String mobile,password,usertype;
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(strReq);
     }
-
 }

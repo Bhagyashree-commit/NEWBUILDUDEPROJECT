@@ -3,4 +3,10 @@
     <string name="title_activity_maps_two">Map</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="jobarea">JOB AREA :</string>
+    <string name="contractorrating">CONTRACTOR RATING :</string>
+    <string name="typeoflabor">TYPE OF LABOUR :</string>
+    <string name="wagerate">WAGE RATE :</string>
+    <string name="jobdate">JOB DATE :</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -23,13 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LabourContractorApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Labour.JobApplication">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".RoleActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -43,23 +37,31 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".Labour.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".Labour.JobApplication"></activity>
+        <activity
             android:name=".Contractor.MapsActivityTwo"
             android:label="@string/title_activity_maps_two" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".Choose_RoleActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".Contractor.ContractorAcceptReject" />
+        <activity android:name=".Contractor.ContractorAcceptReject" >
+
+     </activity>
         <activity android:name=".Contractor.ContractorConsole" />
-        <activity android:name=".Contractor.ContractorProfile" />
+        <activity android:name=".Contractor.ContractorProfile">      </activity>
         <activity android:name=".Contractor.PostJob" />
         <activity android:name=".Labour.LabourConsole" />
-        <activity android:name=".Labour.LabourProfile">
-
-        </activity>
+        <activity android:name=".Labour.LabourProfile" />
 
         <service android:name="com.blucorsys.app.firebase.MyFirebaseMessagingService" />
     </application>

@@ -12,6 +12,47 @@ public class JobModel implements Parcelable {
     private String cat_english;
     private String cat_hindi;
     private String cat_marathi;
+    private String jobid_details;
+
+    public String getJob_applied_id() {
+        return job_applied_id;
+    }
+
+    public void setJob_applied_id(String job_applied_id) {
+        this.job_applied_id = job_applied_id;
+    }
+
+    private String job_applied_id;
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    private String first_name;
+
+    public String getJobid_details() {
+        return jobid_details;
+    }
+
+    public void setJobid_details(String jobid_details) {
+        this.jobid_details = jobid_details;
+    }
+
+
+
+    public String getJob_id() {
+        return job_id;
+    }
+
+    public void setJob_id(String job_id) {
+        this.job_id = job_id;
+    }
+
+    private String job_id;
 
     public JobModel() {
 

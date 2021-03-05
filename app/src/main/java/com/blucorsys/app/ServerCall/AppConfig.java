@@ -29,5 +29,23 @@ public class AppConfig {
 
     public static String APPLYJOB=BASE_URL+"apply_job.php";
 
+    public static String APPLIEDJOB=BASE_URL+"appliedby_job.php";
+
+    public static String GETPALLIEDJOB=BASE_URL+"get_job.php";
+
+    public static String FILLTERJOB=BASE_URL+"get_job_filter.php";
+
+    public static String GETLOCCON=BASE_URL+"getlocation_contractor.php";
+
+    public static String ACCEPTJOB=BASE_URL+"accept_job.php";
+
+    public static String SHOWAPPLYJOB=BASE_URL+"show_applyjob.php";
+
+    public static String NEWLOGIN=BASE_URL+"user_login.php";
+
+    public static String GETLOCBYCON=BASE_URL+"get_locationby_contractor.php";
+
+    public static String GETLOCFILTER=BASE_URL+"get_locationby_contractor_filter.php";
+
 
 }

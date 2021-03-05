@@ -254,8 +254,9 @@ TextView tv_typecat;
                 String site=et_sitedetails.getText().toString();
                 String date=datetimer.getText().toString();
                 String arr= String.valueOf(array);
+                String type= "Contractor";
 
-                postJob(userid,loc,site,date,arr);
+                postJob(userid,loc,site,date,arr,type);
             }
         });
     }
@@ -329,7 +330,7 @@ TextView tv_typecat;
         }
     }
 
-    private void postJob(final String userid,final String loc,final String site,final String date,final String jsonarray) {
+    private void postJob(final String userid,final String loc,final String site,final String date,final String jsonarray,final String type) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.POSTJOB, new Response.Listener<String>() {
@@ -370,6 +371,8 @@ TextView tv_typecat;
                 params.put("site_detail", site);
                 params.put("create_datetime", date);
                 params.put("cattype_id", jsonarray);
+                params.put("usertype", type);
+
                 Log.e("",""+params);
                 return params;
             }

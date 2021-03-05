@@ -63,7 +63,21 @@ String comname,location,pincode,email,generalinfo,userid;
                 email=et_emailid.getText().toString();
                 generalinfo=et_genralinfo.getText().toString();
                 userid=pref.get(Constants.USERID);
-                updateProfile(comname,location,pincode,email,generalinfo,userid);
+                et_comname.setCursorVisible(false);
+                et_pincode.setCursorVisible(false);
+                if (et_comname.getText().toString().trim().length()== 0) {
+                    Toast.makeText(getApplicationContext(), "Please enter company name", Toast.LENGTH_SHORT).show();
+                    et_comname.requestFocus();
+
+                }
+                else if(et_pincode.getText().toString().trim().length()== 0){
+                    Toast.makeText(getApplicationContext(), "Please enter area pin code", Toast.LENGTH_SHORT).show();
+                    et_pincode.requestFocus();
+                }
+
+                else {
+                    updateProfile(comname, location, pincode, email, generalinfo, userid);
+                }
             }
         });
     }

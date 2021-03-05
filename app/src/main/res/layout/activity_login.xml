@@ -29,7 +29,7 @@
     </LinearLayout>
     <LinearLayout
 
-        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_55sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -46,7 +46,6 @@
             android:background="@drawable/square_box"
             android:textSize="@dimen/_15sdp"
             android:layout_width="@dimen/_150sdp"
-            android:textAllCaps="true"
             android:layout_height="@dimen/_40sdp"
             android:hint="Enter Mob No"></EditText>
 
@@ -72,7 +71,6 @@
             android:paddingRight="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
             android:hint="Password"
-            android:textAllCaps="true"
             android:inputType="textPassword"
             android:textColor="@color/black"
             android:textSize="@dimen/_15sdp"></EditText>
@@ -105,7 +103,7 @@
              android:backgroundTint="@color/red_700"
              android:background="@drawable/square_box"
             android:layout_marginLeft="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_150sdp"
+            android:layout_marginTop="@dimen/_170sdp"
             android:layout_width="wrap_content"
             android:gravity="bottom"
             android:layout_marginRight="@dimen/_25sdp"

@@ -60,7 +60,7 @@ Spinner catspin,spin_loc,spin_date;
         jobid = new ArrayList<String>();
         date = new ArrayList<String>();
 
-
+        replaceFragmentWithAnimation(new ApplyJobFragment());
 
         tv_applyjob.setOnClickListener(new View.OnClickListener() {
             @Override

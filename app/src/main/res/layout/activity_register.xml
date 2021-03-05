@@ -47,7 +47,6 @@
             android:background="@drawable/square_box"
             android:textSize="@dimen/_15sdp"
             android:layout_width="@dimen/_150sdp"
-            android:textAllCaps="true"
             android:layout_height="@dimen/_40sdp"
             android:hint="Enter Mob No"></EditText>
 
@@ -80,6 +79,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:digits="0123456789"
+                android:maxLength="4"
                 android:id="@+id/et_otp"
                 android:drawableLeft="@drawable/ic_otp"
                 android:fontFamily="sans-serif-condensed"
@@ -89,7 +90,6 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="@dimen/_150sdp"
-                android:textAllCaps="true"
                 android:layout_height="@dimen/_40sdp"
                 android:hint="Enter OTP"></EditText>
 
@@ -125,6 +125,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:maxLines="1"
                 android:id="@+id/et_password"
                 android:drawableLeft="@drawable/ic_password"
                 android:fontFamily="sans-serif-condensed"
@@ -135,7 +136,6 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="@dimen/_150sdp"
-                android:textAllCaps="true"
                 android:layout_height="@dimen/_40sdp"
                 android:hint="Password"></EditText>
 
@@ -167,6 +167,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
             <EditText
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
                 android:id="@+id/et_fname"
                 android:drawableLeft="@drawable/ic_name"
                 android:fontFamily="sans-serif-condensed"
@@ -176,7 +178,6 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="wrap_content"
-                android:textAllCaps="true"
                 android:layout_height="@dimen/_40sdp"
                 android:hint="First Name"></EditText></LinearLayout>
 
@@ -185,6 +186,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
             <EditText
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
                 android:id="@+id/et_lname"
                 android:drawableLeft="@drawable/ic_name"
                 android:fontFamily="sans-serif-condensed"
@@ -194,7 +197,6 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="wrap_content"
-                android:textAllCaps="true"
                 android:layout_height="@dimen/_40sdp"
                 android:hint="Last Name"></EditText>
             </LinearLayout>
@@ -209,6 +211,8 @@
             android:layout_height="wrap_content"
              android:orientation="horizontal">
              <EditText
+                 android:inputType="phone"
+                 android:digits="0123456789"
                  android:id="@+id/et_refmobile"
                  android:drawablePadding="@dimen/_5sdp"
                  android:drawableLeft="@drawable/call"
@@ -218,7 +222,6 @@
                  android:background="@drawable/square_box"
                  android:textSize="@dimen/_15sdp"
                  android:layout_width="match_parent"
-                 android:textAllCaps="true"
                  android:layout_height="wrap_content"
                  android:hint="Referral Mobile Number"></EditText>
          </LinearLayout>
@@ -231,7 +234,7 @@
              android:orientation="horizontal">
 
              <CheckBox
-
+                android:id="@+id/ch"
                  android:layout_width="@dimen/_20sdp"
                  android:layout_height="@dimen/_20sdp"></CheckBox>
 

@@ -1,124 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView   xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/blue_100"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Contractor.ContractorAcceptReject">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <include layout="@layout/header"></include>
+
+
         <LinearLayout
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <LinearLayout
-                android:background="@color/green_100"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/rel_lay"
+                android:background="@color/grey_800"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Site Details"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15sdp"></TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:background="@color/red_100"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
                 <TextView
-
+                    android:id="@+id/tv_acceptejob"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@color/white"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:textSize="@dimen/_15sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="date"
-                    android:textColor="@color/black"
                     android:textAllCaps="true"
-                    android:textSize="@dimen/_15sdp"></TextView>
-            </LinearLayout>
-        </LinearLayout>
+                    android:textStyle="bold"
+                    android:layout_height="@dimen/_40sdp"
+                    android:text="Accept Offer"></TextView>
+                <View
+                    android:layout_centerInParent="true"
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@color/white" />
+                <TextView
+                    android:id="@+id/tv_acceptedjob"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@color/white"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:layout_height="@dimen/_40sdp"
+                    android:text="Accepted Offer"></TextView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
-        <LinearLayout
-            android:padding="@dimen/_5sdp"
-            android:background="@color/yellow_100"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category "
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15sdp"></TextView>
-        </LinearLayout>
-        <LinearLayout
-            android:background="@color/purple_50"
-            android:gravity="center"
-            android:padding="@dimen/_5sdp"
-            android:layout_width="0dp"
-            android:layout_weight="0.6"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="counter"
-                android:textColor="@color/black"
-                android:textAllCaps="true"
-                android:textSize="@dimen/_15sdp"></TextView>
-        </LinearLayout>
-        <LinearLayout
-            android:background="@color/brown_50"
-            android:padding="@dimen/_5sdp"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="wage"
-                android:textColor="@color/black"
-                android:textAllCaps="true"
-                android:textSize="@dimen/_15sdp"></TextView>
-        </LinearLayout>
-    </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_450sdp"></LinearLayout>
-<LinearLayout
-    android:layout_margin="@dimen/_15sdp"
-    android:background="@drawable/square_box"
-    android:backgroundTint="@color/green_100"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="bottom|center"
-    android:orientation="vertical">
-    <TextView
-        android:textAllCaps="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accept/Reject"
-        android:textSize="@dimen/_15sdp"
-        android:textColor="@color/black"></TextView>
+            </RelativeLayout>
+
+
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/frame_jobapply1"></FrameLayout>
+
+
+
+
+
+
 </LinearLayout>
-
     </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+</LinearLayout>

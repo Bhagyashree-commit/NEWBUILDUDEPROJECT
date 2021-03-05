@@ -17,4 +17,15 @@ public class Constants {
     public static String JOBID= "id";
     public static String DATE= "DateTime";
     public static String DATE1= "create_datetime";
+    public static String USERTYPE_CON= "Contractor";
+    public static String USERTYPE_LAB= "Labour";
+    public static String USERTYPE_ENG= "Engineer";
+    public static String USERTYPE_ARC= "Architect";
+    public static String LOCa= "location";
+    public static String CREADATE= "create_datetime";
+    public static String wage= "wage";
+    public static String count= "count";
+    public static String LOCation= "location";
+    public static String careda= "create_datetime";
+
 }

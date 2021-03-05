@@ -4,13 +4,15 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        
+
         <androidx.cardview.widget.CardView
-            android:background="@color/white"
+            android:backgroundTint="@color/grey_300"
+            android:background="@color/grey_300"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="@dimen/_30sdp"
@@ -18,12 +20,14 @@
             android:layout_margin="@dimen/_5sdp">
 
             <RelativeLayout
+                android:background="@color/grey_300"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
 
                 >
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginRight="@dimen/_50sdp"
                     android:id="@+id/tv_counter"
                     android:layout_width="wrap_content"
@@ -58,47 +62,21 @@
                     android:textColor="@color/black"
                     />
 
-<ImageView
-    android:id="@+id/mapmarker"
-    android:layout_toRightOf="@+id/tv_counter"
-    android:layout_alignParentRight="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_pin"></ImageView>
-                <TextView
-                    android:textStyle="bold"
-                    android:id="@+id/cratingtext"
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/mapmarker"
+                    android:layout_toRightOf="@+id/tv_counter"
+                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/jobareatext"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:paddingRight="@dimen/_20sdp"
-                    android:textColor="@color/black"
-                    android:text="@string/contractorrating"
-                    />
+                    android:src="@drawable/ic_pin"></ImageView>
 
-                <TextView
-                    android:id="@+id/cratinginput"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/jobareainput"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@id/cratingtext"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/green_500"
-                    android:paddingLeft="@dimen/_20sdp"
-                    android:paddingRight="@dimen/_20sdp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    />
                 <TextView
                     android:textStyle="bold"
                     android:id="@+id/labortypetext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cratingtext"
+                    android:layout_below="@id/jobareatext"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="@string/typeoflabor"
@@ -109,7 +87,7 @@
                     android:id="@+id/labortypeinput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cratinginput"
+                    android:layout_below="@id/jobareainput"
                     android:layout_toRightOf="@id/labortypetext"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
@@ -169,14 +147,6 @@
                     android:textSize="@dimen/_10sdp"
                     />
 
-                <CheckBox
-                    android:id="@+id/btncheckbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@id/jobdateinput"
-                    ></CheckBox>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 

@@ -27,7 +27,7 @@
     <TextView
      android:gravity="center"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="@dimen/_15sdp"
         android:text="CONCEPTUALISED BY"
         android:layout_width="match_parent"

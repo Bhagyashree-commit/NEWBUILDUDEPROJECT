@@ -5,10 +5,95 @@
     android:layout_height="match_parent"
     tools:context=".Labour.AppliedJobFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hiiii" />
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/rel_lay1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            >
+
+            <Spinner
+                android:id="@+id/spin_loc"
+                android:layout_width="@dimen/_180sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/square_box"
+                android:backgroundTint="@color/green_200"
+                android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="sans-serif-condensed"
+                android:padding="@dimen/_5sdp"
+                android:spinnerMode="dropdown"
+                android:text="Location"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"></Spinner>
+
+            <Spinner
+                android:spinnerMode="dialog"
+                android:backgroundTint="@color/red_300"
+                android:background="@drawable/square_box"
+                android:id="@+id/spin_date"
+                android:layout_alignParentRight="true"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/white"
+                android:drawablePadding="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
+                android:layout_width="@dimen/_150sdp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_height="@dimen/_35sdp"
+                android:text="Date"></Spinner>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@+id/rel_lay1"
+            android:id="@+id/rel_lay2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Spinner
+                android:spinnerMode="dialog"
+                android:drawableRight="@drawable/ic_drop_down_arrow"
+                android:backgroundTint="@color/orange_300"
+                android:background="@drawable/square_box"
+                android:id="@+id/spincategory"
+                android:layout_alignParentLeft="true"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/white"
+                android:drawablePadding="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_15sdp"
+                android:layout_width="@dimen/_260sdp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_height="@dimen/_35sdp"
+                android:text="Category"></Spinner>
+
+
+            <TextView
+                android:id="@+id/tv_ok"
+                android:textAlignment="center"
+                android:layout_toRightOf="@+id/spincategory"
+                android:drawablePadding="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:textAllCaps="true"
+                android:text="OK ->"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@color/orange_800"
+                android:layout_height="@dimen/_35sdp"
+                android:gravity="center_horizontal"></TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rv_appliedjob"></androidx.recyclerview.widget.RecyclerView>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
 
 </FrameLayout>

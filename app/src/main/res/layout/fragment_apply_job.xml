@@ -10,10 +10,10 @@
  <RelativeLayout
      android:id="@+id/rel_lay1"
      android:layout_width="match_parent"
-     android:layout_height="@dimen/_50sdp"
+     android:layout_height="@dimen/_30sdp"
      >
   <Spinner
-      android:spinnerMode="dialog"
+      android:spinnerMode="dropdown"
       android:backgroundTint="@color/green_200"
       android:background="@drawable/square_box"
       android:id="@+id/spin_loc"
@@ -21,11 +21,11 @@
       android:fontFamily="sans-serif-condensed"
       android:textColor="@color/white"
       android:drawablePadding="@dimen/_5sdp"
-      android:padding="@dimen/_10sdp"
-      android:layout_width="@dimen/_190sdp"
+      android:padding="@dimen/_5sdp"
+      android:layout_width="@dimen/_180sdp"
       android:textAllCaps="true"
       android:textStyle="bold"
-      android:layout_height="match_parent"
+      android:layout_height="@dimen/_35sdp"
       android:text="Location"></Spinner>
 
   <Spinner
@@ -37,11 +37,11 @@
       android:fontFamily="sans-serif-condensed"
       android:textColor="@color/white"
       android:drawablePadding="@dimen/_5sdp"
-      android:padding="@dimen/_10sdp"
+      android:padding="@dimen/_5sdp"
       android:layout_width="@dimen/_150sdp"
       android:textAllCaps="true"
       android:textStyle="bold"
-      android:layout_height="match_parent"
+      android:layout_height="@dimen/_35sdp"
       android:text="Date"></Spinner>
 
  </RelativeLayout>
@@ -60,12 +60,12 @@
       android:fontFamily="sans-serif-condensed"
       android:textColor="@color/white"
       android:drawablePadding="@dimen/_5sdp"
-      android:padding="@dimen/_10sdp"
+      android:padding="@dimen/_5sdp"
       android:textSize="@dimen/_15sdp"
       android:layout_width="@dimen/_210sdp"
       android:textAllCaps="true"
       android:textStyle="bold"
-      android:layout_height="@dimen/_40sdp"
+      android:layout_height="@dimen/_35sdp"
       android:text="Category"></Spinner>
 
 
@@ -77,29 +77,34 @@
       android:fontFamily="sans-serif-condensed"
       android:textColor="@color/black"
       android:drawablePadding="@dimen/_5sdp"
-      android:padding="@dimen/_10sdp"
+      android:padding="@dimen/_5sdp"
       android:textSize="@dimen/_15sdp"
       android:layout_width="@dimen/_60sdp"
       android:textAllCaps="true"
-      android:layout_height="@dimen/_40sdp"
+      android:layout_height="@dimen/_35sdp"
       android:hint="Wages"></EditText>
-  <ImageView
+  <TextView
       android:id="@+id/tv_ok"
+      android:textAlignment="center"
       android:layout_toRightOf="@+id/tv_wages"
-      android:background="@drawable/ic_right_arrow"
       android:drawablePadding="@dimen/_5sdp"
-      android:padding="@dimen/_10sdp"
-      android:textSize="@dimen/_15sdp"
+      android:padding="@dimen/_5sdp"
+      android:textSize="@dimen/_10sdp"
       android:layout_width="match_parent"
       android:textAllCaps="true"
-      android:layout_height="@dimen/_40sdp"
-      ></ImageView>
+      android:text="OK ->"
+      android:textColor="@color/white"
+      android:textStyle="bold"
+      android:background="@color/orange_800"
+      android:layout_height="@dimen/_35sdp"
+      android:gravity="center_horizontal"></TextView>
   <androidx.recyclerview.widget.RecyclerView
       android:layout_marginTop="@dimen/_50sdp"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/rv_applyjob"></androidx.recyclerview.widget.RecyclerView>
   <TextView
+      android:visibility="gone"
       android:layout_below="@+id/rv_applyjob"
       android:textAlignment="center"
       android:backgroundTint="@color/brown_600"

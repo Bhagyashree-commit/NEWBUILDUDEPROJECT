@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,7 +43,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout ll1,ll2;
     String mobnum,data,firstname,lastname,pass,refnumber,deviceid,userRole,token;
     CustomLoader loader;
-Preferences pref;
+    Preferences pref;
+    CheckBox ch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ Preferences pref;
         ll1=(LinearLayout) findViewById(R.id.ll1);
         ll2=(LinearLayout) findViewById(R.id.ll2);
         tv_login=findViewById(R.id.tv_login);
+        ch=findViewById(R.id.ch);
 
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         pref=new Preferences(this);
@@ -96,15 +99,13 @@ Preferences pref;
     private void checkValidation(){
         mobnum=  et_mobnum.getText().toString();
 
-        if (!mobnum.isEmpty()) {
+        if (et_mobnum.getText().toString().trim().length()<10) {
+            Toast.makeText(getApplicationContext(), "Please enter valid 10 digit phone number", Toast.LENGTH_SHORT).show();
+            et_mobnum.requestFocus();
 
-            // Toast.makeText(getApplicationContext(), "Please enter valid 10 digit phone number", Toast.LENGTH_SHORT).show();
-            ChekNo(mobnum);
         }
         else{
-            Toast.makeText(getApplicationContext(),
-                    "Please enter the credentials!", Toast.LENGTH_LONG)
-                    .show();
+            ChekNo(mobnum);
         }
 
     }
@@ -114,17 +115,29 @@ Preferences pref;
         firstname=  et_fname.getText().toString();
         lastname=  et_lname.getText().toString();
         refnumber=  et_refnumber.getText().toString();
-      //  deviceid="4545454";
-        userRole="userRole";
         deviceid = Settings.Secure.getString(this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+        if (et_mobnum.getText().toString().trim().length()<10) {
+            Toast.makeText(getApplicationContext(), "Please enter valid 10 digit phone number", Toast.LENGTH_SHORT).show();
+            et_mobnum.requestFocus();
+        }
+        else if (et_password.getText().toString().trim().length()==0){
+            Toast.makeText(getApplicationContext(), "Please Enter Password", Toast.LENGTH_SHORT).show();
+            et_password.requestFocus();
+        }
+        else if (et_fname.getText().toString().trim().length()==0){
+            Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
+            et_fname.requestFocus();
+        }
+        else if(!ch.isChecked()){
+            Toast.makeText(getApplicationContext(), "Please Accept Terms And Conditions", Toast.LENGTH_SHORT).show();
 
-        Log.e("Android","Android ID : "+deviceid);
-
-             registerUser(mobnum,pass,firstname,lastname,refnumber,deviceid,userRole,token);
-
+        }
+        else
+        {
+            registerUser(mobnum,pass,firstname,lastname,refnumber,deviceid,token);
+        }
     }
-
 
     private void ChekNo(final String mobnum) {
         loader.show();
@@ -143,12 +156,6 @@ Preferences pref;
                          data=object.getString("data");
                         Toast.makeText(getApplicationContext(), data, Toast.LENGTH_LONG).show();
                         et_otp.setText(data);
-
-//                        pref.set(Constants.USERID, object.getString("id"));
-//                        pref.commit();
-//
-//                        startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
-//                        Toast.makeText(getApplicationContext(), "Login Success!", Toast.LENGTH_LONG).show();
                     }
                     else {
                         Toast.makeText(getApplicationContext(), object.getString("data"), Toast.LENGTH_LONG).show();
@@ -231,7 +238,7 @@ Preferences pref;
         requestQueue.add(strReq);
     }
 
-    private void registerUser(final String mobnum,final String pass,final String firstname,final String lastname,final String refnumber,final String deviceid,final String userRole,final String token) {
+    private void registerUser(final String mobnum,final String pass,final String firstname,final String lastname,final String refnumber,final String deviceid,final String token) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.REGISTER, new Response.Listener<String>() {
@@ -271,9 +278,7 @@ Preferences pref;
                 params.put("first_name", firstname);
                 params.put("last_name", lastname);
                 params.put("referal_mobileno", refnumber);
-                params.put("user_role", userRole);
                 params.put("device_id", deviceid);
-               // params.put("fcm_token", token);
                 params.put("prefered_lang", pref.get(Constants.Lang));
                 Log.e("",""+params);
                 return params;

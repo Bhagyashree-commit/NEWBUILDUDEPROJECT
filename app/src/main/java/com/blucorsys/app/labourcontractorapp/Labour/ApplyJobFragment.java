@@ -3,19 +3,25 @@ package com.blucorsys.app.labourcontractorapp.Labour;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -35,13 +41,16 @@ import com.blucorsys.app.CustomComponent.JobModel;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
 import com.blucorsys.app.labourcontractorapp.Contractor.ContractorConsole;
+import com.blucorsys.app.labourcontractorapp.Contractor.MapsActivityTwo;
 import com.blucorsys.app.labourcontractorapp.Contractor.PostJob;
 import com.blucorsys.app.labourcontractorapp.R;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,10 +68,16 @@ CustomLoader loader;
     private ArrayList<String> loca;
     private ArrayList<String> date;
     private ArrayList<String> jobid;
-    TextView tv_applyjob,tv_appliedjob;
-    ImageView tv_ok;
+    String selectedjob;
+    JSONArray array;
+
+    public static List<String> joblisttt  = new ArrayList<>();
+    ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
+    TextView tv_applyjob,tv_appliedjob,btn_apply;
+    TextView tv_ok;
     EditText et_wages;
     ArrayList<JobModel> joblist;
+    String create_datetime,location,cattype_id;
 
     public ApplyJobFragment() {
         // Required empty public constructor
@@ -83,6 +98,7 @@ CustomLoader loader;
         tv_applyjob=v.findViewById(R.id.tv_applyjob);
         tv_appliedjob=v.findViewById(R.id.tv_appliedjob);
         et_wages=v.findViewById(R.id.tv_wages);
+        btn_apply=v.findViewById(R.id.btn_apply);
         tv_ok=v.findViewById(R.id.tv_ok);
 
         categoryEng = new ArrayList<String>();
@@ -91,16 +107,80 @@ CustomLoader loader;
         jobid = new ArrayList<String>();
         date = new ArrayList<String>();
         joblist = new ArrayList<JobModel>();
+
+
+
+        spin_date.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                create_datetime=spin_date.getSelectedItem().toString();
+                Log.e("nishaaa1",""+create_datetime);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        spin_loc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                location=spin_loc.getSelectedItem().toString();
+                Log.e("nishaaa2",""+location);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+        catspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                cattype_id=catspin.getSelectedItem().toString();
+                Log.e("nishaaa3",""+cattype_id);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String location="Unnamed Road, Vatkhale, Maharashtra 412409, India";
-                String create_datetime="27/2/2021  4 : 25 AM";
-                String wage="800";
-                String cattype_id="Unskilled Labour Female";
-                hitAPI(location,create_datetime,wage,cattype_id);
+                // location="Unnamed Road, Vatkhale, Maharashtra 412409, India";
+                // create_datetime="27/2/2021  4 : 25 AM";
+
+                String wage=et_wages.getText().toString();
+                // cattype_id="Unskilled Labour Female";
+                if (!wage.isEmpty()){
+                    hitAPI(location,create_datetime,wage,cattype_id);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),
+                            "Please enter the wages!", Toast.LENGTH_LONG)
+                            .show();
+                }
+
             }
         });
+
+
+        btn_apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id=pref.get(Constants.USERID);
+                String jsonarr="";
+                hipApplyJob(id, String.valueOf(array));
+            }
+        });
+
         getCategory();
         getLocation();
         getDate();
@@ -157,7 +237,7 @@ CustomLoader loader;
                 e.printStackTrace();
             }
         }
-        catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, categoryEng));
+        catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryEng));
     }
 
     private void getLocation() {
@@ -211,7 +291,7 @@ CustomLoader loader;
                 e.printStackTrace();
             }
         }
-        spin_loc.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, loca));
+        spin_loc.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, loca));
     }
 
     private void getDate() {
@@ -265,7 +345,7 @@ CustomLoader loader;
                 e.printStackTrace();
             }
         }
-        spin_date.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, date));
+        spin_date.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, date));
     }
 
 
@@ -273,8 +353,8 @@ CustomLoader loader;
 
     public void setAdapter(RecyclerView mRecyclerview)
     {
-        mRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(),3));
-        mRecyclerview.setAdapter(new ApplyJobAdapter());
+        mRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerview.setAdapter(new ApplyJobAdapter(joblist));
     }
 
     //*Recyclerview Adapter*//
@@ -287,10 +367,6 @@ CustomLoader loader;
             this.jobmodel = jobmodel;
         }
 
-        public ApplyJobAdapter() {
-
-        }
-
         public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.apply_job_item, parent, false));
         }
@@ -299,9 +375,50 @@ CustomLoader loader;
             holder.itemView.setTag(jobmodel.get(position));
 
             final JobModel pu = jobmodel.get(position);
+            holder.jobareainput.setText(pu.getLocation());
+            holder.jobdateinput.setText(pu.getCreate_datetime());
+            holder.wagerateinput.setText(pu.getWage());
+            holder.labortypeinput.setText(pu.getCat_english());
+            holder.cratinginput.setText("3.0");
+            holder.tv_counter.setText("COUNTER" + "-" +pu.getNo());
+            String address=pu.getLocation();
 
+            holder.mapmarker.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), MapsActivity.class);
+                    startActivity(intent);
 
+                 /// getaddress(address);
 
+                }
+            });
+            holder.btncheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+                    if(b){
+
+                         selectedjob= pu.getJobid_details();
+                        Log.e("AMOLf777",""+selectedjob);
+                        joblisttt.add(selectedjob);
+                        HashMap<String,String> map;
+                        map=new HashMap<>();
+
+                        map.put("jobid_details",""+selectedjob);
+                        arrayList.add(map);
+
+                         array = new JSONArray(arrayList);
+                        Log.e("AMOLf",""+array);
+
+                    }
+                    else{
+                       joblisttt.remove(selectedjob);
+                        Log.e("AMOL",""+selectedjob);
+
+                    }
+
+                }
+            });
 
         }
         public int getItemCount() {
@@ -317,14 +434,26 @@ CustomLoader loader;
     private class Holder extends RecyclerView.ViewHolder {
 
         ImageView ivCategory;
-        TextView tvCategoryName;
-        TextView catid;
+        TextView jobareainput;
+        TextView cratinginput;
+        TextView labortypeinput;
+        TextView wagerateinput;
+        TextView jobdateinput;
+        TextView tv_counter;
+        ImageView mapmarker;
+        CheckBox btncheckbox;
 
         public Holder(View itemView) {
             super(itemView);
 //            ivCategory=itemView.findViewById(R.id.ivCategory);
-//            tvCategoryName=itemView.findViewById(R.id.tvCategoryName);
-//            catid=itemView.findViewById(R.id.catid);
+            jobareainput=itemView.findViewById(R.id.jobareainput);
+            cratinginput=itemView.findViewById(R.id.cratinginput);
+            labortypeinput=itemView.findViewById(R.id.labortypeinput);
+            wagerateinput=itemView.findViewById(R.id.wagerateinput);
+            jobdateinput=itemView.findViewById(R.id.jobdateinput);
+            tv_counter=itemView.findViewById(R.id.tv_counter);
+            mapmarker=itemView.findViewById(R.id.mapmarker);
+            btncheckbox=itemView.findViewById(R.id.btncheckbox);
         }
     }
 
@@ -338,11 +467,13 @@ CustomLoader loader;
             public void onResponse(String response) {
                 Log.d(TAG, "Response: " + response.toString());
                 loader.dismiss();
+                joblist.clear();
                 JSONObject j = null;
                 try {
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
+                        btn_apply.setVisibility(View.VISIBLE);
                         JSONArray array=object.getJSONArray("Show-Job");
                         {
                             Log.d(TAG, array.toString());
@@ -354,6 +485,8 @@ CustomLoader loader;
                                 JobModel jobmodel = new JobModel();
                                 //adding the product to product list
                                 jobmodel.setId(job.getString("id"));
+                                jobmodel.setJobid_details(job.getString("jobid_details"));
+                                jobmodel.setJob_id(job.getString("job_id"));
                                 jobmodel.setLocation(job.getString("location"));
                                 jobmodel.setCreate_datetime(job.getString("create_datetime"));
                                 jobmodel.setCattype_id(job.getString("cattype_id"));
@@ -372,7 +505,9 @@ CustomLoader loader;
                         setAdapter(rv_applyjob);
                     }
                     else {
-                        Toast.makeText(getActivity(), "wrong credentials", Toast.LENGTH_LONG).show();
+//                   rv_applyjob.setVisibility(View.INVISIBLE);
+//                    btn_apply.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getActivity(), object.getString("message"), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     // JSON error
@@ -405,6 +540,81 @@ CustomLoader loader;
         requestQueue.add(strReq);
     }
 
+
+public  void getaddress(String address){
+
+
+    Geocoder coder = new Geocoder(getContext());
+    try {
+        ArrayList<Address> adresses = (ArrayList<Address>) coder.getFromLocationName("Your Address", 50);
+        for(Address add : adresses){
+           //Controls to ensure it is right address such as country etc.
+                double longitude = add.getLongitude();
+                double latitude = add.getLatitude();
+
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+}
+
+    private void hipApplyJob(final String id,final String json) {
+        loader.show();
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.APPLIEDJOB, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Response: " + response.toString());
+                loader.dismiss();
+                joblist.clear();
+                JSONObject j = null;
+                try {
+                    JSONObject object = new JSONObject(response);
+
+                    if(object.getString("Success").equalsIgnoreCase("true")) {
+                        btn_apply.setVisibility(View.VISIBLE);
+
+                            Log.d(TAG, array.toString());
+
+                         Toast.makeText(getActivity(), object.getString("message"), Toast.LENGTH_LONG).show();
+                        //startActivity(new Intent(getActivity(), ContractorConsole.class));
+
+                    }
+                    else {
+
+                        Toast.makeText(getActivity(), object.getString("message"), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("ruserid",id);
+                params.put("job_applied_id", json);
+                params.put("usertype", "Labour");
+
+                Log.e("",""+params);
+                return params;
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
+        strReq.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(strReq);
+    }
 
 
 }

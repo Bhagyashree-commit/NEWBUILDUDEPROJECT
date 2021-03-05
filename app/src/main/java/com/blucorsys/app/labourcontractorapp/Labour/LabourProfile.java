@@ -77,6 +77,7 @@ public class LabourProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labour_profile);
+
         spincat = findViewById(R.id.spinn_cat);
         btn_submitlabordetails = findViewById(R.id.btn_submitlabordetails);
         linlay = findViewById(R.id.linlay);

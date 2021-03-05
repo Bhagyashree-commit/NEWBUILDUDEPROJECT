@@ -57,7 +57,7 @@ pref=new Preferences(this);
                         finish();
                     }
                     else {
-                        Intent i1 = new Intent(SplashScreen.this, ContractorConsole.class);
+                        Intent i1 = new Intent(SplashScreen.this, MainActivity.class);
                         startActivity(i1);
                         finish();
                     }
