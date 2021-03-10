@@ -133,7 +133,8 @@
                         android:background="@drawable/square_box"
                         android:textSize="@dimen/_15sdp"
                         android:layout_width="wrap_content"
-                        android:textAllCaps="true"
+                        android:digits="0123456789"
+                        android:maxLength="6"
                         android:layout_height="wrap_content"
                         android:hint="PIN CODE*"></EditText></LinearLayout>
 

@@ -52,7 +52,7 @@ pref=new Preferences(this);
 
                     if (pref.get(Constants.USERID).isEmpty()) {
                         // User is already logged in. Take him to main activity
-                        Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                        Intent i = new Intent(SplashScreen.this, LoginActivity.class);
                         startActivity(i);
                         finish();
                     }

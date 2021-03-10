@@ -255,8 +255,21 @@ TextView tv_typecat;
                 String date=datetimer.getText().toString();
                 String arr= String.valueOf(array);
                 String type= "Contractor";
-
-                postJob(userid,loc,site,date,arr,type);
+                if(tv_location.equals("LOCATION OF WORK")){
+                    Toast.makeText(getApplicationContext(), "Please select area", Toast.LENGTH_SHORT).show();
+                    tv_location.requestFocus();
+                }
+                else if(et_sitedetails.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter site deatils !!!", Toast.LENGTH_SHORT).show();
+                    et_sitedetails.requestFocus();
+                }
+                else if(datetimer.equals("DATE AND TIME")){
+                    Toast.makeText(getApplicationContext(), "Please enter location !!!", Toast.LENGTH_SHORT).show();
+                    datetimer.requestFocus();
+                }
+                else {
+                    postJob(userid, loc, site, date, arr, type);
+                }
             }
         });
     }

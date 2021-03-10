@@ -101,7 +101,20 @@ String token;
         pref.set(Constants.pass,pass);
         pref.set(Constants.mobnum, mobnum);
         pref.commit();
-        startActivity(new Intent(LoginActivity.this,Choose_RoleActivity.class));
+
+        if(et_mobnum.getText().toString().length()<10){
+            Toast.makeText(getApplicationContext(), "Please enter valid mobile!!!", Toast.LENGTH_SHORT).show();
+            et_mobnum.requestFocus();
+
+        }
+        else if(et_password.getText().toString().length()==0){
+            Toast.makeText(getApplicationContext(), "Please enter valid password!!!", Toast.LENGTH_SHORT).show();
+            et_password.requestFocus();
+        }
+        else {
+
+            startActivity(new Intent(LoginActivity.this, Choose_RoleActivity.class));
+        }
 
 
     }

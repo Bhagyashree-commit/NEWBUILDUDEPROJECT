@@ -71,8 +71,6 @@ public class LabourProfile extends AppCompatActivity {
     Calendar calendar;
     String spin;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,7 +154,22 @@ public class LabourProfile extends AppCompatActivity {
                 aadharnum=et_adharnumber.getText().toString();
                 pincode=et_pincode.getText().toString();
 
-                updateProfileLabour(userid,gender,location,dateofbirth,wagerate,aadharnum,pincode,spin);
+
+                if(et_location.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter location !!!", Toast.LENGTH_SHORT).show();
+                    et_location.requestFocus();
+                }
+                else if(et_pincode.getText().toString().length()<6){
+                    Toast.makeText(getApplicationContext(), "Please enter valid Pincode", Toast.LENGTH_SHORT).show();
+                    et_pincode.requestFocus();
+                }
+                else if(et_wage.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter wages", Toast.LENGTH_SHORT).show();
+                    et_wage.requestFocus();
+                }
+                else {
+                    updateProfileLabour(userid, gender, location, dateofbirth, wagerate, aadharnum, pincode, spin);
+                }
             }
         });
 

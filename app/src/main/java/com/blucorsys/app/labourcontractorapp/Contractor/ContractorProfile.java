@@ -70,8 +70,8 @@ String comname,location,pincode,email,generalinfo,userid;
                     et_comname.requestFocus();
 
                 }
-                else if(et_pincode.getText().toString().trim().length()== 0){
-                    Toast.makeText(getApplicationContext(), "Please enter area pin code", Toast.LENGTH_SHORT).show();
+                else if(et_pincode.getText().toString().trim().length()<6){
+                    Toast.makeText(getApplicationContext(), "Please enter valid  area pin code", Toast.LENGTH_SHORT).show();
                     et_pincode.requestFocus();
                 }
 
