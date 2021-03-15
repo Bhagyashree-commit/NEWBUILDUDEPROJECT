@@ -37,6 +37,7 @@ import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.CustomComponent.JobModel;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
+import com.blucorsys.app.labourcontractorapp.MapsActivity;
 import com.blucorsys.app.labourcontractorapp.R;
 
 import org.json.JSONArray;
@@ -382,8 +383,11 @@ CustomLoader loader;
             holder.mapmarker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(getContext(), MapsActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(getContext(), LabourMapActivity.class);
+                    intent.putExtra("lat","37.421998333333335");
+                    intent.putExtra("lng","-122.084");
+                    intent.putExtra("address",pu.getLocation());
+                    startActivity(intent);
 
                  /// getaddress(address);
 
