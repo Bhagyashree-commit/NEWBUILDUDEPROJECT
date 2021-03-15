@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,9 +29,6 @@ import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.CustomComponent.JobModel;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
-import com.blucorsys.app.labourcontractorapp.Labour.ApplyJobFragment;
-import com.blucorsys.app.labourcontractorapp.Labour.JobStatus;
-import com.blucorsys.app.labourcontractorapp.Labour.MapsActivity;
 import com.blucorsys.app.labourcontractorapp.R;
 
 import org.json.JSONArray;

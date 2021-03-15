@@ -353,8 +353,8 @@ public class AppliedJobFragment extends Fragment {
             holder.mapmarker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), MapsActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getContext(), MapsActivity.class);
+//                    startActivity(intent);
 
                     /// getaddress(address);
 

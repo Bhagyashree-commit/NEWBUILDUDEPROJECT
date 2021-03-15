@@ -35,7 +35,7 @@
                 android:textAllCaps="true"
                 android:gravity="center"
                 android:layout_height="@dimen/_90sdp"
-                android:text="@string/loc"></TextView>
+              ></TextView>
         </LinearLayout>
         <LinearLayout
             android:background="@drawable/square_box"

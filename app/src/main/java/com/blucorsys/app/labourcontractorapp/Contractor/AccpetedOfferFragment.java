@@ -1,7 +1,6 @@
 package com.blucorsys.app.labourcontractorapp.Contractor;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,9 +31,6 @@ import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.CustomComponent.JobModel;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
-import com.blucorsys.app.labourcontractorapp.Labour.AppliedJobFragment;
-import com.blucorsys.app.labourcontractorapp.Labour.JobApplication;
-import com.blucorsys.app.labourcontractorapp.Labour.MapsActivity;
 import com.blucorsys.app.labourcontractorapp.R;
 
 import org.json.JSONArray;

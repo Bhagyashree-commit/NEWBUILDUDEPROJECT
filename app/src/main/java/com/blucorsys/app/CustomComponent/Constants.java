@@ -30,5 +30,6 @@ public class Constants {
     public static String RADIOID= "jobid_details";
     public static String role= "usertype";
     public static String lid= "labour_id";
+    public static String address= "labour_id";
 
 }

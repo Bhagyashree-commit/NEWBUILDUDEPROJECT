@@ -71,5 +71,11 @@ public class AppConfig {
 
     public static String PAYPAYMENT=BASE_URL+"payment_paid_by_contractor.php";
 
+    public static String FORGETPASS1=BASE_URL+"forgot_password_step1.php";
+
+    public static String FORGETPASS2=BASE_URL+"forgot_password_step2.php";
+
+    public static String FORGETPASS3=BASE_URL+"forgot_password_step3.php";
+
 
 }

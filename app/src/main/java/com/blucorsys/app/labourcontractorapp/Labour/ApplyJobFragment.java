@@ -2,15 +2,12 @@ package com.blucorsys.app.labourcontractorapp.Labour;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,11 +37,7 @@ import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.CustomComponent.JobModel;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
-import com.blucorsys.app.labourcontractorapp.Contractor.ContractorConsole;
-import com.blucorsys.app.labourcontractorapp.Contractor.MapsActivityTwo;
-import com.blucorsys.app.labourcontractorapp.Contractor.PostJob;
 import com.blucorsys.app.labourcontractorapp.R;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -389,8 +382,8 @@ CustomLoader loader;
             holder.mapmarker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), MapsActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getContext(), MapsActivity.class);
+//                    startActivity(intent);
 
                  /// getaddress(address);
 

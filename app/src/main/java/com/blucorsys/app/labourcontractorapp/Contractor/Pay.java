@@ -98,7 +98,7 @@ public class Pay extends AppCompatActivity {
             holder.labortypeinput.setText(pu.getCat_english());
             holder.wagerateinput.setText(pu.getWage());
             holder.jobdateinput.setText(pu.getCreate_datetime());
-            pref.set(Constants.lid,"labour_id");
+            pref.set(Constants.lid,pu.getLabour_id());
             pref.commit();
             holder.tv_requestpay.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -268,7 +268,7 @@ public class Pay extends AppCompatActivity {
     private void hitRequestPayment(final String userid,final String type,final String trackjobid,final String wages, final String rating,final String laborid) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.PAYREQUEST, new Response.Listener<String>() {
+                AppConfig.PAYPAYMENT, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Response: " + response.toString());

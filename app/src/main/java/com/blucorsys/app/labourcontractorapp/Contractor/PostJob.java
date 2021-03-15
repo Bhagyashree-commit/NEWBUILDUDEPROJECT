@@ -32,6 +32,7 @@ import com.blucorsys.app.CustomComponent.Constants;
 import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
+import com.blucorsys.app.labourcontractorapp.MapsActivity;
 import com.blucorsys.app.labourcontractorapp.R;
 
 
@@ -196,15 +197,15 @@ TextView tv_typecat;
         tv_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PostJob.this, MapsActivityTwo.class);
+                Intent intent = new Intent(PostJob.this, MapsActivity.class);
                 startActivity(intent);
             }
         });
-        if(pref.get("add").equalsIgnoreCase("")){
+        if(pref.get(Constants.address).equalsIgnoreCase("")){
             Toast.makeText(PostJob.this, "please select area",Toast.LENGTH_LONG).show();
         }
         else {
-            tv_location.setText(pref.get("add"));
+            tv_location.setText(pref.get(Constants.address));
 
         }
         btnpostjob.setOnClickListener(new View.OnClickListener() {
@@ -400,7 +401,8 @@ TextView tv_typecat;
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
-
+                        pref.set(Constants.address,"");
+                        pref.commit();
                         Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
                         startActivity(new Intent(PostJob.this,ContractorConsole.class));
 

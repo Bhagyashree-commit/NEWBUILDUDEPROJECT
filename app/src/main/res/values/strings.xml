@@ -26,12 +26,14 @@
     <string name="login">Login</string>
     <string name="noaccount">Do not have AN ACCOUNT?</string>
     <string name="signup">SIGN UP</string>
+    <string name="chnagepass">CHANGE PASSWORD</string>
     <string name="forgetpass">FORGET PASSWORD</string>
     <string name="check">CHECK</string>
     <string name="otp">ENTER OTP</string>
     <string name="verify">VERIFY</string>
     <string name="fname">FIRST NAME</string>
     <string name="lname">LAST NAME</string>
+    <string name="newpass">NEW PASSWORD</string>
     <string name="refnumber">REFERRAL MOBILE NUMBER</string>
     <string name="terms">I agree To terms and conditions</string>
     <string name="loc">PUNE</string>

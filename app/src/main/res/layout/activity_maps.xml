@@ -6,7 +6,7 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Labour.MapsActivity" >
+    tools:context=".MapsActivity" >
     <TextView
         android:id="@+id/tv_location"
         android:background="@color/black"

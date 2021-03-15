@@ -11,7 +11,11 @@ import android.os.Build;
 
 import android.os.Bundle;
 
+import com.blucorsys.app.CustomComponent.Constants;
+import com.blucorsys.app.CustomComponent.CustomLoader;
+import com.blucorsys.app.ServerCall.Preferences;
 import com.blucorsys.app.labourcontractorapp.Contractor.GPSTracker;
+import com.blucorsys.app.labourcontractorapp.Contractor.PostJob;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -53,7 +57,8 @@ import java.util.HashMap;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
-
+Preferences pref;
+CustomLoader loader;
     private GoogleMap mMap;
     Location mLastLocation;
     Marker mCurrLocationMarker;
@@ -73,6 +78,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        pref=new Preferences( this);
+        loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+
     }
 
     @Override
@@ -276,12 +284,15 @@ public class GeocoderHandler extends Handler {
         TextView btnPaynow=dialog.findViewById(R.id.btnPaynow);
         TextView tvAddress=dialog.findViewById(R.id.tvAddress);
         tvAddress.setText(addresss);
-
+        pref.set(Constants.address,addresss);
+        pref.commit();
+        Log.e("ADDREEEEEE",pref.get(Constants.address));
 
         btnPaynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MapsActivity.this, PostJob.class);
+                startActivity(intent);
             }
         });
 
@@ -300,7 +311,7 @@ public class GeocoderHandler extends Handler {
 
         markerOptions.position(latLng);
         markerOptions.draggable(true);
-        markerOptions.title(addresss);
+        //markerOptions.title(addresss);
 
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
