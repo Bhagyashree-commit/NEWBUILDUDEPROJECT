@@ -90,7 +90,7 @@ public class AcceptOfferFragment extends Fragment {
         categoryEng = new ArrayList<String>();
         categoryID = new ArrayList<String>();
         joblist = new ArrayList<JobModel>();
-        usertype="Contractor";
+        usertype="CONTRACTOR";
 
 
          getloc(userid,usertype);
@@ -125,7 +125,7 @@ public class AcceptOfferFragment extends Fragment {
             public void onClick(View v) {
                 String id=pref.get(Constants.USERID);
                 String jsonarr="";
-                hitAcceptJob(id, String.valueOf(array));
+                hitAcceptJob(id, String.valueOf(array),usertype);
             }
         });
 
@@ -211,7 +211,7 @@ public class AcceptOfferFragment extends Fragment {
                                 tv_date.setText(obj.getString("create_datetime"));
                                 tv_wage.setText(obj.getString("wage"));
                                 tv_counter.setText(obj.getString("no"));
-                                pref.set(Constants.LOCa, object.getString("location"));
+                                pref.set(Constants.LOC, object.getString("location"));
                                 pref.set(Constants.CREADATE, object.getString("create_datetime"));
                                 pref.set(Constants.wage, object.getString("wage"));
                                 pref.set(Constants.count, object.getString("no"));
@@ -420,7 +420,7 @@ public class AcceptOfferFragment extends Fragment {
     }
 
 
-    private void hitAcceptJob(final String id,final String json) {
+    private void hitAcceptJob(final String id,final String json,final String usertype) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.ACCEPTJOB, new Response.Listener<String>() {
@@ -434,7 +434,7 @@ public class AcceptOfferFragment extends Fragment {
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
-                      //  btn_accept.setVisibility(View.VISIBLE);
+                        btn_accept.setVisibility(View.INVISIBLE);
 
                         Log.d(TAG, array.toString());
 
@@ -463,7 +463,7 @@ public class AcceptOfferFragment extends Fragment {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("ruserid",id);
                 params.put("accept_jobid", json);
-                params.put("usertype", "Contractor");
+                params.put("usertype", usertype);
 
                 Log.e("",""+params);
                 return params;

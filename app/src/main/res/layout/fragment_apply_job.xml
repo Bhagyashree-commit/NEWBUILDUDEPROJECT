@@ -28,11 +28,11 @@
       android:layout_height="@dimen/_35sdp"
       android:text="Location"></Spinner>
 
-  <Spinner
+  <TextView
       android:spinnerMode="dialog"
       android:backgroundTint="@color/red_300"
       android:background="@drawable/square_box"
-      android:id="@+id/spin_date"
+      android:id="@+id/tv_date"
       android:layout_alignParentRight="true"
       android:fontFamily="sans-serif-condensed"
       android:textColor="@color/white"
@@ -42,7 +42,7 @@
       android:textAllCaps="true"
       android:textStyle="bold"
       android:layout_height="@dimen/_35sdp"
-      android:text="Date"></Spinner>
+      android:text="Date"></TextView>
 
  </RelativeLayout>
  <RelativeLayout

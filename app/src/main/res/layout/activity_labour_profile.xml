@@ -64,6 +64,7 @@
                android:orientation="horizontal"
                android:layout_height="wrap_content">
                <RadioButton
+                   android:checked="true"
                    android:id="@+id/rb_male"
                    android:fontFamily="sans-serif-condensed"
                    android:textSize="@dimen/_15sdp"

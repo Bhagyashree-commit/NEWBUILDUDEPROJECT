@@ -51,4 +51,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-functions:19.2.0'
+    implementation 'com.github.sujithkanna:smileyrating:2.0.0'
 }

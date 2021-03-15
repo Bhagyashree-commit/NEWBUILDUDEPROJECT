@@ -25,7 +25,7 @@
                 android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Site Details"
+                android:text="@string/sitedetails"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"></TextView>

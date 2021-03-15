@@ -65,6 +65,7 @@ public class AppliedJobFragment extends Fragment {
     ArrayList<JobModel> joblist;
     String create_datetime,location,cattype_id,userid;
 
+
     public AppliedJobFragment() {
         // Required empty public constructor
     }

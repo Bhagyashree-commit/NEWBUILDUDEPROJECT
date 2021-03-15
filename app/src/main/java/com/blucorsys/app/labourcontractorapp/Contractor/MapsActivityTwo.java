@@ -63,22 +63,20 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
     double l2;
     Location l3;
     double latitude,longitude;
-    Preferences pref;
+    Preferences sessionManagerContractor;
     FusedLocationProviderClient fusedLocationProviderClient;
     public static String newloc;
-
+    LocationManager locmanager;
     int markercount=0;
 
     Marker m1;
     Marker m2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_two);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
         SupportMapFragment mapFragment = (SupportMapFragment)
@@ -88,8 +86,7 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        pref = new Preferences(this);
-
+        sessionManagerContractor = new Preferences(this);
         GPSTracker mGPS = new GPSTracker(this);
 
         l1= mGPS.getLatitude();
@@ -109,11 +106,14 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
             }
         });
 
-    }
 
+
+
+    }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
+        mMap.clear();
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
@@ -155,8 +155,21 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
                 e.printStackTrace();
             }
         }
+//
+//        // mCurrLocationMarker.remove();
+//        mMap.clear();
+//
+//        MarkerOptions mp = new MarkerOptions();
+//
+//        mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
+//
+//        mp.title("my position");
+//
+//        mMap.addMarker(mp);
+//
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+//                new LatLng(location.getLatitude(), location.getLongitude()), 10));
 
-        // mCurrLocationMarker.remove();
     }
 
     @Override
@@ -206,7 +219,7 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
-        if(pref.get("latitude").isEmpty()){
+        if(sessionManagerContractor.get("latitude").isEmpty()){
             Log.e("testtttt1","first");
             // latLng = new LatLng(location.getLatitude(), location.getLongitude());
             // LatLng lt = new LatLng(18.5903995,73.7482045);
@@ -238,7 +251,7 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
             geocoder = new Geocoder(MapsActivityTwo.this, Locale.getDefault());
             try {
                 String sPlace;
-                addresses = geocoder.getFromLocation(Double.parseDouble(pref.get("latitude")), Double.parseDouble(pref.get("longitude")), 1);
+                addresses = geocoder.getFromLocation(Double.parseDouble(sessionManagerContractor.get("latitude")), Double.parseDouble(sessionManagerContractor.get("longitude")), 1);
                 String address1 = addresses.get(0).getAddressLine(0);
                 String city = addresses.get(0).getAddressLine(1);
                 String country = addresses.get(0).getAddressLine(2);
@@ -251,8 +264,8 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
                 }
                 Log.e("new addreesss",""+address1);
 
-                LatLng India = new LatLng(Double.parseDouble(pref.get("latitude")), Double.parseDouble(pref.get("longitude")));
-                m1=createMarker(Double.parseDouble(pref.get("latitude")), Double.parseDouble(pref.get("longitude")),address);
+                LatLng India = new LatLng(Double.parseDouble(sessionManagerContractor.get("latitude")), Double.parseDouble(sessionManagerContractor.get("longitude")));
+                m1=createMarker(Double.parseDouble(sessionManagerContractor.get("latitude")), Double.parseDouble(sessionManagerContractor.get("longitude")),address);
 
 //                    mMap.addMarker(new MarkerOptions().position(India).draggable(true).title(address).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(India, 10));
@@ -276,7 +289,7 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
             @Override
             public void onMapClick(LatLng latLng) {
                 try {
-                    mCurrLocationMarker.remove();
+                  mCurrLocationMarker.remove();
                     mCurrLocationMarker.setPosition(latLng);
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 
@@ -323,16 +336,16 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
                         Log.e("add", "" + knownName);
 
 //                        mMap.addMarker(new MarkerOptions().position(latLng).draggable(true).title(address).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-//                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
-                        pref.set("add", "" + newadd);
-                        pref.set("latitude", "" + latLng.latitude);
-                        pref.set("longitude", "" + latLng.longitude);
-                        pref.set("pos", "" + postalCode);
-                        pref.commit();
+                        sessionManagerContractor.set("add", "" + newadd);
+                        sessionManagerContractor.set("latitude", "" + latLng.latitude);
+                        sessionManagerContractor.set("longitude", "" + latLng.longitude);
+                        sessionManagerContractor.set("pos", "" + postalCode);
+                        sessionManagerContractor.commit();
 
-                        Log.e("session", pref.get("add"));
-                        Log.e("session", pref.get("pos"));
+                        Log.e("session", sessionManagerContractor.get("add"));
+                        Log.e("session", sessionManagerContractor.get("pos"));
 
 
                     }
