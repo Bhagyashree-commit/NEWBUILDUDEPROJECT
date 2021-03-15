@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/lljob"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+
+            <androidx.cardview.widget.CardView
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/_30sdp"
+                app:cardCornerRadius="@dimen/_15sdp"
+                android:layout_margin="@dimen/_5sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+
+                    >
+                    <TextView
+                        android:layout_above="@+id/tv_counter"
+                        android:padding="@dimen/_5sdp"
+                        android:background="@color/red_800"
+                        android:id="@+id/tv_requestpay"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pay"></TextView>
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_marginRight="@dimen/_50sdp"
+                        android:id="@+id/tv_counter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="COUNTER"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:textColor="@color/red_800"></TextView>
+                    <TextView
+                        android:layout_below="@+id/tv_counter"
+                        android:textStyle="bold"
+                        android:id="@+id/jobareatext"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="@string/jobarea"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_below="@+id/tv_counter"
+                        android:singleLine="true"
+                        android:id="@+id/jobareainput"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_toRightOf="@id/jobareatext"
+                        android:text="Apple MacBook Air"
+                        android:textColor="@color/black"
+                        />
+
+
+
+
+                    <TextView
+                        android:visibility="gone"
+                        android:textStyle="bold"
+                        android:id="@+id/cratingtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/jobareatext"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_20sdp"
+                        android:textColor="@color/black"
+                        android:text="@string/contractorrating"
+                        />
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/cratinginput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/jobareainput"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/cratingtext"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/green_500"
+                        android:paddingLeft="@dimen/_20sdp"
+                        android:paddingRight="@dimen/_20sdp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/labortypetext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cratingtext"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/typeoflabor"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/labortypeinput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cratinginput"
+                        android:layout_toRightOf="@id/labortypetext"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="INR 56990"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"/>
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/wageratetext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/labortypeinput"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/wagerate"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"/>
+
+
+                    <TextView
+                        android:id="@+id/wagerateinput"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/labortypeinput"
+                        android:layout_toRightOf="@id/wageratetext"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/black"
+                        android:text="INR 56990"
+                        android:textSize="@dimen/_10sdp"/>
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/jobdatetext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/wagerateinput"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/jobdate"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/jobdateinput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/wagerateinput"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/jobdatetext"
+                        android:layout_marginTop="5dp"
+                        android:text="INR 56990"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

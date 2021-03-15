@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         btn_info=findViewById(R.id.btn_info);
 
         List<String> list = new ArrayList();
-        list.add("Language");
-        list.add("English");
+        list.add("LANGUAGE");
+        list.add("ENGLISH");
         list.add("हिंदी");
         list.add("मराठी");
 pref=new Preferences(this);

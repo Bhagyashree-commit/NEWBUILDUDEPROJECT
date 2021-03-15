@@ -30,7 +30,7 @@
                     android:id="@+id/cardapply"
                     android:backgroundTint="#68203F"
                     android:layout_width="0dp"
-                    android:layout_marginRight="@dimen/_10sdp"
+
                     android:layout_height="@dimen/_90sdp"
                     app:cardElevation="@dimen/_15sdp"
                     app:cardCornerRadius="@dimen/_25sdp"
@@ -51,7 +51,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:id="@+id/card34"
+                    android:id="@+id/card_requestpay"
                     android:backgroundTint="#1D45BD"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_90sdp"
@@ -89,7 +89,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints">
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card12"
+                    android:id="@+id/card_acceptjob"
                     android:backgroundTint="#526C42"
                     android:layout_width="0dp"
                     android:layout_marginRight="@dimen/_10sdp"

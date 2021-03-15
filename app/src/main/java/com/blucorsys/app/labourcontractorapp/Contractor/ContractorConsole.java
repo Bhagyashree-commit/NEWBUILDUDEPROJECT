@@ -28,7 +28,7 @@ import com.blucorsys.app.labourcontractorapp.R;
 
 
 public class ContractorConsole extends AppCompatActivity {
-CardView card1,card2,card3;
+CardView cardpostjob,card_acceptjob,cardprofile,card_track,card_pay;
 Preferences pref;
 TextView tv_name;
 CustomLoader loader;
@@ -37,18 +37,21 @@ ImageView iv_logout;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contractor_console);
-        card1=(CardView)findViewById(R.id.card1);
-        card2=(CardView)findViewById(R.id.card2);
-        card3=(CardView)findViewById(R.id.card3);
+        cardpostjob=(CardView)findViewById(R.id.cardpostjob);
+        card_acceptjob=(CardView)findViewById(R.id.card_acceptjob);
+        cardprofile=(CardView)findViewById(R.id.cardprofile);
+        card_pay=(CardView)findViewById(R.id.card_pay);
         tv_name=(TextView)findViewById(R.id.tv_name);
         iv_logout=findViewById(R.id.btnlogout);
+        card_track=findViewById(R.id.card_track);
 
 
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         pref=new Preferences(this);
 
         tv_name.setText(pref.get(Constants.FIRSTNAME )+ " " +pref.get(Constants.LASTNAME));
-        card3.setOnClickListener(new View.OnClickListener() {
+        cardprofile
+                .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ContractorConsole.this, ContractorProfile.class));
@@ -56,30 +59,54 @@ ImageView iv_logout;
         });
 
         if(pref.get(Constants.STATUS).equals("0")){
-            card1.setOnClickListener(new View.OnClickListener() {
+            cardpostjob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     showPopUp();
                 }
             });
-            card2.setOnClickListener(new View.OnClickListener() {
+            card_acceptjob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    showPopUp();
+                }
+            });
+            card_track.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopUp();
+                }
+            });
+            card_pay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     showPopUp();
                 }
             });
         }
         else if(pref.get(Constants.STATUS).equals("1")){
-            card1.setOnClickListener(new View.OnClickListener() {
+            cardpostjob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     startActivity(new Intent(ContractorConsole.this, PostJob.class));
                 }
             });
-            card2.setOnClickListener(new View.OnClickListener() {
+            card_acceptjob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     startActivity(new Intent(ContractorConsole.this, ContractorAcceptReject.class));
+                }
+            });
+            card_track.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(ContractorConsole.this, TrackingActivity.class));
+                }
+            });
+            card_pay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(ContractorConsole.this, Pay.class));
                 }
             });
 
@@ -107,9 +134,6 @@ ImageView iv_logout;
                 TextView tvReason = (TextView) dialog.findViewById(R.id.textView22);
                 TextView tvAlertMsg = (TextView) dialog.findViewById(R.id.tvAlertMsg);
 
-                //set value
-                //tvAlertMsg.setText("CONFIRMATION ALERT..!!!");
-                // tvReason.setText("ARE YOU SURE WANT TO LOGOUT?");
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                 dialog.show();

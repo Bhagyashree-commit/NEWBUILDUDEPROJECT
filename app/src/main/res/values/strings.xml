@@ -9,4 +9,40 @@
     <string name="wagerate">WAGE RATE :</string>
     <string name="jobdate">JOB DATE :</string>
     <string name="title_activity_maps">Map</string>
+    <string name="postjob">Post Job</string>
+    <string name="pay">Pay</string>
+    <string name="acceptjob">Accept</string>
+    <string name="profile">Profile</string>
+    <string name="track">Track</string>
+    <string name="summary">Summary</string>
+    <string name="modify">Modify</string>
+    <string name="conceptualizedby">CONCEPTUALISED BY</string>
+    <string name="comname">Shantal Consulting Engineers</string>
+    <string name="conti">Continue</string>
+    <string name="Process">Process</string>
+    <string name="Info">Info</string>
+    <string name="enternum">ENTER MOB NO</string>
+    <string name="pass">PASSWORD</string>
+    <string name="login">Login</string>
+    <string name="noaccount">Do not have AN ACCOUNT?</string>
+    <string name="signup">SIGN UP</string>
+    <string name="forgetpass">FORGET PASSWORD</string>
+    <string name="check">CHECK</string>
+    <string name="otp">ENTER OTP</string>
+    <string name="verify">VERIFY</string>
+    <string name="fname">FIRST NAME</string>
+    <string name="lname">LAST NAME</string>
+    <string name="refnumber">REFERRAL MOBILE NUMBER</string>
+    <string name="terms">I agree To terms and conditions</string>
+    <string name="loc">PUNE</string>
+    <string name="site">SITE DETAILS</string>
+    <string name="category">SELECT CATEGORY</string>
+    <string name="acceptoffer">Accept Offer</string>
+    <string name="acceptedoffer">Accepted Offer</string>
+    <string name="date">DATE</string>
+    <string name="ok">OK -></string>
+    <string name="acceptedjob">Get Accepted Job</string>
+    <string name="sitedetails">Site Details</string>
+
+
 </resources>

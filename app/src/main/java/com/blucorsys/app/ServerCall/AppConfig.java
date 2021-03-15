@@ -47,5 +47,29 @@ public class AppConfig {
 
     public static String GETLOCFILTER=BASE_URL+"get_locationby_contractor_filter.php";
 
+    public static String JOBACCEPTLOCATION=BASE_URL+"get_locationby_labour.php";
+
+    public static String ACCEPTJOBFILTER=BASE_URL+"get_locationby_labour_filter.php";
+
+    public static String CHECKDATE=BASE_URL+"trackordertime.php";
+
+    public static String STARTTRACK1=BASE_URL+"trackingprocess_step1.php";
+
+    public static String STARTTRACK2=BASE_URL+"trackingprocess_step2.php";
+
+    public static String STARTTRACK3=BASE_URL+"trackingprocess_step3.php";
+
+    public static String TRACKLIST=BASE_URL+"get_track_contractorjob.php";
+
+    public static String PAYLIST=BASE_URL+"get_tracked_job.php";
+
+    public static String PAYREQUEST=BASE_URL+"request_job_payment.php";
+
+    public static String ENDJOB=BASE_URL+"end_job_by_labour.php";
+
+    public static String GETPAYREQUEST=BASE_URL+"get_track_contractorjob.php";
+
+    public static String PAYPAYMENT=BASE_URL+"payment_paid_by_contractor.php";
+
 
 }

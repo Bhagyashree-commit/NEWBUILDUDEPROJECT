@@ -27,5 +27,8 @@ public class Constants {
     public static String count= "count";
     public static String LOCation= "location";
     public static String careda= "create_datetime";
+    public static String RADIOID= "jobid_details";
+    public static String role= "usertype";
+    public static String lid= "labour_id";
 
 }

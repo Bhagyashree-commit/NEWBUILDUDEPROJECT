@@ -2,8 +2,10 @@ package com.blucorsys.app.labourcontractorapp.Contractor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -115,7 +117,12 @@ TextView tv_typecat;
                         // TODO Auto-generated method stub
                         /*      Your code   to get date and time    */
                         selectedmonth = selectedmonth + 1;
-                        date = +selectedday + "/" + selectedmonth + "/" + selectedyear;
+                        if(selectedmonth>9) {
+                            date = +selectedyear + "-" + selectedmonth + "-" + selectedday;
+                        }
+                        else {
+                            date = +selectedyear + "-0" + selectedmonth + "-" + selectedday;
+                        }
                         // eReminderDate.setText("" + selectedday + "/" + selectedmonth + "/" + selectedyear);
                         Log.e("", "" + date);
                         // sessionManagerContractor.set("date","date");
@@ -142,13 +149,13 @@ TextView tv_typecat;
                                 }
 
                                 if(hourOfDay>=0 && hourOfDay<12){
-                                    time = hourOfDay + " : " + minute + " AM";
+                                    time = hourOfDay + ":" + minute +":00" ;
                                 } else {
                                     if(hourOfDay == 12){
-                                        time = hourOfDay + " : " + minute + "PM";
+                                        time = hourOfDay + ":" + minute +":00";
                                     } else{
                                         hourOfDay = hourOfDay -12;
-                                        time = hourOfDay + " : " + minute + "PM";
+                                        time = hourOfDay + ":" + minute +":00";
                                     }
                                 }
                                 Log.e("", "" + time);
@@ -206,6 +213,11 @@ TextView tv_typecat;
 
                 for(int i=0;i<etnumberArrayList.size();i++)
                 {
+
+//                    if(etnumberArrayList.get(i).getText().length()==0)
+//                    {
+//
+//                    }
                     HashMap<String,String> map=new HashMap<>();
 
 
@@ -222,8 +234,6 @@ TextView tv_typecat;
                         }
                     }
 
-
-
                     Log.e("ggg",categoryEng.get(spinnerCatArrayList.get(i).getSelectedItemPosition()));
                   //  String spin=spinnerCatArrayList.get(i).getSelectedItem().toString();
 
@@ -237,7 +247,6 @@ TextView tv_typecat;
                 }
                 Log.e("bhagya1",""+arrayList);
                 JSONArray array = new JSONArray(arrayList);
-
 
                 Log.e("array1",""+array);
 
@@ -254,7 +263,7 @@ TextView tv_typecat;
                 String site=et_sitedetails.getText().toString();
                 String date=datetimer.getText().toString();
                 String arr= String.valueOf(array);
-                String type= "Contractor";
+                String type= "CONTRACTOR";
                 if(tv_location.equals("LOCATION OF WORK")){
                     Toast.makeText(getApplicationContext(), "Please select area", Toast.LENGTH_SHORT).show();
                     tv_location.requestFocus();
@@ -268,7 +277,42 @@ TextView tv_typecat;
                     datetimer.requestFocus();
                 }
                 else {
-                    postJob(userid, loc, site, date, arr, type);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PostJob.this);
+
+                    builder.setTitle("Job Post");
+                    builder.setMessage("Are You Sure about job posting?");
+
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do nothing but close the dialog
+                            postJob(userid, loc, site, date, arr, type);
+                            pref.set("add", "");
+                            pref.commit();
+                            et_sitedetails.setText("");
+//                                    Intent intent = new Intent(PostJobs.this, ContractorProfile.class);
+//                                    startActivity(intent);
+                            dialog.dismiss();
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            // Do nothing
+                            dialog.dismiss();
+                        }
+                    });
+
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+
+
                 }
             }
         });
@@ -385,7 +429,6 @@ TextView tv_typecat;
                 params.put("create_datetime", date);
                 params.put("cattype_id", jsonarray);
                 params.put("usertype", type);
-
                 Log.e("",""+params);
                 return params;
             }

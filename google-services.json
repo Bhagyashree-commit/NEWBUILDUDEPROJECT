@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "875345354279",
-    "project_id": "labourcontractor-15b9a",
-    "storage_bucket": "labourcontractor-15b9a.appspot.com"
+    "project_number": "144197934884",
+    "project_id": "newlabourproject",
+    "storage_bucket": "newlabourproject.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:875345354279:android:b72a3d1a7afe5aeb57f802",
+        "mobilesdk_app_id": "1:144197934884:android:94cf25e5915af5a10a5db1",
         "android_client_info": {
           "package_name": "com.blucorsys.app.labourcontractorapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "875345354279-pl7b0o2uvbnbijne86sc1r4nfkc97eam.apps.googleusercontent.com",
+          "client_id": "144197934884-3v80oepcapplssu96vu685l72af7hqlm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBF90sQcSr1g1qlZyjR2BFFRxrmC1J07ak"
+          "current_key": "AIzaSyC23x2r8nLkk1v8gWCd7lY5U5qDhXkGYpM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "875345354279-pl7b0o2uvbnbijne86sc1r4nfkc97eam.apps.googleusercontent.com",
+              "client_id": "144197934884-3v80oepcapplssu96vu685l72af7hqlm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -92,6 +92,7 @@
              android:layout_height="wrap_content"
              android:layout_weight="1">
              <EditText
+                 android:inputType="textCapCharacters"
                  android:id="@+id/et_location"
                  android:fontFamily="sans-serif-condensed"
                  android:textColor="@color/black"
@@ -99,7 +100,6 @@
                  android:background="@drawable/square_box"
                  android:textSize="@dimen/_15sdp"
                  android:layout_width="wrap_content"
-                 android:textAllCaps="true"
                  android:layout_height="wrap_content"
                  android:hint="Location"></EditText></LinearLayout>
 
@@ -132,6 +132,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:inputType="textEmailAddress"
                 android:id="@+id/et_email"
                 android:drawablePadding="@dimen/_5sdp"
                 android:drawableLeft="@drawable/email"
@@ -141,21 +142,20 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="@dimen/_200sdp"
-                android:textAllCaps="true"
                 android:layout_height="@dimen/_40sdp"
                 android:hint="Enter mail Id*"></EditText>
 
         </LinearLayout>
         <LinearLayout
             android:gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_100sdp"
             android:orientation="horizontal">
             <EditText
+                android:inputType="textCapCharacters"
                 android:gravity="start"
                 android:id="@+id/et_generalinfo"
-                android:lines="4"
+                android:maxLines="4"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="sans-serif-condensed"
                 android:textColor="@color/black"
@@ -163,7 +163,6 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="@dimen/_200sdp"
-                android:textAllCaps="true"
                 android:layout_height="wrap_content"
                 android:hint="General Information"></EditText>
 

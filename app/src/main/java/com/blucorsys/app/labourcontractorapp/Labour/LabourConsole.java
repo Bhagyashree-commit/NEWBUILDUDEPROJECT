@@ -4,7 +4,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,7 +28,7 @@ import com.blucorsys.app.labourcontractorapp.R;
 
 
 public class LabourConsole extends AppCompatActivity {
-CardView cardprofile,cardapply;
+CardView cardprofile,cardapply,card_acceptjob,card_requestpay;
 TextView tv_name;
 Preferences pref;
     ImageView iv_logout;
@@ -38,6 +40,8 @@ Preferences pref;
         cardapply=findViewById(R.id.cardapply);
         iv_logout=findViewById(R.id.btnlogout);
         tv_name=findViewById(R.id.tv_name);
+        card_acceptjob=findViewById(R.id.card_acceptjob);
+        card_requestpay=findViewById(R.id.card_requestpay);
         pref=new Preferences(this);
         tv_name.setText(pref.get(Constants.FIRSTNAME));
         cardprofile.setOnClickListener(new View.OnClickListener() {
@@ -49,15 +53,51 @@ Preferences pref;
 
 
 
-        if(pref.get(Constants.STATUS).equals("0")) {}
+        if(pref.get(Constants.STATUS).equals("0")) {
+            cardapply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showPopUp();
+                }
+            });
 
+            card_acceptjob.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showPopUp();
+                }
+            });
+            card_requestpay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showPopUp();
+                }
+            });
+        }
 
+        else {
             cardapply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     startActivity(new Intent(LabourConsole.this, JobApplication.class));
                 }
             });
+
+            card_acceptjob.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(LabourConsole.this, JobStatus.class));
+                }
+            });
+            card_requestpay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(LabourConsole.this, PaymentRequest.class));
+                }
+            });
+        }
+
+
 
 
         iv_logout.setOnClickListener(new View.OnClickListener() {
@@ -116,5 +156,19 @@ Preferences pref;
 
         });
 
+    }
+
+    public void showPopUp(){
+        AlertDialog alertDialog = new AlertDialog.Builder(LabourConsole.this).create();
+        alertDialog.setTitle("Please Update Profile");
+        //alertDialog.setMessage(" Your Last Location Is "+mCurrentLocation);
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

@@ -23,15 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LabourContractorApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LocationAddress"></activity>
-        <activity android:name=".MapsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".RoleActivity" />
+        <activity android:name=".ForgetPassword"></activity>
+        <activity android:name=".Contractor.Pay" />
+        <activity android:name=".Labour.PaymentRequest" />
+        <activity android:name=".Contractor.TrackingActivity" />
+        <activity android:name=".Labour.StartTrackActivity" />
+        <activity android:name=".Labour.JobStatus" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -50,9 +47,15 @@
         <activity android:name=".Labour.JobApplication" />
         <activity
             android:name=".Contractor.MapsActivityTwo"
-            android:label="@string/title_activity_maps_two"></activity>
+            android:label="@string/title_activity_maps_two" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".SplashScreen" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".Choose_RoleActivity" />
         <activity android:name=".RegisterActivity" />
