@@ -48,7 +48,6 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
-
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final int REQUEST_LOCATION = 1;
     GoogleApiClient mGoogleApiClient;
@@ -101,10 +100,21 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
             public void onSuccess(Location location) {
                 if (location != null) {
                     mLastLocation = location;
-                    Toast.makeText(getApplicationContext(), mLastLocation.getLatitude() + "" + mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), mLastLocation.getLatitude() + "and" + mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+
+                    LatLng lt = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+
+//                    MarkerOptions mk = new MarkerOptions().position(lt).title("I am here!");
+//
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLng(lt));
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lt, 5));
+//                    mMap.addMarker(mk);
                     SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     assert supportMapFragment != null;
                     supportMapFragment.getMapAsync(MapsActivityTwo.this);
+
+
+
                 }
             }
         });
@@ -118,8 +128,10 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
-//Showing Current Location Marker on Map
+       //Showing Current Location Marker on Map
         latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+       // mMap.addMarker(new MarkerOptions().position(new LatLng(l1, l2)).title("It's Me!"));
         markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         Log.e("mrakerrrr", "" + latLng);
@@ -149,6 +161,7 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
                     String subLocality = listAddresses.get(0).getSubLocality();
                     markerOptions.title("" + latLng + "," + subLocality + "," + state
                             + "," + country);
+
                     Log.e("mrakerrrrfdyyyyyyyy", "" + state);
                 }
             } catch (IOException e) {
@@ -190,22 +203,39 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
+
 //        //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
-                mMap.setMyLocationEnabled(true);
+               // mMap.setMyLocationEnabled(true);
+               // mMap.getUiSettings().setMyLocationButtonEnabled(true);
             }
         } else {
-            buildGoogleApiClient();
-            mMap.setMyLocationEnabled(true);
+
+            Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
+//            buildGoogleApiClient();
+//           mMap.setMyLocationEnabled(true);
         }
+
+        mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+            @Override
+            public boolean onMyLocationButtonClick() {
+                if (mGoogleApiClient != null) {
+                   // LatLng lt = new LatLng(18.5903995,73.7482045);
+
+                   // LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+                }
+                return false;
+            }
+        });
         if(pref.get("latitude").isEmpty()){
             Log.e("testtttt1","first");
             // latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -226,8 +256,9 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
             Log.e("MARKER ",""+markercount);
 
             // m1.setVisible(true);
-            m1=createMarker(mgps.getLatitude(),mgps.getLongitude(),address);
-            // mMap.addMarker(m1);
+          m1=  createMarker(mgps.getLatitude(),mgps.getLongitude(),"test");
+
+             //mMap.addMarker();
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lt, 10));
 
         }
@@ -288,12 +319,13 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
             public void onMarkerDragStart(Marker marker) {
-                Log.e("start", "");
                 m1.remove();
             }
 
             @Override
             public void onMarkerDrag(Marker marker) {
+                LatLng latLng = marker.getPosition();
+
             }
 
             @Override
@@ -330,9 +362,18 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
                         pref.set("longitude", "" + latLng.longitude);
                         pref.set("pos", "" + postalCode);
                         pref.commit();
+                        StringBuilder sb = new StringBuilder();
+
+
+                        sb.append(knownName).append("\n");
+
+                        sb.append(state).append("\n");
+                        sb.append(country).append(",");
+                        sb.append(postalCode);
+
 
                         Log.e("session", pref.get("add"));
-                        Log.e("session", pref.get("pos"));
+                        Log.e("sss", sb.toString());
 
 
                     }
@@ -456,6 +497,21 @@ public class MapsActivityTwo extends FragmentActivity implements OnMapReadyCallb
         //stop location updates when Activity is no longer active
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
+    }
+
+    private void setUpMapIfNeeded() {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (mMap == null) {
+
+            if (mMap != null) {
+                mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+                    @Override
+                    public void onMyLocationChange(Location arg0) {
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+                    }
+                });
+            }
         }
     }
 }
