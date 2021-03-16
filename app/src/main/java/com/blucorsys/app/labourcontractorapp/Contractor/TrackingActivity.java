@@ -51,14 +51,16 @@ public class TrackingActivity extends AppCompatActivity {
     String type;
     ArrayList<JobModel> joblist;
     RecyclerView rv_tracklist;
-    String selectedjob;
+    String selectedjob,laborid,labourname,lati,longi;
     JSONArray array;
     TextView btn_track;
 
     public static List<String> joblisttt  = new ArrayList<>();
     public static List<String> idlist  = new ArrayList<>();
     public static List<String> labornameist  = new ArrayList<>();
-    ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
+    public static List<String> latlist  = new ArrayList<>();
+    public static List<String> lnglist  = new ArrayList<>();
+    public static ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,28 +91,18 @@ public class TrackingActivity extends AppCompatActivity {
 
                     for(int i=0;i<joblisttt.size();i++)
                     {
-                        Geocoder geocoder = new Geocoder(TrackingActivity.this);
-                        List<Address> addresses;
-                        try {
-                            addresses = geocoder.getFromLocationName(joblisttt.get(i), 1);
-                            if(addresses.size() > 0) {
-                                double latitude= addresses.get(0).getLatitude();
-                                double longitude= addresses.get(0).getLongitude();
-                                map=new HashMap<>();
-                                map.put("lat",""+latitude);
-                                map.put("lng",""+longitude);
-                                map.put("id",""+idlist);
-                                map.put("name",""+labornameist.get(i));
-                                arrayList.add(map);
+
+                        map=new HashMap<>();
+                        map.put("lat",""+latlist.get(i));
+                        map.put("lng",""+lnglist.get(i));
+                        map.put("id",""+idlist.get(i));
+                        map.put("name",""+labornameist.get(i));
+                        arrayList.add(map);
 
 
-                                Log.e("latitude",""+latitude);
-                                Log.e("id",""+idlist);
-                                Log.e("Laborname",""+labornameist.get(i));
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        Log.e("latitude",""+latlist);
+                        Log.e("id",""+idlist.get(i));
+                        Log.e("Laborname",""+labornameist.get(i));
 
                         Log.d("Testtttttt", "Array "+arrayList.toString());
 
@@ -166,16 +158,17 @@ public class TrackingActivity extends AppCompatActivity {
                     if(b){
 
                         selectedjob= pu.getJobid_details();
+                        laborid= pu.getLabour_id();
+                        labourname= pu.getFirst_name();
+                        lati= pu.getLatitude();
+                        longi= pu.getLongitude();
                         Log.e("AMOLf777",""+selectedjob);
                         joblisttt.add(selectedjob);
-                        HashMap<String,String> map;
-                        map=new HashMap<>();
-
-                        map.put("jobid_details",""+selectedjob);
-                        arrayList.add(map);
-
-                        array = new JSONArray(arrayList);
-                        Log.e("AMOLf",""+array);
+                        idlist.add(laborid);
+                        labornameist.add(labourname);
+                        latlist.add(lati);
+                        lnglist.add(longi);
+//
 
                     }
                     else{
@@ -254,11 +247,14 @@ public class TrackingActivity extends AppCompatActivity {
                                 jobmodel.setCreate_datetime(job.getString("create_datetime"));
                                 jobmodel.setCattype_id(job.getString("cattype_id"));
                                 jobmodel.setWage(job.getString("wage"));
-//                                jobmodel.setNo(job.getString("no"));
+                                jobmodel.setLabour_id(job.getString("labour_id"));
                                 jobmodel.setCat_english(job.getString("cat_english"));
                                 jobmodel.setCat_hindi(job.getString("cat_hindi"));
                                 jobmodel.setCat_marathi(job.getString("cat_marathi"));
                                 jobmodel.setTrack_jobid(job.getString("track_jobid"));
+                                jobmodel.setLatitude(job.getString("latitude"));
+                                jobmodel.setLongitude(job.getString("longitude"));
+                                jobmodel.setFirst_name(job.getString("first_name"));
 
                                 joblist.add(jobmodel);
                             }

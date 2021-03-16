@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:textAllCaps="true"
                 android:gravity="center"
+                android:hint="@string/loc"
                 android:layout_height="@dimen/_90sdp"
               ></TextView>
         </LinearLayout>
@@ -55,8 +56,8 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="match_parent"
-                android:textAllCaps="true"
                 android:gravity="center"
+                android:inputType="textCapCharacters"
                 android:layout_height="wrap_content"
                 android:hint="@string/site"></EditText>
         </LinearLayout>
