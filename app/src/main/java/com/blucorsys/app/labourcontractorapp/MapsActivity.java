@@ -36,6 +36,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,8 +61,8 @@ import java.util.HashMap;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
-Preferences pref;
-CustomLoader loader;
+    Preferences pref;
+    CustomLoader loader;
     private GoogleMap mMap;
     Location mLastLocation;
     Marker mCurrLocationMarker;
@@ -81,13 +82,19 @@ CustomLoader loader;
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        pref=new Preferences( this);
+        pref = new Preferences(this);
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         permission();
+
+        View locationButton = ((View)findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+// position on right bottom
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        rlp.setMargins(0, 180, 180, 0);
     }
 
-    public void  permission()
-    {
+    public void permission() {
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -95,8 +102,6 @@ CustomLoader loader;
             return;
         }
     }
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -115,24 +120,25 @@ CustomLoader loader;
             mMap.setMyLocationEnabled(true);
         }
 
+
+
         mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
 
-                Log.e("Test","yyyyyyy");
-                GPSTracker  gps = new GPSTracker(MapsActivity.this);
+                Log.e("Test", "yyyyyyy");
+                GPSTracker gps = new GPSTracker(MapsActivity.this);
                 double latitude = gps.getLatitude();
                 double longitude = gps.getLongitude();
- pref.set(Constants.lat, String.valueOf(latitude));
- pref.set(Constants.lng, String.valueOf(longitude));
- pref.commit();
+                pref.set(Constants.lat, String.valueOf(latitude));
+                pref.set(Constants.lng, String.valueOf(longitude));
+                pref.commit();
                 mCurrLocationMarker.remove();
                 setmarker(latitude, longitude);
 
                 return true;
             }
         });
-
 
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -158,7 +164,7 @@ CustomLoader loader;
 
                 Log.d("System out", "onMarkerDragEnd..." + arg0.getPosition().latitude + "..." + arg0.getPosition().longitude);
                 //showBottomSheetDialog();
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(arg0.getPosition().latitude, arg0.getPosition().longitude), 12.0f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(arg0.getPosition().latitude, arg0.getPosition().longitude), 10.0f));
                 LocationAddress locationAddress = new LocationAddress();
                 locationAddress.getAddressFromLocation(arg0.getPosition().latitude, arg0.getPosition().longitude,
                         getApplicationContext(), new GeocoderHandler());
@@ -206,7 +212,7 @@ CustomLoader loader;
     public void onLocationChanged(Location location) {
 
 
-        Log.e("testtt","fffff");
+        Log.e("testtt", "fffff");
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
@@ -278,38 +284,37 @@ CustomLoader loader;
     }
 
 
+    public class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            String locationAddress;
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = bundle.getString("address");
+                    break;
+                default:
+                    locationAddress = null;
+            }
 
-public class GeocoderHandler extends Handler {
-    @Override
-    public void handleMessage(Message message) {
-        String locationAddress;
-        switch (message.what) {
-            case 1:
-                Bundle bundle = message.getData();
-                locationAddress = bundle.getString("address");
-                break;
-            default:
-                locationAddress = null;
+            addresss = locationAddress;
+            Log.e("locaaa", addresss);
+            showBottomSheetDialog();
+            // tvAddress.setText(locationAddress);
         }
-
-        addresss=locationAddress;
-        Log.e("locaaa",addresss);
-        showBottomSheetDialog();
-       // tvAddress.setText(locationAddress);
     }
-}
 
     public void showBottomSheetDialog() {
         View view = getLayoutInflater().inflate(R.layout.payment_dialog, null);
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(view);
 
-        TextView btnPaynow=dialog.findViewById(R.id.btnPaynow);
-        TextView tvAddress=dialog.findViewById(R.id.tvAddress);
+        TextView btnPaynow = dialog.findViewById(R.id.btnPaynow);
+        TextView tvAddress = dialog.findViewById(R.id.tvAddress);
         tvAddress.setText(addresss);
-        pref.set(Constants.address,addresss);
+        pref.set(Constants.address, addresss);
         pref.commit();
-        Log.e("ADDREEEEEE",pref.get(Constants.address));
+        Log.e("ADDREEEEEE", pref.get(Constants.address));
 
         btnPaynow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,8 +328,7 @@ public class GeocoderHandler extends Handler {
     }
 
 
-    public void setmarker(double lat,double lng)
-    {
+    public void setmarker(double lat, double lng) {
         LatLng latLng = new LatLng(lat, lng);
         MarkerOptions markerOptions = new MarkerOptions();
 

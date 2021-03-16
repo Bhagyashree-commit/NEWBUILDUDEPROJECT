@@ -224,7 +224,7 @@ String usertype;
                 params.put("mobileno", mobile);
                 params.put("password", password);
                 params.put("usertype", usertype);
-                params.put("fcm_token",token);
+                params.put("fcm_token","token");
                 Log.e("",""+params);
                 return params;
             }
@@ -236,7 +236,6 @@ String usertype;
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(strReq);
     }
-
 
     public void CheckGpsStatus(){
 

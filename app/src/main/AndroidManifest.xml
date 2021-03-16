@@ -52,11 +52,7 @@
         <activity android:name=".Labour.JobApplication" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".Choose_RoleActivity" />
@@ -64,11 +60,27 @@
         <activity android:name=".Contractor.ContractorAcceptReject" />
         <activity android:name=".Contractor.ContractorConsole" />
         <activity android:name=".Contractor.ContractorProfile" />
-        <activity android:name=".Contractor.PostJob"></activity>
+        <activity android:name=".Contractor.PostJob">
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+        </activity>
         <activity android:name=".Labour.LabourConsole" />
         <activity android:name=".Labour.LabourProfile" />
+        <service
+            android:name="com.blucorsys.app.firebase.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
-        <service android:name="com.blucorsys.app.firebase.MyFirebaseMessagingService" />
     </application>
 
 </manifest>
