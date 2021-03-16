@@ -431,6 +431,8 @@ TextView tv_typecat;
                 params.put("create_datetime", date);
                 params.put("cattype_id", jsonarray);
                 params.put("usertype", type);
+                params.put("latitude", pref.get(Constants.lat));
+                params.put("longitude", pref.get(Constants.lng));
                 Log.e("",""+params);
                 return params;
             }

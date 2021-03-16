@@ -45,6 +45,7 @@
     <string name="ok">OK -></string>
     <string name="acceptedjob">Get Accepted Job</string>
     <string name="sitedetails">Site Details</string>
+    <string name="title_activity_track_labor_on_map">Map</string>
 
 
 </resources>

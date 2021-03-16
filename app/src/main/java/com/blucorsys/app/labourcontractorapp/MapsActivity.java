@@ -123,9 +123,12 @@ CustomLoader loader;
                 GPSTracker  gps = new GPSTracker(MapsActivity.this);
                 double latitude = gps.getLatitude();
                 double longitude = gps.getLongitude();
-
+ pref.set(Constants.lat, String.valueOf(latitude));
+ pref.set(Constants.lng, String.valueOf(longitude));
+ pref.commit();
                 mCurrLocationMarker.remove();
                 setmarker(latitude, longitude);
+
                 return true;
             }
         });
@@ -213,6 +216,11 @@ CustomLoader loader;
         if (location != null) {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
+
+            pref.set(Constants.lat, String.valueOf(latitude));
+            pref.set(Constants.lng, String.valueOf(longitude));
+            pref.commit();
+
             LocationAddress locationAddress = new LocationAddress();
             locationAddress.getAddressFromLocation(latitude, longitude,
                     getApplicationContext(), new GeocoderHandler());

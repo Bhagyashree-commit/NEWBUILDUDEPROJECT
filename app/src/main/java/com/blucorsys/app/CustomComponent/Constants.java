@@ -31,5 +31,7 @@ public class Constants {
     public static String role= "usertype";
     public static String lid= "labour_id";
     public static String address= "labour_id";
+    public static String lat= "latitude";
+    public static String lng= "longitude";
 
 }

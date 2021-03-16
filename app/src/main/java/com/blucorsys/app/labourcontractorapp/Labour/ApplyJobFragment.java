@@ -384,8 +384,8 @@ CustomLoader loader;
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), LabourMapActivity.class);
-                    intent.putExtra("lat","37.421998333333335");
-                    intent.putExtra("lng","-122.084");
+                    intent.putExtra("lat",pu.getLatitude());
+                    intent.putExtra("lng",pu.getLongitude());
                     intent.putExtra("address",pu.getLocation());
                     startActivity(intent);
 
@@ -399,24 +399,17 @@ CustomLoader loader;
                     if(b){
 
                          selectedjob= pu.getJobid_details();
-                        Log.e("AMOLf777",""+selectedjob);
                         joblisttt.add(selectedjob);
                         HashMap<String,String> map;
                         map=new HashMap<>();
 
                         map.put("jobid_details",""+selectedjob);
                         arrayList.add(map);
-
                          array = new JSONArray(arrayList);
-                        Log.e("AMOLf",""+array);
-
                     }
                     else{
                        joblisttt.remove(selectedjob);
-                        Log.e("AMOL",""+selectedjob);
-
                     }
-
                 }
             });
 
@@ -495,6 +488,8 @@ CustomLoader loader;
                                 jobmodel.setCat_english(job.getString("cat_english"));
                                 jobmodel.setCat_hindi(job.getString("cat_hindi"));
                                 jobmodel.setCat_marathi(job.getString("cat_marathi"));
+                                jobmodel.setLatitude(job.getString("latitude"));
+                                jobmodel.setLongitude(job.getString("longitude"));
 
                                 joblist.add(jobmodel);
                             }

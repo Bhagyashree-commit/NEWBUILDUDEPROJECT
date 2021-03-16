@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +56,8 @@ public class TrackingActivity extends AppCompatActivity {
     TextView btn_track;
 
     public static List<String> joblisttt  = new ArrayList<>();
+    public static List<String> idlist  = new ArrayList<>();
+    public static List<String> labornameist  = new ArrayList<>();
     ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,60 @@ public class TrackingActivity extends AppCompatActivity {
         joblist = new ArrayList<JobModel>();
         getTrackList(pref.get(Constants.USERID),type);
 
+        btn_track.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                if(joblisttt.size()==0){
+                    Toast.makeText(getApplicationContext(),
+                            "Please Click Any One Check Box",
+                            Toast.LENGTH_LONG).show();
+                }
+                else{
+
+                    arrayList.clear();
+                    HashMap<String,String> map;
+
+                    for(int i=0;i<joblisttt.size();i++)
+                    {
+                        Geocoder geocoder = new Geocoder(TrackingActivity.this);
+                        List<Address> addresses;
+                        try {
+                            addresses = geocoder.getFromLocationName(joblisttt.get(i), 1);
+                            if(addresses.size() > 0) {
+                                double latitude= addresses.get(0).getLatitude();
+                                double longitude= addresses.get(0).getLongitude();
+                                map=new HashMap<>();
+                                map.put("lat",""+latitude);
+                                map.put("lng",""+longitude);
+                                map.put("id",""+idlist);
+                                map.put("name",""+labornameist.get(i));
+                                arrayList.add(map);
+
+
+                                Log.e("latitude",""+latitude);
+                                Log.e("id",""+idlist);
+                                Log.e("Laborname",""+labornameist.get(i));
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        Log.d("Testtttttt", "Array "+arrayList.toString());
+
+                    }
+                    Intent intent1 = new Intent(TrackingActivity.this, TrackLaborOnMap.class);
+                    startActivity(intent1);
+                }
+
+                Log.d(TAG, "address "+joblisttt.toString());
+            }
+
+
+
+        });
 
     }
 

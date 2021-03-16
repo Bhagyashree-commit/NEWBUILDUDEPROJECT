@@ -14,6 +14,25 @@ public class JobModel implements Parcelable {
     private String cat_marathi;
     private String jobid_details;
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    private String latitude;
+    private String longitude;
+
     public String getLabour_id() {
         return labour_id;
     }
