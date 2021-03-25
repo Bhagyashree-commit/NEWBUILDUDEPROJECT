@@ -29,7 +29,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="@dimen/_15sdp"
-        android:text="String/conceptualizedby"
+        android:text="@string/conceptualizedby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

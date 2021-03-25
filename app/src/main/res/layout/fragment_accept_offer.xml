@@ -61,12 +61,14 @@
             android:layout_weight="1"
             android:layout_height="match_parent">
             <Spinner
+                android:textAlignment="center"
                 android:id="@+id/spin_cat"
                 android:layout_width="@dimen/_180sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:fontFamily="sans-serif-condensed"
                 android:spinnerMode="dropdown"
-                android:text="Location"
+                android:text="@string/loc"
+                android:layout_gravity="center_horizontal"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textStyle="bold"></Spinner>

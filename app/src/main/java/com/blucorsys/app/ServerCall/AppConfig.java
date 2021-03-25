@@ -77,5 +77,9 @@ public class AppConfig {
 
     public static String FORGETPASS3=BASE_URL+"forgot_password_step3.php";
 
+    public static String GETPAYMETTOLABOUR=BASE_URL+"payment_get_by_labour.php";
+
+    public static String ENDPROCESS=BASE_URL+"end_job_by_labour.php";
+
 
 }

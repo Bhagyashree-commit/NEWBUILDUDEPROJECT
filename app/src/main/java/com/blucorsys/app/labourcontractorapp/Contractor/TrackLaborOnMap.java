@@ -3,18 +3,29 @@ package com.blucorsys.app.labourcontractorapp.Contractor;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.blucorsys.app.labourcontractorapp.R;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.blucorsys.app.labourcontractorapp.Contractor.TrackingActivity.arrayList;
 
 public class TrackLaborOnMap extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    LatLngBounds.Builder builder;
+    CameraUpdate cu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,22 +37,52 @@ public class TrackLaborOnMap extends FragmentActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mSetUpMap();
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+       // LatLng sydney = new LatLng(-34, 151);
+      //  mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+      //  mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+    public void mSetUpMap() {
+        /**clear the map before redraw to them*/
+        mMap.clear();
+        /**Create dummy Markers List*/
+        List<Marker> markersList = new ArrayList<Marker>();
+
+        Log.d("Rashmiiiiii",""+arrayList);
+
+        for(int i = 0 ; i < arrayList.size() ; i++) {
+            Marker location = mMap.addMarker(new MarkerOptions().position(new LatLng(
+                    Double.parseDouble(arrayList.get(i).get("lat")), Double.parseDouble(arrayList.get(i).get("lng")))).title(arrayList.get(i).get("name")));
+            markersList.add(location);
+
+        }
+
+
+        builder = new LatLngBounds.Builder();
+        for (Marker m : markersList) {
+            builder.include(m.getPosition());
+        }
+        /**initialize the padding for map boundary*/
+        int padding = 5;
+        /**create the bounds from latlngBuilder to set into map camera*/
+        LatLngBounds bounds = builder.build();
+        /**create the camera with bounds and padding to set into map*/
+        cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        /**call the map call back to know map is loaded or not*/
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                /**set animated zoom camera into map*/
+                mMap.animateCamera(cu);
+                //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+            }
+        });
+    }
+
 }
