@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -66,7 +67,7 @@ public class Pay extends AppCompatActivity {
         pref = new Preferences(this);
         joblist = new ArrayList<JobModel>();
         type="CONTRACTOR";
-        getpaylist(pref.get(Constants.USERID),type);
+        getpaylist(pref.get(Constants.USERID));
     }
 
 
@@ -95,9 +96,10 @@ public class Pay extends AppCompatActivity {
 
             final JobModel pu = jobmodel.get(position);
             holder.jobareainput.setText(pu.getLocation());
-            holder.labortypeinput.setText(pu.getCat_english());
-            holder.wagerateinput.setText(pu.getWage());
-            holder.jobdateinput.setText(pu.getCreate_datetime());
+            holder.labortypeinput.setText(pu.getFirst_name());
+            holder.wagerateinput.setText(pu.getWages());
+            holder.jobdateinput.setText(pu.getPayment_date());
+            holder.mobnuminput.setText(pu.getMobileno());
             pref.set(Constants.lid,pu.getLabour_id());
             pref.commit();
             holder.tv_requestpay.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +138,7 @@ public class Pay extends AppCompatActivity {
                         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                         @Override
                         public void onClick(View v) {
-                            hitRequestPayment(pref.get(Constants.USERID),type,pu.getTrack_jobid(),pu.getWage(),rating,pref.get(Constants.lid));
+                            hitRequestPayment(pref.get(Constants.USERID),type,pu.getJobid_details(),pu.getWages(),rating,pu.getUser_id());
                             dialog.dismiss();
                         }
                     });
@@ -161,7 +163,7 @@ public class Pay extends AppCompatActivity {
         TextView labortypeinput;
         TextView wagerateinput;
         TextView jobdateinput;
-        TextView tv_requestpay;
+        TextView tv_requestpay,mobnuminput;
         SmileyRating smile_rating;
         ImageView mapmarker;
         CheckBox btncheckbox;
@@ -174,6 +176,7 @@ public class Pay extends AppCompatActivity {
             wagerateinput=itemView.findViewById(R.id.wagerateinput);
             jobdateinput=itemView.findViewById(R.id.jobdateinput);
             tv_requestpay=itemView.findViewById(R.id.tv_requestpay);
+            mobnuminput=itemView.findViewById(R.id.mobnuminput);
             smile_rating=itemView.findViewById(R.id.smile_rating);
             mapmarker=itemView.findViewById(R.id.mapmarker);
             btncheckbox=itemView.findViewById(R.id.btncheckbox);
@@ -181,7 +184,7 @@ public class Pay extends AppCompatActivity {
     }
 
 
-    private void getpaylist(final String userid,final String type) {
+    private void getpaylist(final String userid) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.GETPAYREQUEST, new Response.Listener<String>() {
@@ -196,7 +199,7 @@ public class Pay extends AppCompatActivity {
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
 
-                        JSONArray array=object.getJSONArray("Job-data");
+                        JSONArray array=object.getJSONArray("Show-Job");
                         {
                             Log.d(TAG, array.toString());
                             //traversing through all the object
@@ -206,19 +209,19 @@ public class Pay extends AppCompatActivity {
                                 JSONObject job = array.getJSONObject(i);
                                 JobModel jobmodel = new JobModel();
                                 //adding the product to product list
-                                // jobmodel.setId(job.getString("id"));
+                                 //jobmodel.setId(job.getString("id"));
                                 jobmodel.setJobid_details(job.getString("jobid_details"));
-                                //  jobmodel.setJob_id(job.getString("job_id"));
+                                 // jobmodel.setJob_id(job.getString("job_id"));
                                 jobmodel.setLocation(job.getString("location"));
-                                jobmodel.setCreate_datetime(job.getString("create_datetime"));
-                                jobmodel.setCattype_id(job.getString("cattype_id"));
-                                jobmodel.setWage(job.getString("wage"));
+                                jobmodel.setPayment_date(job.getString("payment_date"));
+                                jobmodel.setFirst_name(job.getString("first_name"));
+                                jobmodel.setWages(job.getString("wages"));
 //                                jobmodel.setNo(job.getString("no"));
-                                jobmodel.setCat_english(job.getString("cat_english"));
-                                jobmodel.setCat_hindi(job.getString("cat_hindi"));
-                                jobmodel.setCat_marathi(job.getString("cat_marathi"));
-                                jobmodel.setTrack_jobid(job.getString("track_jobid"));
-                                jobmodel.setLabour_id(job.getString("labour_id"));
+                                jobmodel.setMobileno(job.getString("mobileno"));
+                              //  jobmodel.setCat_hindi(job.getString("cat_hindi"));
+                               // jobmodel.setCat_marathi(job.getString("cat_marathi"));
+                               // jobmodel.setTrack_jobid(job.getString("track_jobid"));
+                                jobmodel.setUser_id(job.getString("user_id"));
 
 
                                 joblist.add(jobmodel);
@@ -250,7 +253,7 @@ public class Pay extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("ruserid",userid);
-                params.put("usertype", type);
+
 
                 Log.e("",""+params);
                 return params;
@@ -279,7 +282,7 @@ public class Pay extends AppCompatActivity {
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("success").equalsIgnoreCase("true")) {
-
+                        startActivity(new Intent(Pay.this, ContractorConsole.class));
                         Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
 
                     }
@@ -307,7 +310,7 @@ public class Pay extends AppCompatActivity {
                 params.put("track_jobid", trackjobid);
                 params.put("wages_paid", wages);
                 params.put("review", rating);
-                params.put("labour_id", pref.get(Constants.lid));
+                params.put("labour_id", laborid);
 
                 Log.e("",""+params);
                 return params;

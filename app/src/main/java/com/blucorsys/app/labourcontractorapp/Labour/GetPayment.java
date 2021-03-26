@@ -114,12 +114,13 @@ public class GetPayment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     type="LABOUR";
-                    jobid="2";
+                    jobid=pu.getJob_id();
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat simpledateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     cdate = simpledateformat.format(calendar.getTime());
                     Log.e("date",""+cdate);
-                    endprocess(pref.get(Constants.USERID),type,jobid,cdate);
+
+                    endprocess(pu.getRuserid(),jobid,pu.getLabour_id());
                 }
             });
 
@@ -166,7 +167,7 @@ public class GetPayment extends Fragment {
             public void onResponse(String response) {
                 Log.d(TAG, "Response: " + response.toString());
                 loader.dismiss();
-
+                joblist.clear();
                 JSONObject j = null;
                 try {
                     JSONObject object = new JSONObject(response);
@@ -183,14 +184,14 @@ public class GetPayment extends Fragment {
                                 JSONObject job = array.getJSONObject(i);
                                 JobModel jobmodel = new JobModel();
                                 //adding the product to product list
-                                // jobmodel.setId(job.getString("id"));
+                                 jobmodel.setLabour_id(job.getString("labour_id"));
                                 jobmodel.setJobid_details(job.getString("jobid_details"));
-                                //  jobmodel.setJob_id(job.getString("job_id"));
+                                  jobmodel.setJob_id(job.getString("job_id"));
                                 jobmodel.setLocation(job.getString("location"));
                                 jobmodel.setCreate_datetime(job.getString("create_datetime"));
                                 jobmodel.setWages_paid(job.getString("wages_paid"));
                                 jobmodel.setSite_detail(job.getString("site_detail"));
-//                                jobmodel.setNo(job.getString("no"));
+                               jobmodel.setRuserid(job.getString("ruserid"));
                                // jobmodel.setCat_english(job.getString("cat_english"));
                               //  jobmodel.setCat_hindi(job.getString("cat_hindi"));
                                 //jobmodel.setCat_marathi(job.getString("cat_marathi"));
@@ -239,7 +240,7 @@ public class GetPayment extends Fragment {
 
 
 
-    private void endprocess(final String userid,final String type,final String jobid,final String date) {
+    private void endprocess(final String userid,final String jobid,final String laborid) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.ENDPROCESS, new Response.Listener<String>() {
@@ -277,9 +278,8 @@ public class GetPayment extends Fragment {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("ruserid",userid);
-                params.put("usertype", type);
-                params.put("track_jobid", jobid);
-                params.put("job_end_datetime", date);
+                params.put("job_id", jobid);
+                params.put("labour_id", laborid);
 
 
                 Log.e("",""+params);

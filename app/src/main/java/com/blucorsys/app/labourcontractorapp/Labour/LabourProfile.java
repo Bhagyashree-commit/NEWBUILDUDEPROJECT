@@ -56,6 +56,8 @@ public class LabourProfile extends AppCompatActivity {
     Preferences pref;
     private ArrayList<String> categoryEng;
     private ArrayList<String> categoryID;
+    private ArrayList<String> categoryMar;
+    private ArrayList<String> categoryHin;
     LinearLayout linlay;
     CustomAdapter customAdapterTwo;
     TextView btn_submitlabordetails,tv_dob;
@@ -91,6 +93,8 @@ public class LabourProfile extends AppCompatActivity {
         pref = new Preferences(this);
         categoryEng = new ArrayList<String>();
         categoryID = new ArrayList<String>();
+        categoryMar = new ArrayList<String>();
+        categoryHin = new ArrayList<String>();
 
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         getProfile(pref.get(Constants.USERID));
@@ -221,14 +225,26 @@ public class LabourProfile extends AppCompatActivity {
                 //Adding the name of the student to array list
                 categoryID.add(json.getString(Constants.CATID));
              categoryEng.add(json.getString(Constants.CATENG));
+                categoryMar.add(json.getString(Constants.CATMAR));
+                categoryHin.add(json.getString(Constants.CATHIN));
 
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        spincat.setAdapter(new ArrayAdapter<String>(LabourProfile.this, android.R.layout.select_dialog_item, categoryEng));
-    }
+        if(pref.get(Constants.Lang).equals("ENGLISH")){
+            spincat.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryEng));
+
+        }
+        else if(pref.get(Constants.Lang).equals("हिंदी")){
+            spincat.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryHin));
+
+        }
+        else {
+            spincat.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryMar));
+
+        }   }
 
     private void updateProfileLabour(final String userid,final String gender,final String location,final String dateofbirth,final String wagerate,final String aadharnum,final String pincode,final String spin) {
         loader.show();
@@ -312,6 +328,22 @@ public class LabourProfile extends AppCompatActivity {
                             et_pincode.setText(obj.getString("pincode"));
                             et_wage.setText(obj.getString("min_rate"));
                             et_adharnumber.setText(obj.getString("adhar_cardno"));
+
+                            for(int k=0;k<categoryEng.size();k++)
+                            {
+                                if(obj.getString("cat_name").equalsIgnoreCase(categoryEng.get(k)))
+
+                                {
+                                    spincat.setSelection(k);
+                                }
+                            }
+
+                            if(obj.getString("gender").equals("MALE")){
+                           rb_male.setChecked(true);
+                            }
+                            else {
+                                rb_female.setChecked(true);
+                            }
                             pref.set(Constants.STATUS,"1");
                             pref.commit();
                             Log.e("",""+pref.get(Constants.STATUS));

@@ -21,10 +21,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.blucorsys.app.CustomComponent.Constants;
+import com.blucorsys.app.CustomComponent.CustomLoader;
+import com.blucorsys.app.ServerCall.Preferences;
 import com.blucorsys.app.firebase.FetchAddressIntentService;
 import com.blucorsys.app.labourcontractorapp.Contractor.PostJob;
 import com.blucorsys.app.labourcontractorapp.R;
@@ -37,6 +40,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -54,7 +58,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static String TAG = "MAP LOCATION";
     Context mContext;
-    TextView mLocationMarkerText;
+    Preferences pref;
+    CustomLoader loader;
+    TextView mLocationMarkerText,btnPaynow;
     private LatLng mCenterLatLong;
 
 
@@ -87,12 +93,19 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
         mLocationMarkerText = (TextView) findViewById(R.id.locationMarkertext);
         mLocationAddress = (EditText) findViewById(R.id.Address);
         mLocationText = (TextView) findViewById(R.id.Locality);
-      //  mToolbar = (Toolbar) findViewById(R.id.toolbar);
-      //  setSupportActionBar(mToolbar);
-       // getSupportActionBar().setDisplayShowHomeEnabled(true);
+        btnPaynow = (TextView) findViewById(R.id.btnPaynow);
+        loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        pref = new Preferences(this);
 
-    //    getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+        permission();
 
+        btnPaynow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Map.this, PostJob.class);
+                startActivity(intent);
+            }
+        });
 
         mLocationText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,13 +183,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                     startIntentService(mLocation);
                     mLocationMarkerText.setText("Lat : " + mCenterLatLong.latitude + "," + "Long : " + mCenterLatLong.longitude);
 
-
-
-
-
                     LocationAddress locationAddress = new LocationAddress();
                     locationAddress.getAddressFromLocation(mCenterLatLong.latitude, mCenterLatLong.longitude,
                             getApplicationContext(), new GeocoderHandler());
+
+                    pref.set(Constants.lat, String.valueOf(mCenterLatLong.latitude));
+                    pref.set(Constants.lng, String.valueOf(mCenterLatLong.longitude));
+                    pref.commit();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -251,14 +264,22 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     @Override
     public void onLocationChanged(Location location) {
         try {
-            if (location != null)
+            if  (location != null)
+            {
+
+
                 changeMap(location);
-            LocationServices.FusedLocationApi.removeLocationUpdates(
-                    mGoogleApiClient, this);
+                LocationServices.FusedLocationApi.removeLocationUpdates(
+                        mGoogleApiClient, this);
+            }
+            else{
+                showSettingsAlert();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -508,29 +529,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
             // the user pressed the back button.
         }
     }
-    public void showBottomSheetDialog(String address) {
-        View view = getLayoutInflater().inflate(R.layout.payment_dialog, null);
-        final BottomSheetDialog dialog = new BottomSheetDialog(this);
-        dialog.setContentView(view);
-
-        TextView btnPaynow = dialog.findViewById(R.id.btnPaynow);
-        TextView tvAddress = dialog.findViewById(R.id.tvAddress);
-        tvAddress.setText(address);
-
-//        pref.set(Constants.address, addresss);
-//        pref.commit();
-//        Log.e("ADDREEEEEE", pref.get(Constants.address));
-
-        btnPaynow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Map.this, PostJob.class);
-                startActivity(intent);
-            }
-        });
-
-        dialog.show();
-    }
 
 
     public class GeocoderHandler extends Handler {
@@ -547,17 +545,57 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
             }
 
 
-            TextView btnPaynow = findViewById(R.id.btnPaynow);
+           // TextView btnPaynow = findViewById(R.id.btnPaynow);
             TextView tvAddress = findViewById(R.id.tvAddress);
             tvAddress.setText(locationAddress);
+            pref.set(Constants.newaddress, locationAddress);
+            pref.commit();
 
-//        pref.set(Constants.address, addresss);
-//        pref.commit();
-//        Log.e("ADDREEEEEE", pref.get(Constants.address));
-
-
-            //showBottomSheetDialog(locationAddress);
-            // tvAddress.setText(locationAddress);
         }
+    }
+
+    public void permission() {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+            return;
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 100:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    permission();
+                    Intent intent = new Intent(this, com.blucorsys.app.labourcontractorapp.Map.class);
+                    startActivity(intent);
+                }
+                else {
+
+                }
+                break;
+        }
+    }
+    public void showSettingsAlert() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                Map.this);
+        alertDialog.setTitle("SETTINGS");
+        alertDialog.setMessage("Enable Location Provider! Go to settings menu?");
+        alertDialog.setPositiveButton("Settings",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(
+                                Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        Map.this.startActivity(intent);
+                    }
+                });
+        alertDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        alertDialog.show();
     }
 }

@@ -32,7 +32,7 @@
           android:textAllCaps="true"
           android:textStyle="bold"
           android:layout_height="@dimen/_40sdp"
-          android:text="Contractor Profile"></TextView>
+          android:text="@string/contractorprofile"></TextView>
 
   </LinearLayout>
         <LinearLayout
@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:textColorHint="@color/black"
                 android:id="@+id/et_compname"
                 android:drawablePadding="@dimen/_5sdp"
                 android:drawableLeft="@drawable/ic_company"
@@ -68,7 +69,7 @@
                 android:layout_width="@dimen/_200sdp"
                 android:inputType="textCapCharacters"
                 android:layout_height="@dimen/_40sdp"
-                android:hint="Company Name*"><requestFocus />></EditText>
+                android:hint="@string/companyname"><requestFocus />></EditText>
 
         </LinearLayout>
  <LinearLayout
@@ -92,6 +93,7 @@
              android:layout_height="wrap_content"
              android:layout_weight="1">
              <EditText
+                 android:textColorHint="@color/black"
                  android:inputType="textCapCharacters"
                  android:id="@+id/et_location"
                  android:fontFamily="sans-serif-condensed"
@@ -101,7 +103,7 @@
                  android:textSize="@dimen/_15sdp"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:hint="Location"></EditText></LinearLayout>
+                 android:hint="@string/location"></EditText></LinearLayout>
 
          <LinearLayout
              android:gravity="center"
@@ -109,6 +111,7 @@
              android:layout_height="wrap_content"
              android:layout_weight="1">
              <EditText
+                 android:textColorHint="@color/black"
                  android:id="@+id/et_pincode"
                  android:fontFamily="sans-serif-condensed"
                  android:textColor="@color/black"
@@ -118,9 +121,9 @@
                  android:layout_width="wrap_content"
                 android:inputType="number"
                  android:digits="0123456789"
-                 android:maxLength="10"
+                 android:maxLength="6"
                  android:layout_height="wrap_content"
-                 android:hint="Pincode"></EditText>
+                 android:hint="@string/pincode"></EditText>
          </LinearLayout>
      </LinearLayout>
 
@@ -132,6 +135,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:textColorHint="@color/black"
                 android:inputType="textEmailAddress"
                 android:id="@+id/et_email"
                 android:drawablePadding="@dimen/_5sdp"
@@ -143,7 +147,7 @@
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="@dimen/_200sdp"
                 android:layout_height="@dimen/_40sdp"
-                android:hint="Enter mail Id*"></EditText>
+                android:hint="@string/email"></EditText>
 
         </LinearLayout>
         <LinearLayout
@@ -152,6 +156,7 @@
             android:layout_height="@dimen/_100sdp"
             android:orientation="horizontal">
             <EditText
+                android:textColorHint="@color/black"
                 android:inputType="textCapCharacters"
                 android:gravity="start"
                 android:id="@+id/et_generalinfo"
@@ -164,7 +169,7 @@
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="@dimen/_200sdp"
                 android:layout_height="wrap_content"
-                android:hint="General Information"></EditText>
+                android:hint="@string/geninfo"></EditText>
 
         </LinearLayout>
 
@@ -179,14 +184,15 @@
 
             <TextView
                 android:id="@+id/btn_submitdeatils"
-                android:layout_width="144dp"
+                android:layout_width="@dimen/_80sdp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/square_box"
                 android:backgroundTint="@color/cyan_800"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:text="Submit"
+                android:text="@string/submit"
+                android:padding="@dimen/_5sdp"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15sdp"

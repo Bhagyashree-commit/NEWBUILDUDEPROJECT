@@ -159,21 +159,22 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/textView49"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="sans-serif-condensed"
-                        android:text="@string/track"
+                        android:id="@+id/textView44"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:textAllCaps="true"
+                        android:textStyle="bold"
                         android:textColor="@color/white"
+                        android:text="@string/track"
                         android:textSize="@dimen/_15sdp"
-                        android:textStyle="bold" />
+                        />
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card19"
+                    android:id="@+id/card_modify"
                     android:backgroundTint="#8D3918"
                     android:layout_width="0dp"
                     android:layout_marginRight="@dimen/_10sdp"
@@ -206,7 +207,7 @@
                 android:gravity="center"
                 tools:ignore="MissingConstraints">
         <androidx.cardview.widget.CardView
-            android:id="@+id/card192"
+            android:id="@+id/card_summary"
 
             android:backgroundTint="#A08812"
             android:layout_width="wrap_content"
@@ -231,6 +232,7 @@
             </LinearLayout>
 </LinearLayout>
 <ImageView
+    android:baselineAlignBottom="true"
     android:id="@+id/btnlogout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

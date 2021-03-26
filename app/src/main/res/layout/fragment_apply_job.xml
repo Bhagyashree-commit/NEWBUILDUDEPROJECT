@@ -26,7 +26,7 @@
       android:textAllCaps="true"
       android:textStyle="bold"
       android:layout_height="@dimen/_35sdp"
-      android:text="Location"></Spinner>
+      android:text="@string/location"></Spinner>
 
   <TextView
       android:spinnerMode="dialog"
@@ -42,7 +42,7 @@
       android:textAllCaps="true"
       android:textStyle="bold"
       android:layout_height="@dimen/_35sdp"
-      android:text="Date"></TextView>
+      android:text="@string/date"></TextView>
 
  </RelativeLayout>
  <RelativeLayout
@@ -66,10 +66,11 @@
       android:textAllCaps="true"
       android:textStyle="bold"
       android:layout_height="@dimen/_35sdp"
-      android:text="Category"></Spinner>
+      android:text="@string/category"></Spinner>
 
 
   <EditText
+      android:textColorHint="@color/black"
       android:layout_toRightOf="@+id/spincategory"
       android:backgroundTint="@color/pink_50"
       android:background="@drawable/square_box"
@@ -82,7 +83,7 @@
       android:layout_width="@dimen/_60sdp"
       android:textAllCaps="true"
       android:layout_height="@dimen/_35sdp"
-      android:hint="Wages"></EditText>
+      android:hint="@string/wage"></EditText>
   <TextView
       android:id="@+id/tv_ok"
       android:textAlignment="center"
@@ -92,7 +93,7 @@
       android:textSize="@dimen/_10sdp"
       android:layout_width="match_parent"
       android:textAllCaps="true"
-      android:text="OK ->"
+      android:text="@string/ok"
       android:textColor="@color/white"
       android:textStyle="bold"
       android:background="@color/orange_800"
@@ -101,7 +102,7 @@
   <androidx.recyclerview.widget.RecyclerView
       android:layout_marginTop="@dimen/_50sdp"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:id="@+id/rv_applyjob"></androidx.recyclerview.widget.RecyclerView>
   <TextView
       android:visibility="gone"
@@ -119,7 +120,7 @@
       android:layout_width="match_parent"
       android:textAllCaps="true"
       android:layout_height="@dimen/_40sdp"
-      android:text="Apply"
+      android:text="@string/applyjob"
       android:gravity="center_horizontal"></TextView>
 
  </RelativeLayout>

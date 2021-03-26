@@ -13,6 +13,77 @@ public class JobModel implements Parcelable {
     private String cat_hindi;
     private String cat_marathi;
     private String jobid_details;
+    private String first_name;
+
+    public String getAccept_jobid() {
+        return accept_jobid;
+    }
+
+    public void setAccept_jobid(String accept_jobid) {
+        this.accept_jobid = accept_jobid;
+    }
+
+    private String accept_jobid;
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    private String user_id;
+
+    public String getMobileno() {
+        return mobileno;
+    }
+
+    public void setMobileno(String mobileno) {
+        this.mobileno = mobileno;
+    }
+
+    private String mobileno;
+
+    public String getWages() {
+        return wages;
+    }
+
+    public void setWages(String wages) {
+        this.wages = wages;
+    }
+
+    private String wages;
+
+    public String getContractorid() {
+        return contractorid;
+    }
+
+    public void setContractorid(String contractorid) {
+        this.contractorid = contractorid;
+    }
+
+    private String contractorid;
+
+    public String getPayment_date() {
+        return payment_date;
+    }
+
+    public void setPayment_date(String payment_date) {
+        this.payment_date = payment_date;
+    }
+
+    private String payment_date;
+
+    public String getRuserid() {
+        return ruserid;
+    }
+
+    public void setRuserid(String ruserid) {
+        this.ruserid = ruserid;
+    }
+
+    private String ruserid;
 
     public String getSite_detail() {
         return site_detail;
@@ -91,7 +162,7 @@ public class JobModel implements Parcelable {
         this.first_name = first_name;
     }
 
-    private String first_name;
+
 
     public String getJobid_details() {
         return jobid_details;

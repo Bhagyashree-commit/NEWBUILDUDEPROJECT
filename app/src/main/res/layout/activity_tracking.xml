@@ -25,7 +25,7 @@
             android:textAllCaps="true"
             android:textStyle="bold"
             android:layout_height="@dimen/_40sdp"
-            android:text="Track"
+            android:text="@string/track"
             android:gravity="center_horizontal"></TextView>
 
     </RelativeLayout>

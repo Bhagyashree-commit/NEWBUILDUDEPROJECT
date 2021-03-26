@@ -82,7 +82,7 @@
                 android:textAllCaps="true"
                 android:gravity="center"
                 android:layout_height="wrap_content"
-                android:text="Date and time"></TextView>
+                android:hint="@string/datetime"></TextView>
         </LinearLayout>
         <LinearLayout
             android:layout_marginLeft="@dimen/_25sdp"
@@ -119,19 +119,20 @@
 
 
   </LinearLayout>
+
         <TextView
             android:id="@+id/iv_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="84dp"
+            android:layout_gravity="center"
+            android:background="@drawable/square_box"
             android:backgroundTint="@color/yellow_100"
             android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/black"
             android:padding="@dimen/_15sdp"
-            android:background="@drawable/square_box"
-            android:textSize="@dimen/_15sdp"
-            android:layout_width="wrap_content"
+            android:text="@string/category"
             android:textAllCaps="true"
-           android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:text="@string/category"></TextView>
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sdp"></TextView>
         <ImageView
             android:visibility="gone"
 android:layout_marginTop="@dimen/_minus20sdp"

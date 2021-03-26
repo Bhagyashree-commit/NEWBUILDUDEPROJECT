@@ -17,14 +17,16 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logof"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LabourContractorApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Contractor.SummaryContractor"></activity>
-        <activity android:name=".Contractor.ModifyContractorSide" />
+        <activity android:name=".Labour.ModifyLabourSide"></activity>
+        <activity android:name=".Labour.SummaryLabour"></activity>
+        <activity android:name=".Contractor.SummaryContractor" />
+        <activity android:name=".Contractor.ModifyContractorSide"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -67,6 +69,7 @@
         <activity android:name=".Contractor.PostJob" />
         <activity android:name=".Labour.LabourConsole" />
         <activity android:name=".Labour.LabourProfile" />
+        <activity android:name=".Map"></activity>
 
         <service
             android:name="com.blucorsys.app.firebase.MyFirebaseMessagingService"

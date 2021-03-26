@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -94,7 +95,15 @@ public class StartTrackActivity extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        stopWork(pref.get(Constants.USERID),type,pref.get(Constants.RADIOID),date);
+                        if(mGPS.canGetLocation() ){
+                            mGPS.getLocation();
+                        }
+
+                        final String eventlat = String.valueOf(mGPS.getLatitude());
+                        final String eventlong = String.valueOf(mGPS.getLongitude());
+                        Log.e("bhanu",""+eventlat);
+                        Log.e("bhanu",""+eventlong);
+                        stopWork(pref.get(Constants.USERID),type,pref.get(Constants.RADIOID),date,eventlat,eventlong);
                         dialog.dismiss();
                     }
                 });
@@ -143,7 +152,7 @@ public class StartTrackActivity extends AppCompatActivity {
                             Log.e("bhanu",""+eventlat);
                             Log.e("bhanu",""+eventlong);
 
-                            Toast.makeText(getApplicationContext(), "Tracking start Successfully", Toast.LENGTH_LONG).show();
+                           // Toast.makeText(getApplicationContext(), "Tracking start Successfully", Toast.LENGTH_LONG).show();
                             startTrackAPI(pref.get(Constants.USERID),jobid,type,eventlat,eventlong,date);
                         }
                     }
@@ -198,8 +207,8 @@ public class StartTrackActivity extends AppCompatActivity {
 
                             double latitude = mGPS.getLatitude();
                             double longitude = mGPS.getLongitude();
-                            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-                                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+//                                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
                         }else{
 
                             mGPS.showSettingsAlert();
@@ -267,8 +276,8 @@ public class StartTrackActivity extends AppCompatActivity {
 
                             double latitude = mGPS.getLatitude();
                             double longitude = mGPS.getLongitude();
-                            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-                                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+//                                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
                         }else{
 
                             mGPS.showSettingsAlert();
@@ -338,8 +347,8 @@ public class StartTrackActivity extends AppCompatActivity {
 
                             double latitude = mGPS.getLatitude();
                             double longitude = mGPS.getLongitude();
-                            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-                                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+//                                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
                         }else{
 
                             mGPS.showSettingsAlert();
@@ -355,7 +364,7 @@ public class StartTrackActivity extends AppCompatActivity {
                         AlertDialog.Builder builder = new AlertDialog.Builder(StartTrackActivity.this);
 
                         builder.setTitle("Work Update!");
-                        builder.setMessage("Your Working hours are started");
+                        builder.setMessage("Your Working hours are started!!");
 
                         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
@@ -404,7 +413,7 @@ public class StartTrackActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(strReq);
     }
-    private void stopWork(final String userid,final String jobid,final String type,final String datetime) {
+    private void stopWork(final String userid,final String type,final String jobid, final String datetime,final String lat,final String lng) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.ENDJOB, new Response.Listener<String>() {
@@ -412,6 +421,7 @@ public class StartTrackActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d(TAG, "Response: " + response.toString());
                 loader.dismiss();
+
                 JSONObject j = null;
                 try {
                     JSONObject object = new JSONObject(response);
@@ -422,8 +432,8 @@ public class StartTrackActivity extends AppCompatActivity {
 
                             double latitude = mGPS.getLatitude();
                             double longitude = mGPS.getLongitude();
-                            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-                                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+//                                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
                         }else{
 
                             mGPS.showSettingsAlert();
@@ -434,15 +444,24 @@ public class StartTrackActivity extends AppCompatActivity {
                         Log.e("bhanu",""+eventlat);
                         Log.e("bhanu",""+eventlong);
 
-
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(StartTrackActivity.this);
 
                         builder.setTitle("Work Update!");
-                        builder.setMessage("Your Working hours are started");
+                        builder.setMessage("You Want to Stop Your Working Hours?");
 
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do nothing but close the dialog
+                                startActivity(new Intent(StartTrackActivity.this, LabourConsole.class));
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                            @Override
                             public void onClick(DialogInterface dialog, int which) {
 
 
@@ -450,14 +469,9 @@ public class StartTrackActivity extends AppCompatActivity {
                             }
                         });
 
-
-
                         AlertDialog alert = builder.create();
                         alert.show();
 
-
-
-                        // startTrack2(pref.get(Constants.USERID),pref.get(Constants.RADIOID),type,eventlat,eventlong);
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "Sorry Job Expired", Toast.LENGTH_LONG).show();
@@ -478,11 +492,11 @@ public class StartTrackActivity extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("ruserid", userid);
-                params.put("track_jobid", pref.get(Constants.RADIOID));
+                params.put("track_jobid", jobid);
                 params.put("usertype", type);
-//                params.put("dest_latitude", lat);
-//                params.put("dest_longitude", lng);
-                params.put("job_start_datetime", datetime);
+                params.put("dest_latitude", lat);
+                params.put("dest_longitude", lng);
+                params.put("job_end_datetime", datetime);
                 Log.e("",""+params);
                 return params;
             }

@@ -3,9 +3,12 @@ package com.blucorsys.app.labourcontractorapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     TextView btn_info;
     Preferences pref;
     Locale myLocale;
+    String lang;
     String currentLanguage;
 
     @Override
@@ -47,39 +51,68 @@ public class MainActivity extends AppCompatActivity {
         btn_process=findViewById(R.id.btn_process);
         btn_info=findViewById(R.id.btn_info);
 
+        btncontinue.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.e("ttttttt11", lang);
+                if (lang.equalsIgnoreCase(pref.get(Constants.Lang))) {
+                    Toast.makeText(MainActivity.this, "please select any one language", Toast.LENGTH_LONG).show();
+                } else {
+                    MainActivity.this.startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
+            }
+        });
         List<String> list = new ArrayList();
         list.add("LANGUAGE");
         list.add("ENGLISH");
         list.add("हिंदी");
         list.add("मराठी");
-pref=new Preferences(this);
+
+        pref=new Preferences(this);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         langspinner.setAdapter(adapter);
 
         langspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                String lang = MainActivity.this.langspinner.getSelectedItem().toString();
-                MainActivity.this.pref.set(Constants.Lang, lang);
-                MainActivity.this.pref.commit();
-                Log.e("", "" + MainActivity.this.pref.get(Constants.Lang));
+                lang =langspinner.getSelectedItem().toString();
+//                MainActivity.this.pref.set(Constants.Lang, lang);
+//                MainActivity.this.pref.commit();
+
+                switch (position) {
+                    case 0:
+
+                        break;
+                    case 1:
+                        MainActivity.this.pref.set(Constants.Lang, lang);
+                        MainActivity.this.pref.commit();
+//                        pref.set("Lang","en");
+//                        pref.commit();
+                        setLocale("en");
+                        break;
+                    case 2:
+                        MainActivity.this.pref.set(Constants.Lang, lang);
+                        MainActivity.this.pref.commit();
+//                        pref.set("Lang","hi");
+//                        pref.commit();
+                        setLocale("hi");
+                        break;
+                    case 3:
+                        MainActivity.this.pref.set(Constants.Lang, lang);
+                        MainActivity.this.pref.commit();
+//                        pref.set("Lang","mar");
+//                        pref.commit();
+                        setLocale("mar");
+                        break;
+                }
+
+                Log.e("anhgjh", "" + MainActivity.this.pref.get(Constants.Lang));
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
 
-        btncontinue.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if (MainActivity.this.pref.get(Constants.Lang).equalsIgnoreCase("Language")) {
-                    Toast.makeText(MainActivity.this, "please select any one language", Toast.LENGTH_LONG).show();
-                } else {
-                    Log.e("ttttttt", MainActivity.this.pref.get(Constants.Lang));
-                    MainActivity.this.startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                }
 
-            }
-        });
         this.btn_process.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 MainActivity.this.startActivity(new Intent("android.intent.action.VIEW", Uri.parse("http://example.i-tech.consulting/Buildude/dist/media/1613458569PROMO_2_English.mov")));
@@ -95,7 +128,21 @@ pref=new Preferences(this);
         });
 
     }
-
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLanguage)) {
+            myLocale = new Locale(localeName);
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLanguage, localeName);
+            startActivity(refresh);
+        } else {
+            Toast.makeText(MainActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

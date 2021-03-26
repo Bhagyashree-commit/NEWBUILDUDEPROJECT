@@ -1,11 +1,13 @@
 package com.blucorsys.app.labourcontractorapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -25,8 +27,6 @@ import com.blucorsys.app.CustomComponent.Constants;
 import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 
 import org.json.JSONException;
@@ -44,7 +44,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     String mobnum,data,firstname,lastname,pass,refnumber,deviceid,userRole,token;
     CustomLoader loader;
     Preferences pref;
+    TextView iv_eye;
     CheckBox ch;
+    private boolean isPasswordVisible;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         tv_check=findViewById(R.id.tv_check);
         et_mobnum=findViewById(R.id.et_mobnum);
         tv_verify=findViewById(R.id.tv_verify);
+        iv_eye=findViewById(R.id.iv_eye);
         et_otp=findViewById(R.id.et_otp);
         et_password=findViewById(R.id.et_password);
         et_fname=findViewById(R.id.et_fname);
@@ -65,15 +68,49 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         pref=new Preferences(this);
-
+        iv_eye.setTransformationMethod(new PasswordTransformationMethod());
         tv_verify.setOnClickListener(this);
         tv_check.setOnClickListener(this);
         btnsignup.setOnClickListener(this);
         tv_login.setOnClickListener(this);
+        iv_eye.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPasswordVisible){
+//show_password();
+                    String pass = et_password.getText().toString();
+                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    et_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    et_password.setText(pass);
+                    et_password.setSelection(pass.length());
+                }
+                else {
+                    String pass = et_password.getText().toString();
+                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    et_password.setInputType(InputType.TYPE_CLASS_TEXT);
+                    et_password.setText(pass);
+                    et_password.setSelection(pass.length());
+                    //hide_password();
+                }
+            }
+        });
+
        // getFCM_token();
 
     }
 
+
+    public void show_password()
+    {
+        et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
+    }
+
+    public void hide_password()
+    {
+
+        et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId())

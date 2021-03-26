@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ScrollView
         android:layout_width="match_parent"
@@ -152,13 +152,37 @@
                         android:textColor="@color/black"
                         android:text="INR 56990"
                         android:textSize="@dimen/_10sdp"/>
+                    <TextView
+                        android:textStyle="bold"
+                        android:id="@+id/lbname1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/wagerateinput"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/name"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        />
 
+                    <TextView
+                        android:id="@+id/lbname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/wagerateinput"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_toRightOf="@id/jobdatetext"
+                        android:layout_marginTop="5dp"
+                        android:text="INR 56990"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        />
                     <TextView
                         android:textStyle="bold"
                         android:id="@+id/jobdatetext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/wagerateinput"
+                        android:layout_below="@id/lbname1"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:text="@string/jobdate"
@@ -170,7 +194,7 @@
                         android:id="@+id/jobdateinput"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/wagerateinput"
+                        android:layout_below="@id/lbname"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@id/jobdatetext"
                         android:layout_marginTop="5dp"

@@ -77,8 +77,6 @@ public class TrackingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 if(joblisttt.size()==0){
                     Toast.makeText(getApplicationContext(),
                             "Please Click Any One Check Box",
@@ -148,6 +146,7 @@ public class TrackingActivity extends AppCompatActivity {
             holder.labortypeinput.setText(pu.getCat_english());
             holder.wagerateinput.setText(pu.getWage());
             holder.jobdateinput.setText(pu.getCreate_datetime());
+            holder.lbname.setText(pu.getFirst_name());
 
             String address=pu.getLocation();
 
@@ -198,6 +197,7 @@ public class TrackingActivity extends AppCompatActivity {
         TextView labortypeinput;
         TextView wagerateinput;
         TextView jobdateinput;
+        TextView lbname;
 
         ImageView mapmarker;
         CheckBox btncheckbox;
@@ -209,6 +209,7 @@ public class TrackingActivity extends AppCompatActivity {
             labortypeinput=itemView.findViewById(R.id.labortypeinput);
             wagerateinput=itemView.findViewById(R.id.wagerateinput);
             jobdateinput=itemView.findViewById(R.id.jobdateinput);
+            lbname=itemView.findViewById(R.id.lbname);
 
             mapmarker=itemView.findViewById(R.id.mapmarker);
             btncheckbox=itemView.findViewById(R.id.btncheckbox);
@@ -223,12 +224,14 @@ public class TrackingActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d(TAG, "Response: " + response.toString());
                 loader.dismiss();
-                btn_track.setVisibility(View.VISIBLE);
+                joblist.clear();
+
                 JSONObject j = null;
                 try {
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
+                        btn_track.setVisibility(View.VISIBLE);
 
                         JSONArray array=object.getJSONArray("Job-data");
                         {

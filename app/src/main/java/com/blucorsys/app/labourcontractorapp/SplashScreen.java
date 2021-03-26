@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.blucorsys.app.CustomComponent.Constants;
 import com.blucorsys.app.ServerCall.Preferences;
 import com.blucorsys.app.labourcontractorapp.Contractor.ContractorConsole;
+import com.blucorsys.app.labourcontractorapp.Labour.LabourConsole;
 
 
 public class SplashScreen extends AppCompatActivity {
@@ -50,14 +51,19 @@ pref=new Preferences(this);
                     imageView.clearAnimation();
 
 
-                    if (pref.get(Constants.USERID).isEmpty()) {
+                    if (pref.get(Constants.USERID).isEmpty() || pref.get(Constants.role).isEmpty()) {
                         // User is already logged in. Take him to main activity
                         Intent i = new Intent(SplashScreen.this, MainActivity.class);
                         startActivity(i);
                         finish();
                     }
-                    else {
-                        Intent i1 = new Intent(SplashScreen.this, MainActivity.class);
+                    else if(!pref.get(Constants.USERID).isEmpty() && pref.get(Constants.role).equalsIgnoreCase("CONTRACTOR")) {
+                        Intent i1 = new Intent(SplashScreen.this, ContractorConsole.class);
+                        startActivity(i1);
+                        finish();
+                    }
+                    else if(!pref.get(Constants.USERID).isEmpty() && pref.get(Constants.role).equalsIgnoreCase("LABOUR")) {
+                        Intent i1 = new Intent(SplashScreen.this, LabourConsole.class);
                         startActivity(i1);
                         finish();
                     }

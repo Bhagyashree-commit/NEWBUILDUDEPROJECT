@@ -25,7 +25,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:padding="@dimen/_5sdp"
                 android:spinnerMode="dropdown"
-                android:text="Location"
+                android:text="@string/location"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textStyle="bold"></Spinner>
@@ -44,7 +44,7 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:layout_height="@dimen/_35sdp"
-                android:text="Date"></Spinner>
+                android:text="@string/date"></Spinner>
 
         </RelativeLayout>
         <RelativeLayout
@@ -68,7 +68,7 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:layout_height="@dimen/_35sdp"
-                android:text="Category"></Spinner>
+                android:text="@string/category"></Spinner>
 
 
             <TextView
@@ -80,7 +80,7 @@
                 android:textSize="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:textAllCaps="true"
-                android:text="OK ->"
+                android:text="@string/ok"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:background="@color/orange_800"

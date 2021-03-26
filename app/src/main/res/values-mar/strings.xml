@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">BUILDUDE</string>
+    <string name="title_activity_maps_two">नकाशा</string>
+    <string name="jobarea">नोकरी क्षेत्र :</string>
+    <string name="sitedetails">साइट तपशील:</string>
+    <string name="sdate">प्रारंभ तारीख:</string>
+    <string name="labourname">कामगार नाव:</string>
+
+    <string name="conname">कंत्राटदार नाव:</string>
+    <string name="contractorrating">कंत्राटदार रेटिंग :</string>
+    <string name="typeoflabor">श्रम प्रकार :</string>
+    <string name="wagerate">मजुरीचा दर :</string>
+    <string name="twages">एकूण दर :</string>
+    <string name="dwages">देय दर :</string>
+    <string name="jobdate">नोकरीची तारीख :</string>
+    <string name="mobnum">मोबाइल नंबर :</string>
+    <string name="title_activity_maps">नकाशा</string>
+    <string name="postjob">पोस्ट जॉब</string>
+    <string name="pay">देय द्या</string>
+    <string name="acceptjob">स्वीकारा</string>
+    <string name="profile">प्रोफाइल</string>
+    <string name="track">ट्रॅक</string>
+    <string name="summary">सारांश</string>
+    <string name="modify">सुधारित करा</string>
+    <string name="conceptualizedby">द्वारे संकल्पित</string>
+    <string name="comname">शांताल कंसल्टिंग इंजीनियर</string>
+    <string name="conti">सुरू</string>
+    <string name="Process">प्रक्रिया</string>
+    <string name="Info">माहिती</string>
+    <string name="enternum">मोबाईल प्रविष्ट करा</string>
+    <string name="pass">संकेतशब्द</string>
+    <string name="login">लॉगिन</string>
+    <string name="noaccount">खाते नाही?</string>
+    <string name="signup">साइन अप करा</string>
+    <string name="chnagepass">संकेतशब्द बदला</string>
+    <string name="forgetpass">पासवर्ड विसरलात?</string>
+    <string name="check">
+तपासा</string>
+    <string name="otp">ओटीपी प्रविष्ट करा</string>
+    <string name="verify">सत्यापित करा</string>
+    <string name="fname">
+पहिले नाव</string>
+    <string name="lname">आडनाव</string>
+    <string name="newpass">
+नवीन संकेतशब्द</string>
+    <string name="refnumber">रेफरल मोबाइल क्रमांक</string>
+    <string name="terms">मी अटी व शर्तींशी सहमत आहे</string>
+    <string name="loc">साइटचे स्थान</string>
+    <string name="site">साइट तपशील</string>
+    <string name="category">श्रेणी निवडा</string>
+    <string name="acceptoffer">ऑफर स्वीकारा</string>
+    <string name="modifyoffer">ऑफर सुधारित करा</string>
+    <string name="modifiedoffer">सुधारित ऑफर</string>
+    <string name="acceptedoffer">स्वीकारलेली ऑफर</string>
+    <string name="date">तारीख</string>
+    <string name="ok">ठीक आहे -></string>
+    <string name="acceptedjob">नोकरी स्वीकारा</string>
+    <string name="title_activity_track_labor_on_map">नकाशा</string>
+    <string name="companyname">कंपनीचे नाव*</string>
+    <string name="location">स्थान*</string>
+    <string name="pincode">पिन कोड</string>
+    <string name="email">ईमेल प्रविष्ट करा*</string>
+    <string name="geninfo">सामान्य माहिती</string>
+    <string name="name">नाव</string>
+    <string name="rating">रेटिंग</string>
+    <string name="wage">दर</string>
+    <string name="nos">संख्या</string>
+    <string name="type">प्रकार</string>
+    <string name="contractorprofile">कॉन्ट्रॅक्टर प्रोफाइल</string>
+    <string name="submit">प्रस्तुत करा</string>
+    <string name="applyjob">अर्ज करा</string>
+    <string name="appliedjob">उपयोजित जॉब</string>
+    <string name="jobstatus">जॉब स्थिती</string>
+    <string name="payment">पेमेंट</string>
+    <string name="minwagerate">किमान वेतन दर*</string>
+    <string name="birthday">जन्म तारीख*</string>
+    <string name="female">स्त्री</string>
+    <string name="male">पुरुष</string>
+    <string name="aadharnum">आधार संख्या</string>
+    <string name="labourprofile">श्रम प्रोफाइल</string>
+    <string name="getpayment">पैसे मिळवा</string>
+    <string name="payrequest">पैसे विनंती</string>
+    <string name="datetime">तारीख आणि वेळ</string>
+    <string name="already">आधीच सदस्य आहे?</string>
+    <string name="stopwork">कार्य थांबवा</string>
+    <string name="starttracking">ट्रॅक प्रारंभ करा</string>
+    <string name="stoptrack">ट्रॅक थांबवा</string>
+    <string name="consolidated">संकलित</string>
+    <string name="categorywise">कॅटेगरी नुसार</string>
+    <string name="giverating">रेटिंग द्या</string>
+    <string name="sure">लॉगआउट करण्याकरता तयार आहे ?</string>
+    <string name="alert">कन्फर्मेशन अ‍ॅलर्ट</string>
+    <string name="yes">होय</string>
+    <string name="no">नाही</string>
+    <string name="count">काउंटर</string>
+    <string name="thankyou">धन्यवाद</string>
+    <string name="rpay">पैसे देण्याची विनंती करा</string>
+    <string name="conloc">पुष्टीकरण स्थान</string>
+    <string name="select">भाषा</string>
+
+    <string name="choose">
+भूमिका निवडा</string>
+    <string name="contractor">कंत्राटदार</string>
+    <string name="labour">कामगार</string>
+    <string name="architect">गृहशिल्पी</string>
+    <string name="engineer">
+अभियंता</string>
+    <string name="supplier">पुरवठादार</string>
+    <string name="otherservice">
+इतर सेवा</string>
+    <string name="owner">मालक</string>
+    <string name="developer">विकासक</string>
+
+
+
+</resources>

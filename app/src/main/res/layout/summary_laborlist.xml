@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/lljob"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+        <androidx.cardview.widget.CardView
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/_30sdp"
+            app:cardCornerRadius="@dimen/_15sdp"
+            android:layout_margin="@dimen/_5sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                >
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/tv_sdetails"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="@string/sitedetails"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:singleLine="true"
+                    android:id="@+id/tv_sdetailsinput"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_toRightOf="@id/tv_sdetails"
+                    android:text="Apple MacBook Air"
+                    android:textColor="@color/black"
+                    />
+
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/tv_lname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_sdetails"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:text="@string/conname"
+                    />
+
+                <TextView
+                    android:textSize="@dimen/_10sdp"
+                    android:id="@+id/tv_lnameinput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_sdetailsinput"
+                    android:layout_marginLeft="@dimen/_30sdp"
+                    android:layout_toRightOf="@id/tv_sdate"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/tv_sdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_lname"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_20sdp"
+                    android:textColor="@color/black"
+                    android:text="@string/sdate"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sdatee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_lnameinput"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/tv_sdate"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+
+                    />
+
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/tv_twages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_sdatee"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/twages"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_wagesinput"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_sdatee"
+                    android:layout_toRightOf="@id/tv_sdate"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    android:text="INR 56990"
+                    android:textSize="@dimen/_10sdp"/>
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/tv_dwages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_wagesinput"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/dwages"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_dwageinput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_wagesinput"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/tv_dwages"
+                    android:layout_marginTop="5dp"
+                    android:text="INR 56990"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</LinearLayout>

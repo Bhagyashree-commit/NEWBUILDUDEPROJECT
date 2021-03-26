@@ -223,9 +223,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
 
-            pref.set(Constants.lat, String.valueOf(latitude));
-            pref.set(Constants.lng, String.valueOf(longitude));
-            pref.commit();
+
 
             LocationAddress locationAddress = new LocationAddress();
             locationAddress.getAddressFromLocation(latitude, longitude,
@@ -334,6 +332,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         markerOptions.position(latLng);
         markerOptions.draggable(true);
+
         //markerOptions.title(addresss);
 
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));

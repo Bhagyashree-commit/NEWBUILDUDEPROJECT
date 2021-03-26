@@ -60,6 +60,8 @@ LinearLayout layout;
 TextView tv_typecat;
     private ArrayList<String> categoryEng;
     private ArrayList<String> categoryID;
+    private ArrayList<String> categoryMar;
+    private ArrayList<String> categoryHin;
     String date,time,datetime;
     String cat_id="";
     EditText et_sitedetails;
@@ -91,27 +93,20 @@ TextView tv_typecat;
         tv_name.setText(pref.get(Constants.FIRSTNAME )+ " " +pref.get(Constants.LASTNAME));
         categoryEng = new ArrayList<String>();
         categoryID = new ArrayList<String>();
-
+        categoryMar = new ArrayList<String>();
+        categoryHin = new ArrayList<String>();
         spinnerCatArrayList=new ArrayList<>();
         etwagesArrayList=new ArrayList<>();
         etnumberArrayList=new ArrayList<>();
 
-
-
         datetimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 Calendar mcurrentDate = Calendar.getInstance();
                 int mYear = mcurrentDate.get(Calendar.YEAR);
                 int mMonth = mcurrentDate.get(Calendar.MONTH);
                 int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
-
-
-
                 DatePickerDialog mDatePicker;
-
                 mDatePicker = new DatePickerDialog(PostJob.this, new DatePickerDialog.OnDateSetListener() {
 
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
@@ -168,44 +163,58 @@ TextView tv_typecat;
                 mDatePicker.setTitle("Select Date");
                 mDatePicker.getDatePicker().setMinDate(mcurrentDate.getTimeInMillis());
                 mDatePicker.show();
-
-
             }
         });
-
 
         getCategory();
 
         iv_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addlayout(categoryEng);
-
-                iv_plus.setVisibility(View.INVISIBLE);
-                iv_plus1.setVisibility(View.VISIBLE);
-
+                if(pref.get(Constants.Lang).equals("ENGLISH")) {
+                    addlayout(categoryEng);
+                    iv_plus.setVisibility(View.INVISIBLE);
+                    iv_plus1.setVisibility(View.VISIBLE);
+                }
+                else if(pref.get(Constants.Lang).equals("हिंदी")){
+                    addlayout(categoryHin);
+                    iv_plus.setVisibility(View.INVISIBLE);
+                    iv_plus1.setVisibility(View.VISIBLE);
+                }
+                else {
+                    addlayout(categoryMar);
+                    iv_plus.setVisibility(View.INVISIBLE);
+                    iv_plus1.setVisibility(View.VISIBLE);
+                }
             }
         });
         iv_plus1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(pref.get(Constants.Lang).equals("ENGLISH")) {
                 addlayout(categoryEng);
-
+                }
+                else if(pref.get(Constants.Lang).equals("हिंदी")){
+                    addlayout(categoryHin);
+                }
+                else {
+                    addlayout(categoryMar);
+                }
             }
         });
 
         tv_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PostJob.this, MapsActivity.class);
+                Intent intent = new Intent(PostJob.this, com.blucorsys.app.labourcontractorapp.Map.class);
                 startActivity(intent);
             }
         });
-        if(pref.get(Constants.address).equalsIgnoreCase("")){
+        if(pref.get(Constants.newaddress).equalsIgnoreCase("")){
             Toast.makeText(PostJob.this, "please select area",Toast.LENGTH_LONG).show();
         }
         else {
-            tv_location.setText(pref.get(Constants.address));
+            tv_location.setText(pref.get(Constants.newaddress));
 
         }
         btnpostjob.setOnClickListener(new View.OnClickListener() {
@@ -214,37 +223,33 @@ TextView tv_typecat;
 
                 for(int i=0;i<etnumberArrayList.size();i++)
                 {
-
-//                    if(etnumberArrayList.get(i).getText().length()==0)
-//                    {
-//
-//                    }
                     HashMap<String,String> map=new HashMap<>();
-
-
-                    Log.e("caaa",categoryEng.get(i));
-                    Log.e("caaa1",categoryEng.get(spinnerCatArrayList.get(i).getSelectedItemPosition()));
-
+                    //Log.e("caaa",categoryEng.get(i));
+                   // Log.e("caaa1",categoryEng.get(spinnerCatArrayList.get(i).getSelectedItemPosition()));
                     for(int j=0;j<categoryID.size();j++)
                     {
-                        if(categoryEng.get(j).equalsIgnoreCase(categoryEng.get(spinnerCatArrayList.get(i).getSelectedItemPosition())))
-
-                        {
-                            Log.e("ffff",categoryID.get(j));
-                            map.put("category_id",categoryID.get(j));
+                        if(pref.get(Constants.Lang).equals("ENGLISH")) {
+                            if (categoryEng.get(j).equalsIgnoreCase(categoryEng.get(spinnerCatArrayList.get(i).getSelectedItemPosition()))) {
+                                // Log.e("ffff",categoryID.get(j));
+                                map.put("category_id", categoryID.get(j));
+                            }
+                        }
+                        else if(pref.get(Constants.Lang).equals("हिंदी")) {
+                            if (categoryHin.get(j).equalsIgnoreCase(categoryHin.get(spinnerCatArrayList.get(i).getSelectedItemPosition()))) {
+                                // Log.e("ffff",categoryID.get(j));
+                                map.put("category_id", categoryID.get(j));
+                            }
+                        }
+                        else {
+                            if (categoryMar.get(j).equalsIgnoreCase(categoryMar.get(spinnerCatArrayList.get(i).getSelectedItemPosition()))) {
+                                // Log.e("ffff",categoryID.get(j));
+                                map.put("category_id", categoryID.get(j));
+                            }
                         }
                     }
-
-                    Log.e("ggg",categoryEng.get(spinnerCatArrayList.get(i).getSelectedItemPosition()));
-                  //  String spin=spinnerCatArrayList.get(i).getSelectedItem().toString();
-
-                    Log.e("testss", String.valueOf(spinnerCatArrayList.get(i).getSelectedItemPosition()));
-                    map.put("wages",etwagesArrayList.get(i).getText().toString());
+                   map.put("wages",etwagesArrayList.get(i).getText().toString());
                     map.put("number",etnumberArrayList.get(i).getText().toString());
-                   // map.put("category",spin);
-                   // etwagesArrayList.get(i).getText().toString();
                     arrayList.add(map);
-
                 }
                 Log.e("bhagya1",""+arrayList);
                 JSONArray array = new JSONArray(arrayList);
@@ -255,9 +260,9 @@ TextView tv_typecat;
                 int count = layout.getChildCount();
                 for (int i = 0; i < count; i++) {
                     final View row = layout.getChildAt(i);
-                  //  TextView textOut = (TextView)row.findViewById(R.id.textout);
-                    //String data = textOut.getText().toString();
-                    Log.e("","");
+                    EditText et_wages=row.findViewById(R.id.tv_wages);
+                    String data = et_wages.getText().toString();
+                    Log.e("rashhhhh",""+data);
                 }
                 String userid=pref.get(Constants.USERID);
                 String loc=tv_location.getText().toString();
@@ -265,7 +270,7 @@ TextView tv_typecat;
                 String date=datetimer.getText().toString();
                 String arr= String.valueOf(array);
                 String type= "CONTRACTOR";
-                if(tv_location.equals("LOCATION OF WORK")){
+                if(tv_location.getText().toString().equalsIgnoreCase("")){
                     Toast.makeText(getApplicationContext(), "Please select area", Toast.LENGTH_SHORT).show();
                     tv_location.requestFocus();
                 }
@@ -273,10 +278,15 @@ TextView tv_typecat;
                     Toast.makeText(getApplicationContext(), "Please enter site deatils !!!", Toast.LENGTH_SHORT).show();
                     et_sitedetails.requestFocus();
                 }
-                else if(datetimer.equals("DATE AND TIME")){
-                    Toast.makeText(getApplicationContext(), "Please enter location !!!", Toast.LENGTH_SHORT).show();
+                else if(datetimer.getText().toString().equalsIgnoreCase("")){
+                    Toast.makeText(getApplicationContext(), "Please enter job date !!!", Toast.LENGTH_SHORT).show();
                     datetimer.requestFocus();
                 }
+//                else if(etnumberArrayList.get(i).getText().length()==0){
+//
+//                        Toast.makeText(getApplicationContext(), "Please select category", Toast.LENGTH_SHORT).show();
+//
+//                }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(PostJob.this);
 
@@ -287,33 +297,25 @@ TextView tv_typecat;
 
                         public void onClick(DialogInterface dialog, int which) {
                             // Do nothing but close the dialog
-                            postJob(userid, loc, site, date, arr, type);
-                            pref.set("add", "");
-                            pref.commit();
+                            String la=pref.get(Constants.lat);
+                            String ln=pref.get(Constants.lng);
+                            postJob(userid, loc, site, date, arr, type,la,ln);
                             et_sitedetails.setText("");
-//                                    Intent intent = new Intent(PostJobs.this, ContractorProfile.class);
+//                                    Intent intent = new Intent(PostJob.this, ContractorProfile.class);
 //                                    startActivity(intent);
-                            dialog.dismiss();
-
                             dialog.dismiss();
                         }
                     });
 
                     builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                             // Do nothing
                             dialog.dismiss();
                         }
                     });
-
                     AlertDialog alert = builder.create();
                     alert.show();
-
-
-
                 }
             }
         });
@@ -328,7 +330,6 @@ TextView tv_typecat;
         customAdapterTwo=new CustomAdapter(PostJob.this,array);
         spincat.setAdapter(customAdapterTwo);
         layout.addView(child);
-
 
         spinnerCatArrayList.add(spincat);
         etwagesArrayList.add(et_wages);
@@ -382,13 +383,27 @@ TextView tv_typecat;
                 //Adding the name of the student to array list
                 categoryID.add(json.getString(Constants.CATID));
                 categoryEng.add(json.getString(Constants.CATENG));
+                categoryMar.add(json.getString(Constants.CATMAR));
+                categoryHin.add(json.getString(Constants.CATHIN));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+//        if(pref.get(Constants.Lang).equals("ENGLISH")){
+//            spincat.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryEng));
+//
+//        }
+//        else if(pref.get(Constants.Lang).equals("हिंदी")){
+//            spincat.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryHin));
+//
+//        }
+//        else {
+//            spincat.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryMar));
+//
+//        }
     }
 
-    private void postJob(final String userid,final String loc,final String site,final String date,final String jsonarray,final String type) {
+    private void postJob(final String userid,final String loc,final String site,final String date,final String jsonarray,final String type,final String la ,final String ln) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.POSTJOB, new Response.Listener<String>() {
@@ -401,7 +416,9 @@ TextView tv_typecat;
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
-                        pref.set(Constants.address,"");
+                        String newstatus=object.getString("jobstatus");
+                        pref.set(Constants.newaddress,"");
+                        pref.set(Constants.newjobstatus,newstatus);
                         pref.commit();
                         Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
                         startActivity(new Intent(PostJob.this,ContractorConsole.class));
@@ -431,8 +448,8 @@ TextView tv_typecat;
                 params.put("create_datetime", date);
                 params.put("cattype_id", jsonarray);
                 params.put("usertype", type);
-                params.put("latitude", pref.get(Constants.lat));
-                params.put("longitude", pref.get(Constants.lng));
+                params.put("latitude", la);
+                params.put("longitude", ln);
                 Log.e("",""+params);
                 return params;
             }

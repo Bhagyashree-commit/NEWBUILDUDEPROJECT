@@ -37,6 +37,8 @@ import com.blucorsys.app.CustomComponent.JobModel;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
 import com.blucorsys.app.labourcontractorapp.Contractor.AcceptOfferFragment;
+import com.blucorsys.app.labourcontractorapp.Contractor.ContractorConsole;
+import com.blucorsys.app.labourcontractorapp.Contractor.PostJob;
 import com.blucorsys.app.labourcontractorapp.R;
 
 import org.json.JSONArray;
@@ -56,6 +58,8 @@ public class JobStatus extends AppCompatActivity {
     private ArrayList<String> loca;
     private ArrayList<String> date;
     private ArrayList<String> wage;
+    private ArrayList<String> categoryMar;
+    private ArrayList<String> categoryHin;
     ArrayList<JobModel> joblist;
     Spinner spin_loc,spincategory;
     String location,cattype_id;
@@ -74,12 +78,15 @@ public class JobStatus extends AppCompatActivity {
         setContentView(R.layout.activity_job_status);
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         pref = new Preferences(this);
-         type="CONTRACTOR";
+
         loca = new ArrayList<String>();
         date = new ArrayList<String>();
         wage = new ArrayList<String>();
         categoryEng = new ArrayList<String>();
         categoryID = new ArrayList<String>();
+        categoryMar = new ArrayList<String>();
+        categoryHin = new ArrayList<String>();
+
         joblist = new ArrayList<JobModel>();
         spin_loc=findViewById(R.id.spin_loc);
         rv_acceptjob=findViewById(R.id.rv_acceptjob);
@@ -88,7 +95,7 @@ public class JobStatus extends AppCompatActivity {
         tv_wage=findViewById(R.id.tv_wages);
         tv_ok=findViewById(R.id.tv_ok);
         btn_accept=findViewById(R.id.btn_accept);
-
+type="LABOUR";
         getLocationL();
         getCategory();
 
@@ -128,10 +135,8 @@ public class JobStatus extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(status== true) {
-                   // hitAPi();
-                    Intent i=(new Intent(getApplicationContext(),StartTrackActivity.class));
-                    i.putExtra("job",pu);
-                    startActivity(i);
+                    hitAPi(pref.get(Constants.USERID),type,pref.get(Constants.JOBNEWID));
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"Please Select Address",Toast.LENGTH_LONG).show();
@@ -259,12 +264,24 @@ public class JobStatus extends AppCompatActivity {
                 //Adding the name of the student to array list
                 categoryID.add(json.getString(Constants.CATID));
                 categoryEng.add(json.getString(Constants.CATENG));
+                categoryMar.add(json.getString(Constants.CATMAR));
+                categoryHin.add(json.getString(Constants.CATHIN));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        spincategory.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryEng));
+        if(pref.get(Constants.Lang).equals("ENGLISH")){
+            spincategory.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryEng));
 
+        }
+        else if(pref.get(Constants.Lang).equals("हिंदी")){
+            spincategory.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryHin));
+
+        }
+        else {
+            spincategory.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categoryMar));
+
+        }
     }
 
 
@@ -300,7 +317,9 @@ public class JobStatus extends AppCompatActivity {
             if(row_index==position)
             {
                 String addrid = pu.getJobid_details();
+                String jobid = pu.getAccept_jobid();
                 pref.set(Constants.RADIOID,addrid);
+                pref.set(Constants.JOBNEWID,jobid);
                pref.commit();
                 status=true;
                 Log.e("imageview",""+addrid);
@@ -368,6 +387,7 @@ public class JobStatus extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d(TAG, "Response: " + response.toString());
                 loader.dismiss();
+                joblist.clear();
                 JSONObject j = null;
                 try {
                     JSONObject object = new JSONObject(response);
@@ -388,7 +408,7 @@ public class JobStatus extends AppCompatActivity {
                                      jobmodel.setJobid_details(job.getString("jobid_details"));
                                 jobmodel.setLocation(job.getString("location"));
                               //  jobmodel.setFirst_name(job.getString("first_name"));
-                               // jobmodel.setJob_applied_id(job.getString("job_applied_id"));
+                                jobmodel.setAccept_jobid(job.getString("accept_jobid"));
                                 jobmodel.setCattype_id(job.getString("cattype_id"));
                                 jobmodel.setWage(job.getString("wage"));
                                 jobmodel.setCreate_datetime(job.getString("create_datetime"));
@@ -430,6 +450,60 @@ public class JobStatus extends AppCompatActivity {
             }
         };
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+        strReq.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(strReq);
+    }
+
+
+    private void hitAPi(final String userid,final String type,final String jobid) {
+        loader.show();
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.ACCEPTJOBNEW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, " Response: " + response.toString());
+                loader.dismiss();
+
+                try {
+                    JSONObject object = new JSONObject(response);
+
+                    if(object.getString("Success").equalsIgnoreCase("true")) {
+
+                        Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
+                        Intent i=(new Intent(getApplicationContext(),StartTrackActivity.class));
+                        i.putExtra("job",pu);
+                        startActivity(i);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("ruserid",userid);
+                params.put("usertype", type);
+                params.put("accept_jobid", jobid);
+
+                Log.e("",""+params);
+                return params;
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
         strReq.setRetryPolicy(new DefaultRetryPolicy(
                 10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

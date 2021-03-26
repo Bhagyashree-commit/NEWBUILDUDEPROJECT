@@ -67,7 +67,7 @@ public class AppConfig {
 
     public static String ENDJOB=BASE_URL+"end_job_by_labour.php";
 
-    public static String GETPAYREQUEST=BASE_URL+"get_track_contractorjob.php";
+    public static String GETPAYREQUEST=BASE_URL+"get_requested_payment_job_list_for_contactor.php";
 
     public static String PAYPAYMENT=BASE_URL+"payment_paid_by_contractor.php";
 
@@ -79,7 +79,27 @@ public class AppConfig {
 
     public static String GETPAYMETTOLABOUR=BASE_URL+"payment_get_by_labour.php";
 
-    public static String ENDPROCESS=BASE_URL+"end_job_by_labour.php";
+    public static String ENDPROCESS=BASE_URL+"payment_receive_by_labour.php";
+
+    public static String SITEWISEFILTER=BASE_URL+"get_sitedetail_contractor.php";
+
+    public static String SITEWISEFILTER2=BASE_URL+"get_sitedetail_filter_contractor.php";
+
+    public static String SITEWISEFILTER3=BASE_URL+"get_locationby_labourwise.php";
+
+    public static String SITEWISEFILTER4=BASE_URL+"get_locationby_filter_labourwise.php";
+
+    public static String FILTER=BASE_URL+"get_laboursummary.php";
+
+    public static String SUMMARYLABOUR=BASE_URL+"get_locationby_laboursummery.php";
+
+    public static String ACCEPTJOBNEW=BASE_URL+"accept_job_labour.php";
+
+    public static String GETFORMODIFY=BASE_URL+"get_all_acceptedjob_by_labour.php";
+
+    public static String MODIFYLABOURJOB=BASE_URL+"acceptedjob_modify_by_labour.php";
+
+
 
 
 }

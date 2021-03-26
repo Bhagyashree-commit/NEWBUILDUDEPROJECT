@@ -28,12 +28,13 @@
 
     </LinearLayout>
     <LinearLayout
-
+android:gravity="center_horizontal"
         android:layout_marginTop="@dimen/_55sdp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <EditText
+            android:textColorHint="@color/black"
             android:id="@+id/et_mobnum"
             android:drawableLeft="@drawable/call"
             android:fontFamily="sans-serif-condensed"
@@ -50,32 +51,49 @@
             android:hint="@string/enternum"></EditText>
 
     </LinearLayout>
-    <LinearLayout
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:textColorHint="@color/black"
+                android:maxLines="1"
+                android:padding="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_5sdp"
+                android:layout_gravity="right"
+                android:id="@+id/et_password"
+                android:drawableLeft="@drawable/ic_password"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/black"
+                android:inputType="textPassword"
+                android:background="@drawable/square_box"
+                android:textSize="@dimen/_15sdp"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:hint="@string/pass"></EditText>
 
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/et_password"
-            android:drawableLeft="@drawable/ic_password"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/square_box"
-            android:fontFamily="sans-serif-condensed"
-            android:gravity="left"
-            android:drawablePadding="@dimen/_5sdp"
-            android:paddingLeft="@dimen/_10sdp"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingRight="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
-            android:hint="@string/pass"
-            android:inputType="textPassword"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_15sdp"></EditText>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/iv_eye"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_15sdp"
+                android:layout_width="@dimen/_90sdp"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_height="@dimen/_40sdp"
 
-    </LinearLayout>
+                android:drawableStart="@drawable/eye"
+                android:drawableLeft="@drawable/eye"></TextView>
+
+        </LinearLayout>
+
          <LinearLayout
 
         android:layout_marginTop="@dimen/_10sdp"

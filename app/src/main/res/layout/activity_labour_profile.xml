@@ -28,7 +28,7 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:layout_height="@dimen/_40sdp"
-                android:text="Labour Profile"></TextView>
+                android:text="@string/labourprofile"></TextView>
 
         </LinearLayout>
 
@@ -64,20 +64,19 @@
                android:orientation="horizontal"
                android:layout_height="wrap_content">
                <RadioButton
-                   android:checked="true"
                    android:id="@+id/rb_male"
                    android:fontFamily="sans-serif-condensed"
                    android:textSize="@dimen/_15sdp"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="MALE"></RadioButton>
+                   android:text="@string/male"></RadioButton>
               <RadioButton
                   android:id="@+id/rb_female"
                   android:fontFamily="sans-serif-condensed"
                   android:textSize="@dimen/_15sdp"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="FEMALE"></RadioButton>
+               android:text="@string/female"></RadioButton>
            </RadioGroup>
         </LinearLayout>
 
@@ -88,6 +87,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:textColorHint="@color/black"
                 android:id="@+id/et_location"
                 android:drawablePadding="@dimen/_5sdp"
                 android:drawableLeft="@drawable/location"
@@ -97,9 +97,9 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="@dimen/_200sdp"
-                android:textAllCaps="true"
+            android:inputType="textCapCharacters"
                 android:layout_height="@dimen/_40sdp"
-                android:hint="LOCATION*"></EditText>
+                android:hint="@string/location"></EditText>
 
         </LinearLayout>
 
@@ -126,6 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
                     <EditText
+                        android:textColorHint="@color/black"
                         android:inputType="number"
                         android:id="@+id/et_pincode"
                         android:fontFamily="sans-serif-condensed"
@@ -137,7 +138,7 @@
                         android:digits="0123456789"
                         android:maxLength="6"
                         android:layout_height="wrap_content"
-                        android:hint="PIN CODE*"></EditText></LinearLayout>
+                        android:hint="@string/pincode"></EditText></LinearLayout>
 
                 <LinearLayout
                     android:gravity="center"
@@ -145,6 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
                     <TextView
+                        android:textColorHint="@color/black"
                         android:id="@+id/tv_dob"
                         android:fontFamily="sans-serif-condensed"
                         android:textColor="@color/black"
@@ -154,7 +156,7 @@
                         android:layout_width="wrap_content"
                         android:textAllCaps="true"
                         android:layout_height="wrap_content"
-                        android:hint="BIRTH DATE*"></TextView>
+                        android:hint="@string/birthday"></TextView>
                 </LinearLayout>
             </LinearLayout>
 
@@ -182,18 +184,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/et_wage"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="72dp"
+                android:background="@drawable/square_box"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/black"
+                android:hint="@string/minwagerate"
+                android:inputType="textCapCharacters"
                 android:padding="@dimen/_10sdp"
-                android:background="@drawable/square_box"
-                android:textSize="@dimen/_15sdp"
-                android:layout_width="@dimen/_200sdp"
-                android:textAllCaps="true"
-                android:layout_height="@dimen/_40sdp"
-                android:hint="MIN WAGE RATE*"></EditText>
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/_15sdp"></EditText>
 
         </LinearLayout>
         <LinearLayout
@@ -203,6 +207,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:textColorHint="@color/black"
                 android:id="@+id/et_adharnumber"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="sans-serif-condensed"
@@ -211,9 +216,9 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="@dimen/_200sdp"
-                android:textAllCaps="true"
+               android:inputType="textCapCharacters"
                 android:layout_height="@dimen/_40sdp"
-                android:hint="AADHAR NUMBER"></EditText>
+                android:hint="@string/aadharnum"></EditText>
 
         </LinearLayout>
         <LinearLayout
@@ -221,20 +226,20 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_width="match_parent"
             android:layout_marginRight="@dimen/_25sdp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/btn_submitlabordetails"
-                android:layout_width="144dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_140sdp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/square_box"
                 android:backgroundTint="@color/cyan_800"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15sdp"

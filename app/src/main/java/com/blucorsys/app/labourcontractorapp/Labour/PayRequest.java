@@ -145,8 +145,9 @@ public class PayRequest extends Fragment {
                         @Override
                         public void onClick(View v) {
                             String type="LABOUR";
+                            String conid=pu.getContractorid();
 
-                            hitRequestPayment(pref.get(Constants.USERID),type,pu.getTrack_jobid(),pu.getWage(),rating);
+                            hitRequestPayment(pref.get(Constants.USERID),type,pu.getTrack_jobid(),pu.getWage(),rating,conid);
                             dialog.dismiss();
                         }
                     });
@@ -198,7 +199,7 @@ public class PayRequest extends Fragment {
             public void onResponse(String response) {
                 Log.d(TAG, "Response: " + response.toString());
                 loader.dismiss();
-
+                joblist.clear();
                 JSONObject j = null;
                 try {
                     JSONObject object = new JSONObject(response);
@@ -222,6 +223,7 @@ public class PayRequest extends Fragment {
                                 jobmodel.setCreate_datetime(job.getString("create_datetime"));
                                 jobmodel.setCattype_id(job.getString("cattype_id"));
                                 jobmodel.setWage(job.getString("wage"));
+                                jobmodel.setContractorid(job.getString("contractorid"));
 //                                jobmodel.setNo(job.getString("no"));
                                 jobmodel.setCat_english(job.getString("cat_english"));
                                 jobmodel.setCat_hindi(job.getString("cat_hindi"));
@@ -272,7 +274,7 @@ public class PayRequest extends Fragment {
         requestQueue.add(strReq);
     }
 
-    private void hitRequestPayment(final String userid,final String type,final String trackjobid,final String wages, final String rating) {
+    private void hitRequestPayment(final String userid,final String type,final String trackjobid,final String wages, final String rating,final String conid) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.PAYREQUEST, new Response.Listener<String>() {
@@ -314,6 +316,7 @@ public class PayRequest extends Fragment {
                 params.put("track_jobid", trackjobid);
                 params.put("wages", wages);
                 params.put("review", rating);
+                params.put("contractorid",conid);
 
                 Log.e("",""+params);
                 return params;

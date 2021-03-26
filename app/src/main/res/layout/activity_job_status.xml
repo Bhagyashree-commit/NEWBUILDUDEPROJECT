@@ -29,7 +29,7 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:layout_height="@dimen/_40sdp"
-                android:text="Apply Job"
+                android:text="@string/applyjob"
                 android:gravity="center_horizontal"></TextView>
 
         </RelativeLayout>
@@ -70,14 +70,14 @@
                     android:backgroundTint="@color/red_300"
                     android:drawablePadding="@dimen/_5sdp"
                     android:fontFamily="sans-serif-condensed"
+                    android:gravity="center_horizontal"
                     android:padding="@dimen/_5sdp"
                     android:spinnerMode="dialog"
-                    android:text="Date"
+                    android:text="@string/date"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:gravity="center_horizontal"></TextView>
+                    android:textStyle="bold"></TextView>
 
             </RelativeLayout>
             <RelativeLayout
@@ -104,6 +104,7 @@
 
 
                 <TextView
+                    android:textColorHint="@color/black"
                     android:textAlignment="center"
                     android:layout_toRightOf="@+id/spincategory"
                     android:backgroundTint="@color/pink_50"
@@ -117,7 +118,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:textAllCaps="true"
                     android:layout_height="@dimen/_35sdp"
-                    android:hint="Wages"
+                    android:hint="@string/wage"
                     android:gravity="center_horizontal"></TextView>
                 <TextView
                     android:id="@+id/tv_ok"
@@ -128,7 +129,7 @@
                     android:textSize="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:textAllCaps="true"
-                    android:text="OK ->"
+                    android:text="@string/ok"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:background="@color/orange_800"
@@ -156,7 +157,7 @@
                     android:layout_width="wrap_content"
                     android:textAllCaps="true"
                     android:layout_height="@dimen/_40sdp"
-                    android:text="Accept Job"
+                    android:text="@string/acceptjob"
                    ></TextView>
             </RelativeLayout>
 

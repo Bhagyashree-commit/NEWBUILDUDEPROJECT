@@ -12,6 +12,8 @@ public class Constants {
     public static String JSONARRAY= "category";
     public static String CATID= "cat_id";
     public static String CATENG= "cat_english";
+    public static String CATHIN= "cat_hindi";
+    public static String CATMAR= "cat_marathi";
     public static String STATUS= "profile_status";
     public static String LOC= "location";
     public static String JOBID= "id";
@@ -30,8 +32,12 @@ public class Constants {
     public static String RADIOID= "jobid_details";
     public static String role= "usertype";
     public static String lid= "labour_id";
-    public static String address= "labour_id";
+    public static String address= "address";
     public static String lat= "latitude";
     public static String lng= "longitude";
+    public static String JOBNEWID= "accept_jobid";
+    public static String accepted= "accept_jobid";
+    public static String newaddress= "locationAddress";
+    public static String newjobstatus= "jobstatus";
 
 }

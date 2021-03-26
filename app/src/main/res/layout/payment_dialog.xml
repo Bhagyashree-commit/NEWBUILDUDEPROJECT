@@ -27,7 +27,7 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="Confirm Location"
+        android:text="@string/conloc"
         android:background="@color/red_800"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_width="match_parent"

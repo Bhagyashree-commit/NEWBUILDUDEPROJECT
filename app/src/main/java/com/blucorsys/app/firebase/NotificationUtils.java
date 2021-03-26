@@ -21,7 +21,6 @@ import android.util.Patterns;
 
 import androidx.core.app.NotificationCompat;
 
-
 import com.blucorsys.app.labourcontractorapp.R;
 
 import java.io.IOException;

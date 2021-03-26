@@ -59,6 +59,8 @@ CustomLoader loader;
     Spinner catspin,spin_loc;
     private ArrayList<String> categoryEng;
     private ArrayList<String> categoryID;
+    private ArrayList<String> categoryMar;
+    private ArrayList<String> categoryHin;
     private ArrayList<String> loca;
     private ArrayList<String> date;
     private ArrayList<String> jobid;
@@ -97,6 +99,8 @@ CustomLoader loader;
 
         categoryEng = new ArrayList<String>();
         categoryID = new ArrayList<String>();
+        categoryMar = new ArrayList<String>();
+        categoryHin = new ArrayList<String>();
         loca = new ArrayList<String>();
         jobid = new ArrayList<String>();
         date = new ArrayList<String>();
@@ -136,6 +140,7 @@ CustomLoader loader;
         catspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
                 cattype_id=catspin.getSelectedItem().toString();
                 Log.e("nishaaa3",""+cattype_id);
             }
@@ -229,12 +234,24 @@ CustomLoader loader;
                 //Adding the name of the student to array list
                 categoryID.add(json.getString(Constants.CATID));
                 categoryEng.add(json.getString(Constants.CATENG));
+                categoryMar.add(json.getString(Constants.CATMAR));
+                categoryHin.add(json.getString(Constants.CATHIN));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryEng));
-    }
+        if(pref.get(Constants.Lang).equals("ENGLISH")){
+            catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryEng));
+
+        }
+        else if(pref.get(Constants.Lang).equals("हिंदी")){
+            catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryHin));
+
+        }
+        else {
+            catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryMar));
+
+        }     }
 
     private void getLocation() {
         loader.show();

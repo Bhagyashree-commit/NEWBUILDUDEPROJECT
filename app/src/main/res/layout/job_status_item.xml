@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/blue_100"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -68,6 +68,7 @@
                         />
 
                     <ImageView
+                        android:visibility="gone"
                         android:id="@+id/mapmarker"
                         android:layout_toRightOf="@+id/tv_counter"
                         android:layout_alignParentRight="true"

@@ -6,8 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,19 +46,24 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
-TextView btnlogin,tv_signup,tv_forgetpassword;
+TextView btnlogin,tv_signup,tv_forgetpassword,tv_eye;
 EditText et_mobnum,et_password;
 CustomLoader loader;
 Preferences pref;
 String mobnum,pass;
 String token;
 Spinner role;
-String usertype;
+    private ArrayList<String> date;
+String usertype,type;
+
+private boolean isPasswordVisible;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,20 +74,58 @@ String usertype;
         tv_forgetpassword=findViewById(R.id.tv_forgetpassword);
         et_password=findViewById(R.id.et_password);
         tv_signup=findViewById(R.id.tv_signup);
-
+        tv_eye=findViewById(R.id.iv_eye);
+        date = new ArrayList<String>();
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         pref=new Preferences(this);
 
+        tv_eye.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPasswordVisible){
+//show_password();
+                    String pass = et_password.getText().toString();
+                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    et_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    et_password.setText(pass);
+                    et_password.setSelection(pass.length());
+                }
+                else {
+                    String pass = et_password.getText().toString();
+                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    et_password.setInputType(InputType.TYPE_CLASS_TEXT);
+                    et_password.setText(pass);
+                    et_password.setSelection(pass.length());
+                    //hide_password();
+                }
+            }
+        });
+
+
         List<String> list = new ArrayList();
-        list.add("CHOOSE ROLE");
-        list.add("CONTRACTOR");
-        list.add("LABOUR");
-        list.add("ARCHITECT");
-        list.add("ENGINEER");
-        list.add("SUPPLIER");
-        list.add("OTHER SERVICES");
-        list.add("OWNER");
-        list.add("DEVELOPER");
+        List<String> list1 = new ArrayList();
+        List<String> list2 = new ArrayList();
+        list.add(getString(R.string.choose));
+        list.add(getString(R.string.contractor));
+        list.add(getString(R.string.labour));
+        list.add(getString(R.string.architect));
+        list.add(getString(R.string.engineer));
+        list.add(getString(R.string.supplier));
+        list.add(getString(R.string.otherservice));
+        list.add(getString(R.string.owner));
+        list.add(getString(R.string.developer));
+
+            list1.add("CHOOSE ROLE");
+            list1.add("CONTRACTOR");
+            list1.add("LABOUR");
+            list1.add("ARCHITECT");
+            list1.add("ENGINEER");
+            list1.add("SUPPLIER");
+            list1.add("OTHER SERVICES");
+            list1.add("OWNER");
+            list1.add("DEVELOPER");
+
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,10 +133,17 @@ String usertype;
 
         role.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                 usertype = LoginActivity.this.role.getSelectedItem().toString();
-                LoginActivity.this.pref.set(Constants.role, usertype);
+                 usertype = String.valueOf(role.getSelectedItemPosition());
+                  type= list1.get(Integer.parseInt(usertype));
+               //  String userrole=date.get(position);
+                Log.e("new role", "" + type);
+
+                Log.e("newrole", "" + list1.get(Integer.parseInt(usertype)));
+                LoginActivity.this.pref.set(Constants.role, type);
                 LoginActivity.this.pref.commit();
                 Log.e("", "" + LoginActivity.this.pref.get(Constants.role));
+
+
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -119,6 +175,23 @@ String usertype;
 
     }
 
+
+
+    public void setLocale(String localeName) {
+        if (!localeName.equals("en")) {
+            Locale myLocale = new Locale(localeName);
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, LoginActivity.class);
+            //refresh.putExtra("en", localeName);
+            startActivity(refresh);
+        } else {
+            Toast.makeText(LoginActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
     public void getFCM_token()
     {
         FirebaseMessaging.getInstance().getToken()
@@ -135,7 +208,7 @@ String usertype;
                         // Log and toast
                         String  msg = token;
                         Log.e("msg", msg);
-                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -161,7 +234,7 @@ String usertype;
             } else {
                 Log.e("ttttttt", LoginActivity.this.pref.get(Constants.role));
 
-                loginUser(mobnum,pass,usertype,token);
+                loginUser(mobnum,pass,type,token);
             }
 
 
