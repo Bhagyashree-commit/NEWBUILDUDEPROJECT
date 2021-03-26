@@ -48,10 +48,8 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
-
     implementation 'com.google.android.gms:play-services-base:17.5.0'
     implementation 'com.github.sujithkanna:smileyrating:2.0.0'
-
 
 
     implementation 'com.google.android.gms:play-services-places:17.0.0'

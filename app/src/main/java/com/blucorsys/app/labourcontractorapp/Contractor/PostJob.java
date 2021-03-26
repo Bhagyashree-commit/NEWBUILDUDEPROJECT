@@ -72,6 +72,10 @@ TextView tv_typecat;
     ArrayList<EditText> etnumberArrayList;
 
 
+
+    int counter=0;
+
+
     ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
 
     @Override
@@ -191,15 +195,37 @@ TextView tv_typecat;
         iv_plus1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pref.get(Constants.Lang).equals("ENGLISH")) {
-                addlayout(categoryEng);
-                }
-                else if(pref.get(Constants.Lang).equals("हिंदी")){
-                    addlayout(categoryHin);
-                }
-                else {
-                    addlayout(categoryMar);
-                }
+
+              if(spinnerCatArrayList.get(counter-1).getSelectedItemPosition()==0)
+              {
+                  Toast.makeText(PostJob.this, "Select category", Toast.LENGTH_SHORT).show();
+              }
+              else if(etwagesArrayList.get(counter-1).getText().toString().length()==0)
+              {
+                  Toast.makeText(PostJob.this, "Enter wages", Toast.LENGTH_SHORT).show();
+
+              }
+              else if(etnumberArrayList.get(counter-1).getText().toString().length()==0)
+              {
+                  Toast.makeText(PostJob.this, "Enter No of labourer required", Toast.LENGTH_SHORT).show();
+
+              }
+              else
+              {
+                  if(pref.get(Constants.Lang).equals("ENGLISH")) {
+                      addlayout(categoryEng);
+                  }
+                  else if(pref.get(Constants.Lang).equals("हिंदी")){
+                      addlayout(categoryHin);
+                  }
+                  else {
+                      addlayout(categoryMar);
+                  }
+              }
+
+
+
+
             }
         });
 
@@ -334,6 +360,7 @@ TextView tv_typecat;
         spinnerCatArrayList.add(spincat);
         etwagesArrayList.add(et_wages);
         etnumberArrayList.add(et_number);
+        counter++;
     }
 
 
