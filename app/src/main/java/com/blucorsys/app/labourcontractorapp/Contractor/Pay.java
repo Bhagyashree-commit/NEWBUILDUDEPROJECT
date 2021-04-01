@@ -67,7 +67,7 @@ public class Pay extends AppCompatActivity {
         pref = new Preferences(this);
         joblist = new ArrayList<JobModel>();
         type="CONTRACTOR";
-        getpaylist(pref.get(Constants.USERID));
+        getpaylist(pref.get(Constants.USERID),type);
     }
 
 
@@ -184,7 +184,7 @@ public class Pay extends AppCompatActivity {
     }
 
 
-    private void getpaylist(final String userid) {
+    private void getpaylist(final String userid,final String type) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.GETPAYREQUEST, new Response.Listener<String>() {
@@ -235,7 +235,7 @@ public class Pay extends AppCompatActivity {
                     else {
 //                   rv_applyjob.setVisibility(View.INVISIBLE);
 //                    btn_apply.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"No Record Found", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     // JSON error
@@ -253,6 +253,7 @@ public class Pay extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("ruserid",userid);
+                params.put("usertype",type);
 
 
                 Log.e("",""+params);

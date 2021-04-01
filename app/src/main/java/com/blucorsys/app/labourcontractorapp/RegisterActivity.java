@@ -34,6 +34,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Preferences pref;
     TextView iv_eye;
     CheckBox ch;
+    Pattern p = Pattern.compile("(0/91)?[7-9][0-9]{9}");
     private boolean isPasswordVisible;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,18 +102,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-
-    public void show_password()
-    {
-        et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-
-    }
-
-    public void hide_password()
-    {
-
-        et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-    }
     @Override
     public void onClick(View v) {
         switch (v.getId())
@@ -135,11 +126,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void checkValidation(){
         mobnum=  et_mobnum.getText().toString();
+        Matcher m = null;
 
         if (et_mobnum.getText().toString().trim().length()<10) {
             Toast.makeText(getApplicationContext(), "Please enter valid 10 digit phone number", Toast.LENGTH_SHORT).show();
+            Log.e("bhagya",""+mobnum);
             et_mobnum.requestFocus();
 
+        }
+        else if(m == p.matcher(mobnum)){
+            Log.e("rashmi",""+m);
         }
         else{
             ChekNo(mobnum);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -34,7 +34,6 @@ android:gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <EditText
-            android:textColorHint="@color/black"
             android:id="@+id/et_mobnum"
             android:drawableLeft="@drawable/call"
             android:fontFamily="sans-serif-condensed"
@@ -58,7 +57,6 @@ android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
-                android:textColorHint="@color/black"
                 android:maxLines="1"
                 android:padding="@dimen/_10sdp"
                 android:drawablePadding="@dimen/_5sdp"
@@ -93,20 +91,38 @@ android:gravity="center_horizontal"
                 android:drawableLeft="@drawable/eye"></TextView>
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_role"
+            android:background="@drawable/square_box"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:orientation="horizontal">
 
-         <LinearLayout
 
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-             android:orientation="horizontal">
+            <TextView
+                android:maxLines="1"
+                android:padding="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_5sdp"
+                android:layout_gravity="right"
+                android:id="@+id/tv_role"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/black"
+                android:inputType="textPassword"
+                android:background="@drawable/square_box"
+                android:textSize="@dimen/_15sdp"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:hint="@string/choose"></TextView>
 
+            <Spinner
+                android:visibility="gone"
+                android:id="@+id/role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></Spinner>
 
-             <Spinner
-                 android:id="@+id/role"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"></Spinner>
-         </LinearLayout>
+        </LinearLayout>
+
         <LinearLayout
 
             android:layout_marginTop="@dimen/_20sdp"
@@ -134,7 +150,7 @@ android:gravity="center_horizontal"
              android:backgroundTint="@color/red_700"
              android:background="@drawable/square_box"
             android:layout_marginLeft="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_170sdp"
+             android:layout_marginTop="@dimen/_50sdp"
             android:layout_width="wrap_content"
             android:gravity="bottom"
             android:layout_marginRight="@dimen/_25sdp"
@@ -158,7 +174,7 @@ android:gravity="center_horizontal"
                  android:text="@string/forgetpass"></TextView>
          </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -187,4 +203,4 @@ android:gravity="center_horizontal"
                 android:text="@string/signup"></TextView>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

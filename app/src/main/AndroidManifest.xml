@@ -23,10 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LabourContractorApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Labour.ModifyLabourSide"></activity>
-        <activity android:name=".Labour.SummaryLabour"></activity>
+        <activity android:name=".OpenWebsite"></activity>
+        <activity android:name=".Labour.ModifyLabourSide" />
+        <activity android:name=".Labour.SummaryLabour" />
         <activity android:name=".Contractor.SummaryContractor" />
-        <activity android:name=".Contractor.ModifyContractorSide"></activity>
+        <activity android:name=".Contractor.ModifyContractorSide" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -48,35 +49,37 @@
         <activity android:name=".Labour.PaymentRequest" />
         <activity android:name=".Contractor.TrackingActivity" />
         <activity android:name=".Labour.StartTrackActivity" />
-        <activity android:name=".Labour.JobStatus" >
-        </activity>
+        <activity android:name=".Labour.JobStatus"></activity>
         <activity android:name=".MapsActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".Labour.JobApplication" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" > <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Choose_RoleActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".Contractor.ContractorAcceptReject" />
         <activity android:name=".Contractor.ContractorConsole" />
         <activity android:name=".Contractor.ContractorProfile" />
-        <activity android:name=".Contractor.PostJob" >
-
-
-        </activity>
+        <activity android:name=".Contractor.PostJob"></activity>
         <activity android:name=".Labour.LabourConsole" />
         <activity android:name=".Labour.LabourProfile" />
-        <activity android:name=".Map"></activity>
+        <activity android:name=".Map" />
 
         <service
-            android:name="com.blucorsys.app.firebase.MyFirebaseMessagingService"
+            android:name=".firebase.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

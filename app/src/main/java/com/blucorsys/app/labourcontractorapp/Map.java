@@ -28,9 +28,10 @@ import androidx.core.app.ActivityCompat;
 import com.blucorsys.app.CustomComponent.Constants;
 import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.ServerCall.Preferences;
-import com.blucorsys.app.firebase.FetchAddressIntentService;
+
 import com.blucorsys.app.labourcontractorapp.Contractor.PostJob;
 import com.blucorsys.app.labourcontractorapp.R;
+import com.blucorsys.app.labourcontractorapp.firebase.FetchAddressIntentService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;

@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,9 +33,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.blucorsys.app.CustomComponent.Constants;
 import com.blucorsys.app.CustomComponent.CustomLoader;
+import com.blucorsys.app.CustomComponent.CustomNew;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
 import com.blucorsys.app.labourcontractorapp.Contractor.ContractorConsole;
+import com.blucorsys.app.labourcontractorapp.Contractor.CustomAdapter;
+import com.blucorsys.app.labourcontractorapp.Contractor.PostJob;
 import com.blucorsys.app.labourcontractorapp.Labour.LabourConsole;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -59,8 +63,11 @@ Preferences pref;
 String mobnum,pass;
 String token;
 Spinner role;
+LinearLayout ll_role,ll_role1;
     private ArrayList<String> date;
 String usertype,type;
+TextView tv_role;
+CustomNew customNew;
 
 private boolean isPasswordVisible;
 
@@ -75,6 +82,8 @@ private boolean isPasswordVisible;
         et_password=findViewById(R.id.et_password);
         tv_signup=findViewById(R.id.tv_signup);
         tv_eye=findViewById(R.id.iv_eye);
+        ll_role=findViewById(R.id.ll_role);
+        tv_role=findViewById(R.id.tv_role);
         date = new ArrayList<String>();
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         pref=new Preferences(this);
@@ -105,7 +114,7 @@ private boolean isPasswordVisible;
         List<String> list = new ArrayList();
         List<String> list1 = new ArrayList();
         List<String> list2 = new ArrayList();
-        list.add(getString(R.string.choose));
+        list.add("");
         list.add(getString(R.string.contractor));
         list.add(getString(R.string.labour));
         list.add(getString(R.string.architect));
@@ -114,8 +123,9 @@ private boolean isPasswordVisible;
         list.add(getString(R.string.otherservice));
         list.add(getString(R.string.owner));
         list.add(getString(R.string.developer));
+        list.add(getString(R.string.associate));
 
-            list1.add("CHOOSE ROLE");
+            list1.add(" ");
             list1.add("CONTRACTOR");
             list1.add("LABOUR");
             list1.add("ARCHITECT");
@@ -124,12 +134,22 @@ private boolean isPasswordVisible;
             list1.add("OTHER SERVICES");
             list1.add("OWNER");
             list1.add("DEVELOPER");
+            list1.add("ASSOCIATE");
 
 
+        tv_role.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    role.setVisibility(View.VISIBLE);
+                    tv_role.setVisibility(View.GONE);
+                }
+            });
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        role.setAdapter(adapter);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        role.setAdapter(adapter);
+        customNew=new CustomNew(LoginActivity.this,list);
+        role.setAdapter(customNew);
 
         role.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -229,7 +249,7 @@ private boolean isPasswordVisible;
             et_password.requestFocus();
         }
         else {
-            if (LoginActivity.this.pref.get(Constants.role).equalsIgnoreCase("CHOOSE ROLE")) {
+            if (LoginActivity.this.pref.get(Constants.role).equalsIgnoreCase(" ")) {
                 Toast.makeText(LoginActivity.this, "please select your Role", Toast.LENGTH_LONG).show();
             } else {
                 Log.e("ttttttt", LoginActivity.this.pref.get(Constants.role));
@@ -261,7 +281,6 @@ private boolean isPasswordVisible;
                         pref.set(Constants.MOBILENUMBER,object.getString("mobileno"));
                         pref.set(Constants.PREFLANG,object.getString("prefered_lang"));
                         pref.set(Constants.STATUS,object.getString("profile_status"));
-
                         pref.commit();
 
                         if(pref.get(Constants.role).equals("CONTRACTOR")) {
@@ -270,9 +289,37 @@ private boolean isPasswordVisible;
                         else if(pref.get(Constants.role).equals("LABOUR")){
                             startActivity(new Intent(LoginActivity.this, LabourConsole.class));
                         }
-                        else {
-
+                        else if(pref.get(Constants.role).equals("ARCHITECT")){
+                            Intent i1 = new Intent(LoginActivity.this, Choose_RoleActivity.class);
+                            startActivity(i1);
+                            finish();
                         }
+                        else if(pref.get(Constants.role).equals("ENGINEER")){
+                            Intent i1 = new Intent(LoginActivity.this, Choose_RoleActivity.class);
+                            startActivity(i1);
+                            finish();
+                        }
+                        else if(pref.get(Constants.role).equals("SUPPLIER")){
+                            Intent i1 = new Intent(LoginActivity.this, Choose_RoleActivity.class);
+                            startActivity(i1);
+                            finish();
+                        }
+                        else if(pref.get(Constants.role).equals("OTHER SERVICES")){
+                            Intent i1 = new Intent(LoginActivity.this, Choose_RoleActivity.class);
+                            startActivity(i1);
+                            finish();
+                        }
+                        else if(pref.get(Constants.role).equals("OWNER")){
+                            Intent i1 = new Intent(LoginActivity.this, Choose_RoleActivity.class);
+                            startActivity(i1);
+                            finish();
+                        }
+                        else if(pref.get(Constants.role).equals("DEVELOPER")){
+                            Intent i1 = new Intent(LoginActivity.this, Choose_RoleActivity.class);
+                            startActivity(i1);
+                            finish();
+                        }
+
                         Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_LONG).show();
                     }
                     else {
@@ -342,5 +389,17 @@ private boolean isPasswordVisible;
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
+    public void showPopUp(){
+        AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
+        alertDialog.setMessage("Thank You For Registering with BUILDUDE! We Will get back to you with this functionality very soon!");
+        //alertDialog.setMessage(" Your Last Location Is "+mCurrentLocation);
 
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
 }

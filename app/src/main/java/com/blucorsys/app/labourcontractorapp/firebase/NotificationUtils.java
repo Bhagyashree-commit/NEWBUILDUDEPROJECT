@@ -1,4 +1,4 @@
-package com.blucorsys.app.firebase;
+package com.blucorsys.app.labourcontractorapp.firebase;
 
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -20,6 +20,7 @@ import android.util.Log;
 import android.util.Patterns;
 
 import androidx.core.app.NotificationCompat;
+
 
 import com.blucorsys.app.labourcontractorapp.R;
 
