@@ -71,34 +71,38 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         pref=new Preferences(this);
-        iv_eye.setTransformationMethod(new PasswordTransformationMethod());
+       // iv_eye.setTransformationMethod(new PasswordTransformationMethod());
         tv_verify.setOnClickListener(this);
         tv_check.setOnClickListener(this);
         btnsignup.setOnClickListener(this);
         tv_login.setOnClickListener(this);
-        iv_eye.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isPasswordVisible){
-//show_password();
-                    String pass = et_password.getText().toString();
-                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    et_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    et_password.setText(pass);
-                    et_password.setSelection(pass.length());
-                }
-                else {
-                    String pass = et_password.getText().toString();
-                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    et_password.setInputType(InputType.TYPE_CLASS_TEXT);
-                    et_password.setText(pass);
-                    et_password.setSelection(pass.length());
-                    //hide_password();
-                }
-            }
-        });
+//        iv_eye.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(isPasswordVisible){
+////show_password();
+//                    String pass = et_password.getText().toString();
+//                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                    et_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//                    et_password.setText(pass);
+//                    et_password.setSelection(pass.length());
+//                }
+//                else {
+//                    String pass = et_password.getText().toString();
+//                    et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+//                    et_password.setInputType(InputType.TYPE_CLASS_TEXT);
+//                    et_password.setText(pass);
+//                    et_password.setSelection(pass.length());
+//                    //hide_password();
+//                }
+//            }
+//        });
 
        // getFCM_token();
+
+
+
+
 
     }
 

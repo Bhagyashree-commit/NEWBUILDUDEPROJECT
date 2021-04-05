@@ -124,7 +124,14 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:passwordToggleEnabled="true"
+            android:backgroundTint="@null"
+            app:hintTextAppearance="@style/CustomTextAppearance1"
+            android:layout_height="wrap_content">
             <EditText
+                android:backgroundTint="@null"
                 android:maxLines="1"
                 android:id="@+id/et_password"
                 android:drawableLeft="@drawable/ic_password"
@@ -133,29 +140,32 @@ android:visibility="gone"
                 android:drawablePadding="@dimen/_5sdp"
                 android:padding="@dimen/_10sdp"
                 android:inputType="textPassword"
-                android:background="@drawable/square_box"
+               android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
-                android:layout_width="@dimen/_150sdp"
+
+                android:layout_width="@dimen/_170sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:hint="@string/pass"></EditText>
 
 
-            <TextView
-                android:id="@+id/iv_eye"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:padding="@dimen/_10sdp"
-                android:textSize="@dimen/_15sdp"
-                android:layout_width="@dimen/_90sdp"
-                android:textAllCaps="true"
-                android:gravity="center"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_height="@dimen/_40sdp"
+<!--            <TextView-->
+<!--                android:visibility="gone"-->
+<!--                android:text="SHOW"-->
+<!--                android:id="@+id/iv_eye"-->
+<!--                android:fontFamily="sans-serif-condensed"-->
+<!--                android:textColor="@color/blue_100"-->
+<!--                android:textStyle="bold"-->
+<!--                android:padding="@dimen/_10sdp"-->
+<!--                android:textSize="@dimen/_15sdp"-->
+<!--                android:layout_width="@dimen/_90sdp"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_marginLeft="@dimen/_5sdp"-->
+<!--                android:layout_height="@dimen/_40sdp"-->
 
-                android:drawableStart="@drawable/eye"
-                android:drawableLeft="@drawable/eye"></TextView>
-
+<!--                android:drawableStart="@drawable/eye"-->
+<!--                android:drawableLeft="@drawable/eye"></TextView>-->
+        </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
