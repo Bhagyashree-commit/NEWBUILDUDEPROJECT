@@ -31,6 +31,7 @@
     <string name="Info">Info</string>
     <string name="enternum">ENTER MOB NO</string>
     <string name="pass">PASSWORD</string>
+    <string name="conpass">NEW PASSWORD</string>
     <string name="login">Login</string>
     <string name="noaccount">Do not have AN ACCOUNT?</string>
     <string name="signup">SIGN UP</string>
@@ -106,6 +107,8 @@
     <string name="otherservice">OTHER SERVICES</string>
     <string name="owner">OWNER</string>
     <string name="developer">DEVELOPER</string>
+    <string name="associate">ASSOCIATE</string>
+    <string name="text">Thank You For Registering with BUILDUDE! We Will get back to you with this functionality very soon!</string>
 
     <string name="no_geocoder_available">No geocoder available</string>
 

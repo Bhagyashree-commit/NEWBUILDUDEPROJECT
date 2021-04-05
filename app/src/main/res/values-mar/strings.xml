@@ -29,6 +29,8 @@
     <string name="Info">माहिती</string>
     <string name="enternum">मोबाईल प्रविष्ट करा</string>
     <string name="pass">संकेतशब्द</string>
+    <string name="conpass">
+नवीन संकेतशब्द</string>
     <string name="login">लॉगिन</string>
     <string name="noaccount">खाते नाही?</string>
     <string name="signup">साइन अप करा</string>
@@ -110,6 +112,9 @@
 इतर सेवा</string>
     <string name="owner">मालक</string>
     <string name="developer">विकासक</string>
+    <string name="associate">
+सहयोगी</string>
+    <string name="text">बिलुडसह नोंदणी केल्याबद्दल धन्यवाद! आम्ही लवकरच या कार्यक्षमतेसह आपल्याकडे परत येऊ!</string>
 
 
 

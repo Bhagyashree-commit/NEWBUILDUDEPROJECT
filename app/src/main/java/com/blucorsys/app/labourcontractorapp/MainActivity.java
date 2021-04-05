@@ -2,9 +2,13 @@ package com.blucorsys.app.labourcontractorapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +21,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
     Locale myLocale;
     String lang;
     String currentLanguage;
+    ImageView share;
+    LinearLayout openLink;
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +58,38 @@ public class MainActivity extends AppCompatActivity {
         btncontinue=findViewById(R.id.btn_cont);
         btn_process=findViewById(R.id.btn_process);
         btn_info=findViewById(R.id.btn_info);
+        share=findViewById(R.id.share);
+        openLink=findViewById(R.id.ll_shantal);
+
+
+        ObjectAnimator anim = ObjectAnimator.ofInt(openLink, "backgroundColor", Color.WHITE, Color.RED,
+                Color.WHITE);
+        anim.setDuration(1500);
+        anim.setEvaluator(new ArgbEvaluator());
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+        anim.start();
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Insert Subject here");
+                String app_url = " https://drive.google.com/file/d/1qnIAtbiBw4St_HKagdUE5-2-VFlfLlOc/view?usp=sharing";
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, app_url);
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            }
+        });
+
+        openLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),
+                        OpenWebsite.class);
+                startActivity(i);
+            }
+        });
 
         btncontinue.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

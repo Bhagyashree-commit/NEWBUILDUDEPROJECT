@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -34,10 +37,13 @@ public class ForgetPassword extends AppCompatActivity  {
     private static final String TAG = ForgetPassword.class.getSimpleName();
     CustomLoader loader;
     Preferences pref;
-    TextView tv_check,tv_verify,btnchangepass,et_newpass;
+    TextView tv_check,tv_verify,btnchangepass;
     String mobnum,deviceid,data,newpass;
-    EditText et_mobnum,et_otp;
+    EditText et_mobnum,et_otp,et_password,et_newpass;
     LinearLayout ll8,ll2;
+    TextView iv_eye1,iv_eye2,iv_eyeclose;
+    private boolean isPasswordVisible;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +56,55 @@ public class ForgetPassword extends AppCompatActivity  {
         et_mobnum=findViewById(R.id.et_fmobnum);
         btnchangepass=findViewById(R.id.btnchangepass);
         et_newpass=findViewById(R.id.et_newpass);
+        et_password=findViewById(R.id.et_password);
         et_otp=findViewById(R.id.et_otp);
         tv_verify=findViewById(R.id.tv_verify);
         ll8=findViewById(R.id.ll8);
         ll2=findViewById(R.id.ll2);
+        iv_eye1=findViewById(R.id.iv_eye1);
+        iv_eye2=findViewById(R.id.iv_eye2);
 
+
+        iv_eye1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPasswordVisible){
+                    String pass = et_password.getText().toString();
+                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    et_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    et_password.setText(pass);
+                    et_password.setSelection(pass.length());
+                }
+                else {
+                    String pass = et_password.getText().toString();
+                    et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    et_password.setInputType(InputType.TYPE_CLASS_TEXT);
+                    et_password.setText(pass);
+                    et_password.setSelection(pass.length());
+                }
+            }
+        });
+        iv_eye2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPasswordVisible){
+//show_password();
+                    String pass = et_newpass.getText().toString();
+                    et_newpass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    et_newpass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    et_newpass.setText(pass);
+                    et_newpass.setSelection(pass.length());
+                }
+                else {
+                    String pass = et_newpass.getText().toString();
+                    et_newpass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    et_newpass.setInputType(InputType.TYPE_CLASS_TEXT);
+                    et_newpass.setText(pass);
+                    et_newpass.setSelection(pass.length());
+                    //hide_password();
+                }
+            }
+        });
         tv_check.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {

@@ -1,4 +1,4 @@
-package com.blucorsys.app.firebase;
+package com.blucorsys.app.labourcontractorapp.firebase;
 
 import android.app.IntentService;
 import android.content.Intent;

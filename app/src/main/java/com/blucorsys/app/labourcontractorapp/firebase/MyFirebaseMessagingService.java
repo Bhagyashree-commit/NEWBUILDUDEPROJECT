@@ -1,4 +1,4 @@
-package com.blucorsys.app.firebase;
+package com.blucorsys.app.labourcontractorapp.firebase;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -21,14 +21,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
-import com.blucorsys.app.CustomComponent.Constants;
-import com.blucorsys.app.ServerCall.Preferences;
-import com.blucorsys.app.labourcontractorapp.Contractor.ContractorConsole;
-import com.blucorsys.app.labourcontractorapp.Labour.LabourConsole;
 import com.blucorsys.app.labourcontractorapp.LoginActivity;
-import com.blucorsys.app.labourcontractorapp.MainActivity;
 import com.blucorsys.app.labourcontractorapp.R;
-import com.blucorsys.app.labourcontractorapp.SplashScreen;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -51,15 +45,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
   private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
-  Preferences pref;
+
      // PrefManager pref;
   @Override
   public void onMessageReceived(RemoteMessage remoteMessage) {
     super.onMessageReceived(remoteMessage);
-
-    pref=new Preferences(this);
-
-    Log.e("fffnnn",pref.get(Constants.USERID));
     // TODO(developer): Handle FCM messages here.
     // If the application is in the foreground handle both data and notification messages here.
     // Also if you intend on generating your own notifications as a result of a received FCM
@@ -86,8 +76,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.e(TAG, "ExceptionJson: " + e.getMessage());
       }
     }
-
-
 
   }
 
@@ -128,66 +116,25 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         pushNotification.putExtra("message", message);
         LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
 
-        Intent i = null;
-        if (pref.get(Constants.USERID).isEmpty() || pref.get(Constants.role).isEmpty()) {
-          // User is already logged in. Take him to main activity
-           i = new Intent(this, MainActivity.class);
+        Intent intent = null;
+        intent=new Intent(getApplicationContext(), LoginActivity.class);
 
-          i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-        else if(!pref.get(Constants.USERID).isEmpty() && pref.get(Constants.role).equalsIgnoreCase("CONTRACTOR")) {
-           i= new Intent(this, ContractorConsole.class);
-          i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        }
-        else if(!pref.get(Constants.USERID).isEmpty() && pref.get(Constants.role).equalsIgnoreCase("LABOUR")) {
-           i = new Intent(this, LabourConsole.class);
-          i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        }
-        else
-        {
-          i = new Intent(this, LabourConsole.class);
-          i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
 
-        play_notification(title,message,imageUrl,i);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        play_notification(title,message,imageUrl,intent);
 
       } else {
         // app is in background, show the notification in notification tray
-        Intent i = null;
-        if (pref.get(Constants.USERID).isEmpty() || pref.get(Constants.role).isEmpty()) {
-          // User is already logged in. Take him to main activity
-          i = new Intent(this, MainActivity.class);
-
-          i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-        else if(!pref.get(Constants.USERID).isEmpty() && pref.get(Constants.role).equalsIgnoreCase("CONTRACTOR")) {
-          i= new Intent(this, ContractorConsole.class);
-
-          i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-        else if(!pref.get(Constants.USERID).isEmpty() && pref.get(Constants.role).equalsIgnoreCase("LABOUR")) {
-          i = new Intent(this, LabourConsole.class);
-
-          i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-        else
-        {
-          i = new Intent(this, LabourConsole.class);
-          i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
+        Intent intent = null;
 
 
-        play_notification(title,message,imageUrl,i);
+        intent=new Intent(getApplicationContext(), LoginActivity.class);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        play_notification(title,message,imageUrl,intent);
 
         // check for image attachment
 //        if (TextUtils.isEmpty(imageUrl)) {
@@ -228,7 +175,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     Intent intent = new Intent(this, LoginActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     final Uri NOTIFICATION_SOUND_URI = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
             + "://" +getApplicationContext() .getPackageName() + "/raw/tone");
@@ -238,7 +184,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             .setContentText(notification.getBody())
             .setAutoCancel(true)
             .setSound(NOTIFICATION_SOUND_URI)
-            .setContentIntent(pendingIntent)
+         //   .setContentIntent(pendingIntent)
             .setContentInfo(notification.getTitle())
             .setLargeIcon(icon)
             .setOngoing(true)
@@ -356,7 +302,4 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
     notificationUtils.playNotificationSound();
   }
-
-
-
 }

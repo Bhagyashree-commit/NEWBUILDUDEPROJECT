@@ -70,12 +70,7 @@ TextView tv_typecat;
     ArrayList<Spinner> spinnerCatArrayList;
     ArrayList<EditText> etwagesArrayList;
     ArrayList<EditText> etnumberArrayList;
-
-
-
     int counter=0;
-
-
     ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
 
     @Override
