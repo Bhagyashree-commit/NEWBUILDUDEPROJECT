@@ -29,13 +29,13 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="@dimen/_15sdp"
-        android:text="CONCEPTUALISED BY"
+        android:text="@string/conceptualizedby"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:layout_marginTop="@dimen/_5sdp"
-        android:text="Shantal Consulting Engineers"
+        android:text="@string/comname"
         android:textStyle="bold"
         android:textAllCaps="true"
         android:id="@+id/shantal"

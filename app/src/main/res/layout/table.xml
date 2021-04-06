@@ -90,25 +90,27 @@
             android:inputType="number"
             android:layout_marginLeft="@dimen/_15sdp"
             android:id="@+id/tv_wages"
+            android:gravity="center_horizontal"
             android:fontFamily="sans-serif-condensed"
             android:textSize="@dimen/_15sdp"
             android:layout_width="wrap_content"
             android:textAllCaps="true"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:hint="Wages"></EditText>
+            android:hint="@string/wage"></EditText>
 
         <EditText
             android:inputType="number"
             android:layout_marginLeft="@dimen/_15sdp"
             android:id="@+id/tv_number"
+            android:gravity="center_horizontal"
             android:fontFamily="sans-serif-condensed"
             android:textSize="@dimen/_15sdp"
             android:layout_width="wrap_content"
             android:textAllCaps="true"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:hint="Number"></EditText>
+            android:hint="@string/nos"></EditText>
 
         </LinearLayout>
 

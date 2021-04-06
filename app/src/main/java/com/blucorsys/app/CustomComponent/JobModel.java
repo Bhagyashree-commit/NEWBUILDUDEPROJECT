@@ -13,6 +13,136 @@ public class JobModel implements Parcelable {
     private String cat_hindi;
     private String cat_marathi;
     private String jobid_details;
+    private String first_name;
+
+    public String getAccept_jobid() {
+        return accept_jobid;
+    }
+
+    public void setAccept_jobid(String accept_jobid) {
+        this.accept_jobid = accept_jobid;
+    }
+
+    private String accept_jobid;
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    private String user_id;
+
+    public String getMobileno() {
+        return mobileno;
+    }
+
+    public void setMobileno(String mobileno) {
+        this.mobileno = mobileno;
+    }
+
+    private String mobileno;
+
+    public String getWages() {
+        return wages;
+    }
+
+    public void setWages(String wages) {
+        this.wages = wages;
+    }
+
+    private String wages;
+
+    public String getContractorid() {
+        return contractorid;
+    }
+
+    public void setContractorid(String contractorid) {
+        this.contractorid = contractorid;
+    }
+
+    private String contractorid;
+
+    public String getPayment_date() {
+        return payment_date;
+    }
+
+    public void setPayment_date(String payment_date) {
+        this.payment_date = payment_date;
+    }
+
+    private String payment_date;
+
+    public String getRuserid() {
+        return ruserid;
+    }
+
+    public void setRuserid(String ruserid) {
+        this.ruserid = ruserid;
+    }
+
+    private String ruserid;
+
+    public String getSite_detail() {
+        return site_detail;
+    }
+
+    public void setSite_detail(String site_detail) {
+        this.site_detail = site_detail;
+    }
+
+    private String site_detail;
+
+    public String getWages_paid() {
+        return wages_paid;
+    }
+
+    public void setWages_paid(String wages_paid) {
+        this.wages_paid = wages_paid;
+    }
+
+    private String wages_paid;
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    private String latitude;
+    private String longitude;
+
+    public String getLabour_id() {
+        return labour_id;
+    }
+
+    public void setLabour_id(String labour_id) {
+        this.labour_id = labour_id;
+    }
+
+    private String labour_id;
+
+    public String getTrack_jobid() {
+        return track_jobid;
+    }
+
+    public void setTrack_jobid(String track_jobid) {
+        this.track_jobid = track_jobid;
+    }
+
+    private String track_jobid;
 
     public String getJob_applied_id() {
         return job_applied_id;
@@ -32,7 +162,7 @@ public class JobModel implements Parcelable {
         this.first_name = first_name;
     }
 
-    private String first_name;
+
 
     public String getJobid_details() {
         return jobid_details;

@@ -34,8 +34,9 @@
                 android:layout_width="match_parent"
                 android:textAllCaps="true"
                 android:gravity="center"
+                android:hint="@string/loc"
                 android:layout_height="@dimen/_90sdp"
-                android:text="Location Of Work"></TextView>
+              ></TextView>
         </LinearLayout>
         <LinearLayout
             android:background="@drawable/square_box"
@@ -55,10 +56,10 @@
                 android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="match_parent"
-                android:textAllCaps="true"
                 android:gravity="center"
+                android:inputType="textCapCharacters"
                 android:layout_height="wrap_content"
-                android:hint="Site Details"></EditText>
+                android:hint="@string/site"></EditText>
         </LinearLayout>
         <LinearLayout
             android:background="@drawable/square_box"
@@ -81,7 +82,7 @@
                 android:textAllCaps="true"
                 android:gravity="center"
                 android:layout_height="wrap_content"
-                android:text="Date and time"></TextView>
+                android:hint="@string/datetime"></TextView>
         </LinearLayout>
         <LinearLayout
             android:layout_marginLeft="@dimen/_25sdp"
@@ -118,20 +119,20 @@
 
 
   </LinearLayout>
-        <TextView
 
+        <TextView
             android:id="@+id/iv_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="84dp"
+            android:layout_gravity="center"
+            android:background="@drawable/square_box"
             android:backgroundTint="@color/yellow_100"
             android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/black"
             android:padding="@dimen/_15sdp"
-            android:background="@drawable/square_box"
-            android:textSize="@dimen/_15sdp"
-            android:layout_width="wrap_content"
+            android:text="@string/category"
             android:textAllCaps="true"
-           android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:text="Select Category"></TextView>
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sdp"></TextView>
         <ImageView
             android:visibility="gone"
 android:layout_marginTop="@dimen/_minus20sdp"
@@ -164,7 +165,7 @@ android:layout_marginTop="@dimen/_minus20sdp"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
-                android:text="Post Job"></TextView>
+                android:text="@string/postjob"></TextView>
         </LinearLayout>
     </LinearLayout>
 

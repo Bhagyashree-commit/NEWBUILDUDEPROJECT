@@ -47,5 +47,59 @@ public class AppConfig {
 
     public static String GETLOCFILTER=BASE_URL+"get_locationby_contractor_filter.php";
 
+    public static String JOBACCEPTLOCATION=BASE_URL+"get_locationby_labour.php";
+
+    public static String ACCEPTJOBFILTER=BASE_URL+"get_locationby_labour_filter.php";
+
+    public static String CHECKDATE=BASE_URL+"trackordertime.php";
+
+    public static String STARTTRACK1=BASE_URL+"trackingprocess_step1.php";
+
+    public static String STARTTRACK2=BASE_URL+"trackingprocess_step2.php";
+
+    public static String STARTTRACK3=BASE_URL+"trackingprocess_step3.php";
+
+    public static String TRACKLIST=BASE_URL+"get_track_contractorjob.php";
+
+    public static String PAYLIST=BASE_URL+"get_tracked_job.php";
+
+    public static String PAYREQUEST=BASE_URL+"request_job_payment.php";
+
+    public static String ENDJOB=BASE_URL+"end_job_by_labour.php";
+
+    public static String GETPAYREQUEST=BASE_URL+"get_requested_payment_job_list_for_contactor.php";
+
+    public static String PAYPAYMENT=BASE_URL+"payment_paid_by_contractor.php";
+
+    public static String FORGETPASS1=BASE_URL+"forgot_password_step1.php";
+
+    public static String FORGETPASS2=BASE_URL+"forgot_password_step2.php";
+
+    public static String FORGETPASS3=BASE_URL+"forgot_password_step3.php";
+
+    public static String GETPAYMETTOLABOUR=BASE_URL+"payment_get_by_labour.php";
+
+    public static String ENDPROCESS=BASE_URL+"payment_receive_by_labour.php";
+
+    public static String SITEWISEFILTER=BASE_URL+"get_sitedetail_contractor.php";
+
+    public static String SITEWISEFILTER2=BASE_URL+"get_sitedetail_filter_contractor.php";
+
+    public static String SITEWISEFILTER3=BASE_URL+"get_locationby_labourwise.php";
+
+    public static String SITEWISEFILTER4=BASE_URL+"get_locationby_filter_labourwise.php";
+
+    public static String FILTER=BASE_URL+"get_laboursummary.php";
+
+    public static String SUMMARYLABOUR=BASE_URL+"get_locationby_laboursummery.php";
+
+    public static String ACCEPTJOBNEW=BASE_URL+"accept_job_labour.php";
+
+    public static String GETFORMODIFY=BASE_URL+"get_all_acceptedjob_by_labour.php";
+
+    public static String MODIFYLABOURJOB=BASE_URL+"acceptedjob_modify_by_labour.php";
+
+
+
 
 }

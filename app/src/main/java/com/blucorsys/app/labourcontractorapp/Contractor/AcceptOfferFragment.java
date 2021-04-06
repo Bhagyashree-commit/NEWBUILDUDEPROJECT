@@ -1,7 +1,6 @@
 package com.blucorsys.app.labourcontractorapp.Contractor;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,8 +32,6 @@ import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.CustomComponent.JobModel;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
-import com.blucorsys.app.labourcontractorapp.Labour.AppliedJobFragment;
-import com.blucorsys.app.labourcontractorapp.Labour.MapsActivity;
 import com.blucorsys.app.labourcontractorapp.R;
 
 import org.json.JSONArray;
@@ -59,6 +55,8 @@ public class AcceptOfferFragment extends Fragment {
     String loc,date,wage,counter,cattype_id;
     Spinner spincat;
     private ArrayList<String> categoryEng;
+    private ArrayList<String> categoryMar;
+    private ArrayList<String> categoryHin;
     private ArrayList<String> categoryID;
     ArrayList<JobModel> joblist;
     String selectedjob;
@@ -88,9 +86,11 @@ public class AcceptOfferFragment extends Fragment {
         spincat=v.findViewById(R.id.spin_cat);
         userid=pref.get(Constants.USERID);
         categoryEng = new ArrayList<String>();
+        categoryMar = new ArrayList<String>();
+        categoryHin = new ArrayList<String>();
         categoryID = new ArrayList<String>();
         joblist = new ArrayList<JobModel>();
-        usertype="Contractor";
+        usertype="CONTRACTOR";
 
 
          getloc(userid,usertype);
@@ -115,17 +115,21 @@ public class AcceptOfferFragment extends Fragment {
         tv_ok.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
+                     hitAPI(pref.get(Constants.USERID),cattype_id);
 
-                 hitAPI(pref.get(Constants.USERID),cattype_id);
              }
          });
 
         btn_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id=pref.get(Constants.USERID);
-                String jsonarr="";
-                hitAcceptJob(id, String.valueOf(array));
+                String id = pref.get(Constants.USERID);
+                String jsonarr = "";
+                if (joblisttt.isEmpty()) {
+                    Toast.makeText(getActivity(), "Please Select any checkbox", Toast.LENGTH_LONG).show();
+                } else {
+                    hitAcceptJob(id, String.valueOf(array), usertype);
+                }
             }
         });
 
@@ -179,12 +183,25 @@ public class AcceptOfferFragment extends Fragment {
                 //Adding the name of the student to array list
                 categoryID.add(json.getString(Constants.CATID));
                 categoryEng.add(json.getString(Constants.CATENG));
+                categoryMar.add(json.getString(Constants.CATMAR));
+                categoryHin.add(json.getString(Constants.CATHIN));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        spincat.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryEng));
-    }
+        if(pref.get(Constants.Lang).equals("ENGLISH")){
+            spincat.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryEng));
+
+        }
+        else if(pref.get(Constants.Lang).equals("हिंदी")){
+            spincat.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryHin));
+
+        }
+        else {
+            spincat.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryMar));
+
+        }
+           }
 
     private void getloc(final  String userid,final  String usertype) {
         loader.show();
@@ -211,12 +228,11 @@ public class AcceptOfferFragment extends Fragment {
                                 tv_date.setText(obj.getString("create_datetime"));
                                 tv_wage.setText(obj.getString("wage"));
                                 tv_counter.setText(obj.getString("no"));
-                                pref.set(Constants.LOCa, object.getString("location"));
-                                pref.set(Constants.CREADATE, object.getString("create_datetime"));
-                                pref.set(Constants.wage, object.getString("wage"));
-                                pref.set(Constants.count, object.getString("no"));
+                                pref.set(Constants.LOC, obj.getString("location"));
+                                pref.set(Constants.CREADATE, obj.getString("create_datetime"));
+                                pref.set(Constants.wage, obj.getString("wage"));
+                                pref.set(Constants.count, obj.getString("no"));
                                 pref.commit();
-
 
                             }
 
@@ -420,7 +436,7 @@ public class AcceptOfferFragment extends Fragment {
     }
 
 
-    private void hitAcceptJob(final String id,final String json) {
+    private void hitAcceptJob(final String id,final String json,final String usertype) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.ACCEPTJOB, new Response.Listener<String>() {
@@ -434,7 +450,7 @@ public class AcceptOfferFragment extends Fragment {
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
-                      //  btn_accept.setVisibility(View.VISIBLE);
+                        btn_accept.setVisibility(View.INVISIBLE);
 
                         Log.d(TAG, array.toString());
 
@@ -463,7 +479,7 @@ public class AcceptOfferFragment extends Fragment {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("ruserid",id);
                 params.put("accept_jobid", json);
-                params.put("usertype", "Contractor");
+                params.put("usertype", usertype);
 
                 Log.e("",""+params);
                 return params;

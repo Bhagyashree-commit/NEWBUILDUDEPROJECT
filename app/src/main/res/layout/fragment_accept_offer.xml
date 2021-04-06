@@ -25,7 +25,7 @@
                 android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Site Details"
+                android:text="@string/sitedetails"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"></TextView>
@@ -40,7 +40,7 @@
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="date"
+                android:text="@string/date"
                 android:textColor="@color/black"
                 android:textAllCaps="true"
                 android:textSize="@dimen/_12sdp"></TextView>
@@ -60,13 +60,16 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
+
             <Spinner
                 android:id="@+id/spin_cat"
-                android:layout_width="@dimen/_180sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="251dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:fontFamily="sans-serif-condensed"
                 android:spinnerMode="dropdown"
-                android:text="Location"
+                android:text="@string/loc"
+                android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textStyle="bold"></Spinner>
@@ -81,11 +84,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="count"
+                android:text="@string/count"
                 android:id="@+id/tv_counter"
                 android:textColor="@color/black"
                 android:textAllCaps="true"
-                android:textSize="@dimen/_12sdp"></TextView>
+                android:textSize="@dimen/_10sdp"></TextView>
         </LinearLayout>
         <LinearLayout
             android:background="@color/brown_50"
@@ -97,7 +100,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="wage"
+                android:text="@string/wage"
                 android:id="@+id/tv_wage"
                 android:textColor="@color/black"
                 android:textAllCaps="true"
@@ -113,7 +116,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ok"
+                android:text="@string/ok"
                 android:id="@+id/tv_ok"
                 android:textColor="@color/black"
                 android:textAllCaps="true"
@@ -121,71 +124,71 @@
         </LinearLayout>
     </LinearLayout>
 
-        <LinearLayout
-            android:visibility="gone"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-                <TextView
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp"
-                    android:id="@+id/tv_lname"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Labour Name"
-                    ></TextView>
-                        </LinearLayout>
-            <LinearLayout
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4">
-                <TextView
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp"
-                    android:id="@+id/tv_wage1"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Wage"
+<!--        <LinearLayout-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_margin="@dimen/_10sdp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:weightSum="2">-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1">-->
+<!--                <TextView-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="@dimen/_12sdp"-->
+<!--                    android:id="@+id/tv_lname"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:text="Labour Name"-->
+<!--                    ></TextView>-->
+<!--                        </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_marginLeft="@dimen/_5sdp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="0.4">-->
+<!--                <TextView-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="@dimen/_12sdp"-->
+<!--                    android:id="@+id/tv_wage1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:text="Wage"-->
 
-                    ></TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4">
-                <TextView
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp"
-                    android:id="@+id/tv_rating"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Rating"
+<!--                    ></TextView>-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_marginLeft="@dimen/_5sdp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="0.4">-->
+<!--                <TextView-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="@dimen/_12sdp"-->
+<!--                    android:id="@+id/tv_rating"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:text="Rating"-->
 
-                    ></TextView>
-            </LinearLayout>
-            <LinearLayout
+<!--                    ></TextView>-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
 
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2">
-                <CheckBox
-                    android:id="@+id/checklabor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30sdp"></CheckBox>
-            </LinearLayout>
-        </LinearLayout>
+<!--                android:layout_marginLeft="@dimen/_5sdp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="0.2">-->
+<!--                <CheckBox-->
+<!--                    android:id="@+id/checklabor"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="@dimen/_30sdp"></CheckBox>-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -206,7 +209,7 @@
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="sans-serif-condensed"
                 android:padding="@dimen/_10sdp"
-                android:text="Accept Job"
+                android:text="@string/acceptjob"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/white"

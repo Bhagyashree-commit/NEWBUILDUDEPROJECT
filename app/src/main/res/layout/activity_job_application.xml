@@ -28,7 +28,7 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:layout_height="@dimen/_40sdp"
-                android:text="Apply Job"></TextView>
+                android:text="@string/applyjob"></TextView>
             <View
                 android:layout_centerInParent="true"
                 android:id="@+id/view"
@@ -47,7 +47,7 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:layout_height="@dimen/_40sdp"
-                android:text="Applied Job"></TextView>
+                android:text="@string/appliedjob"></TextView>
 
         </RelativeLayout>
 

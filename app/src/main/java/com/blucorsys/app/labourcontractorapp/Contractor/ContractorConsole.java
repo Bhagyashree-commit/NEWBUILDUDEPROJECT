@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -19,36 +20,44 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blucorsys.app.CustomComponent.Constants;
 import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.ServerCall.Preferences;
+import com.blucorsys.app.labourcontractorapp.Labour.LabourConsole;
 import com.blucorsys.app.labourcontractorapp.MainActivity;
 import com.blucorsys.app.labourcontractorapp.R;
 
 
 public class ContractorConsole extends AppCompatActivity {
-CardView card1,card2,card3;
+CardView cardpostjob,card_acceptjob,cardprofile,card_track,card_pay,card_summary,card_modify;
 Preferences pref;
 TextView tv_name;
 CustomLoader loader;
 ImageView iv_logout;
+    public static int backPressed = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contractor_console);
-        card1=(CardView)findViewById(R.id.card1);
-        card2=(CardView)findViewById(R.id.card2);
-        card3=(CardView)findViewById(R.id.card3);
+        cardpostjob=(CardView)findViewById(R.id.cardpostjob);
+        card_acceptjob=(CardView)findViewById(R.id.card_acceptjob);
+        cardprofile=(CardView)findViewById(R.id.cardprofile);
+        card_modify=(CardView)findViewById(R.id.card_modify);
+        card_pay=(CardView)findViewById(R.id.card_pay);
         tv_name=(TextView)findViewById(R.id.tv_name);
         iv_logout=findViewById(R.id.btnlogout);
+        card_track=findViewById(R.id.card_track);
+        card_summary=findViewById(R.id.card_summary);
 
 
         loader = new CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         pref=new Preferences(this);
 
         tv_name.setText(pref.get(Constants.FIRSTNAME )+ " " +pref.get(Constants.LASTNAME));
-        card3.setOnClickListener(new View.OnClickListener() {
+        cardprofile
+                .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ContractorConsole.this, ContractorProfile.class));
@@ -56,33 +65,94 @@ ImageView iv_logout;
         });
 
         if(pref.get(Constants.STATUS).equals("0")){
-            card1.setOnClickListener(new View.OnClickListener() {
+            cardpostjob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     showPopUp();
                 }
             });
-            card2.setOnClickListener(new View.OnClickListener() {
+            card_acceptjob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    showPopUp();
+                }
+            });
+            card_track.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopUp();
+                }
+            });
+            card_pay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopUp();
+                }
+            });
+            card_summary.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopUp();
+                }
+            });
+            card_modify.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     showPopUp();
                 }
             });
         }
         else if(pref.get(Constants.STATUS).equals("1")){
-            card1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(ContractorConsole.this, PostJob.class));
-                }
-            });
-            card2.setOnClickListener(new View.OnClickListener() {
+
+           if(pref.get(Constants.newjobstatus).equals(1)) {
+                cardpostjob.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "You Are Not eligible for new job posting", Toast.LENGTH_LONG).show();
+                        //startActivity(new Intent(ContractorConsole.this, PostJob.class));
+                    }
+                });
+            }
+           else {
+
+               cardpostjob.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       //Toast.makeText(getApplicationContext(), "You Are Not eligible for new job posting", Toast.LENGTH_LONG).show();
+                       startActivity(new Intent(ContractorConsole.this, PostJob.class));
+                   }
+               });
+            }
+            card_acceptjob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     startActivity(new Intent(ContractorConsole.this, ContractorAcceptReject.class));
                 }
             });
-
+            card_track.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(ContractorConsole.this, TrackingActivity.class));
+                }
+            });
+            card_pay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(ContractorConsole.this, Pay.class));
+                }
+            });
+            card_summary.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(ContractorConsole.this, SummaryContractor.class));
+                }
+            });
+            card_modify.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(ContractorConsole.this, ModifyContractorSide.class));
+                }
+            });
         }
         iv_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,9 +177,6 @@ ImageView iv_logout;
                 TextView tvReason = (TextView) dialog.findViewById(R.id.textView22);
                 TextView tvAlertMsg = (TextView) dialog.findViewById(R.id.tvAlertMsg);
 
-                //set value
-                //tvAlertMsg.setText("CONFIRMATION ALERT..!!!");
-                // tvReason.setText("ARE YOU SURE WANT TO LOGOUT?");
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                 dialog.show();
@@ -127,17 +194,13 @@ ImageView iv_logout;
                         dialog.dismiss();
                     }
                 });
-
-
                 tvCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
                     }
                 });
-
             }
-
         });
     }
 
@@ -153,5 +216,24 @@ ImageView iv_logout;
                     }
                 });
         alertDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressed = backPressed + 1;
+        if (backPressed == 1) {
+            Toast.makeText(ContractorConsole.this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+            new CountDownTimer(5000, 1000) { // adjust the milli seconds here
+                public void onTick(long millisUntilFinished) {
+                }
+                public void onFinish() { backPressed = 0;
+                }
+            }.start();
+        }
+        if (backPressed == 2) {
+            backPressed = 0;
+            finishAffinity();
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
     }
 }

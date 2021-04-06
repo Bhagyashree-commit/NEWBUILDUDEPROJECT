@@ -48,7 +48,7 @@
             android:textSize="@dimen/_15sdp"
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_40sdp"
-            android:hint="Enter Mob No"></EditText>
+            android:hint="@string/enternum"></EditText>
 
 
      <TextView
@@ -64,7 +64,7 @@
          android:gravity="center"
          android:layout_marginLeft="@dimen/_5sdp"
          android:layout_height="@dimen/_30sdp"
-         android:text="Check"></TextView>
+         android:text="@string/check"></TextView>
 </LinearLayout>
         <LinearLayout
           android:visibility="invisible"
@@ -91,7 +91,7 @@
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_40sdp"
-                android:hint="Enter OTP"></EditText>
+                android:hint="@string/otp"></EditText>
 
 
             <TextView
@@ -107,13 +107,13 @@
                 android:gravity="center"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:text="Verify"></TextView>
+                android:text="@string/verify"></TextView>
 
         </LinearLayout>
 
         </LinearLayout>
         <LinearLayout
-            android:visibility="invisible"
+android:visibility="gone"
             android:orientation="vertical"
             android:id="@+id/ll2"
             android:layout_width="match_parent"
@@ -124,7 +124,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:passwordToggleEnabled="true"
+            android:backgroundTint="@null"
+            app:hintTextAppearance="@style/CustomTextAppearance1"
+            android:layout_height="wrap_content">
             <EditText
+                android:backgroundTint="@null"
                 android:maxLines="1"
                 android:id="@+id/et_password"
                 android:drawableLeft="@drawable/ic_password"
@@ -133,26 +140,32 @@
                 android:drawablePadding="@dimen/_5sdp"
                 android:padding="@dimen/_10sdp"
                 android:inputType="textPassword"
-                android:background="@drawable/square_box"
+               android:background="@drawable/square_box"
                 android:textSize="@dimen/_15sdp"
-                android:layout_width="@dimen/_150sdp"
+
+                android:layout_width="@dimen/_170sdp"
                 android:layout_height="@dimen/_40sdp"
-                android:hint="Password"></EditText>
+                android:hint="@string/pass"></EditText>
 
 
-            <ImageView
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:padding="@dimen/_10sdp"
-                android:textSize="@dimen/_15sdp"
-                android:layout_width="@dimen/_90sdp"
-                android:textAllCaps="true"
-                android:gravity="center"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:src="@drawable/eye"></ImageView>
+<!--            <TextView-->
+<!--                android:visibility="gone"-->
+<!--                android:text="SHOW"-->
+<!--                android:id="@+id/iv_eye"-->
+<!--                android:fontFamily="sans-serif-condensed"-->
+<!--                android:textColor="@color/blue_100"-->
+<!--                android:textStyle="bold"-->
+<!--                android:padding="@dimen/_10sdp"-->
+<!--                android:textSize="@dimen/_15sdp"-->
+<!--                android:layout_width="@dimen/_90sdp"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_marginLeft="@dimen/_5sdp"-->
+<!--                android:layout_height="@dimen/_40sdp"-->
 
+<!--                android:drawableStart="@drawable/eye"-->
+<!--                android:drawableLeft="@drawable/eye"></TextView>-->
+        </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -179,7 +192,7 @@
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_40sdp"
-                android:hint="First Name"></EditText></LinearLayout>
+                android:hint="@string/fname"></EditText></LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -198,7 +211,7 @@
                 android:textSize="@dimen/_15sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_40sdp"
-                android:hint="Last Name"></EditText>
+                android:hint="@string/lname"></EditText>
             </LinearLayout>
         </LinearLayout>
 
@@ -213,6 +226,7 @@
              <EditText
                  android:inputType="phone"
                  android:digits="0123456789"
+                 android:maxLength="10"
                  android:id="@+id/et_refmobile"
                  android:drawablePadding="@dimen/_5sdp"
                  android:drawableLeft="@drawable/call"
@@ -223,7 +237,7 @@
                  android:textSize="@dimen/_15sdp"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:hint="Referral Mobile Number"></EditText>
+                 android:hint="@string/refnumber"></EditText>
          </LinearLayout>
 
          <LinearLayout
@@ -247,7 +261,7 @@
                  android:layout_width="match_parent"
                  android:textAllCaps="true"
                  android:layout_height="wrap_content"
-                 android:text="I agree To terms and conditions"></TextView>
+                 android:text="@string/terms"></TextView>
          </LinearLayout>
 
      <LinearLayout
@@ -271,7 +285,7 @@
              android:layout_width="@dimen/_120sdp"
              android:layout_height="@dimen/_30sdp"
              android:textAllCaps="true"
-             android:text="Sign Up"></TextView>
+             android:text="@string/signup"></TextView>
      </LinearLayout>
 
 
@@ -292,7 +306,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
-                android:text="Already a member? "></TextView>
+                android:text="@string/already"></TextView>
             <TextView
                 android:fontFamily="sans-serif-condensed"
                 android:id="@+id/tv_login"
@@ -304,7 +318,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
-                android:text="Login"></TextView>
+                android:text="@string/login"></TextView>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
     <ScrollView
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Name"
+                android:text="@string/name"
                 android:background="@drawable/square_box"
                 android:backgroundTint="@color/grey_200"
                 ></TextView>
@@ -45,7 +45,7 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Wage"
+                    android:text="@string/wage"
                     android:background="@drawable/square_box"
                     android:backgroundTint="@color/grey_200"
                     ></TextView>
@@ -61,7 +61,7 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Rating"
+                    android:text="@string/rating"
                     android:background="@drawable/square_box"
                     android:backgroundTint="@color/grey_200"
                     ></TextView>

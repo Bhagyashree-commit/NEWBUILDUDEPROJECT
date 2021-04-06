@@ -1,12 +1,125 @@
 <resources>
-    <string name="app_name">LabourContractorApp</string>
+    <string name="app_name">BUILDUDE</string>
     <string name="title_activity_maps_two">Map</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="jobarea">JOB AREA :</string>
+    <string name="sitedetails">SITE DETAILS:</string>
+    <string name="sdate">START DATE:</string>
+    <string name="labourname">LABOUR NAME:</string>
+
+    <string name="conname">CONTRACTOR NAME:</string>
     <string name="contractorrating">CONTRACTOR RATING :</string>
     <string name="typeoflabor">TYPE OF LABOUR :</string>
+
     <string name="wagerate">WAGE RATE :</string>
+    <string name="twages">TOTAL WAGES :</string>
+    <string name="dwages">DUE WAGES :</string>
     <string name="jobdate">JOB DATE :</string>
+    <string name="mobnum">MOB NUMBER :</string>
     <string name="title_activity_maps">Map</string>
+    <string name="postjob">Post Job</string>
+    <string name="pay">Pay</string>
+    <string name="acceptjob">Accept</string>
+    <string name="profile">Profile</string>
+    <string name="track">Track</string>
+    <string name="summary">Summary</string>
+    <string name="modify">Modify</string>
+    <string name="conceptualizedby">CONCEPTUALISED BY</string>
+    <string name="comname">Shantal Consulting Engineers</string>
+    <string name="conti">Continue</string>
+    <string name="Process">Process</string>
+    <string name="Info">Info</string>
+    <string name="enternum">ENTER MOB NO</string>
+    <string name="pass">PASSWORD</string>
+    <string name="conpass">NEW PASSWORD</string>
+    <string name="login">Login</string>
+    <string name="noaccount">Do not have AN ACCOUNT?</string>
+    <string name="signup">SIGN UP</string>
+    <string name="chnagepass">CHANGE PASSWORD</string>
+    <string name="forgetpass">FORGET PASSWORD</string>
+    <string name="check">CHECK</string>
+    <string name="otp">ENTER OTP</string>
+    <string name="verify">VERIFY</string>
+    <string name="fname">FIRST NAME</string>
+    <string name="lname">LAST NAME</string>
+    <string name="newpass">NEW PASSWORD</string>
+    <string name="refnumber">REFERRAL MOBILE NUMBER</string>
+    <string name="terms">I agree To terms and conditions</string>
+    <string name="loc">LOCATION OF SITE</string>
+    <string name="site">SITE DETAILS</string>
+    <string name="category">SELECT CATEGORY</string>
+    <string name="acceptoffer">Accept Offer</string>
+    <string name="modifyoffer">Modify Offer</string>
+    <string name="modifiedoffer">Modified Offer</string>
+    <string name="acceptedoffer">Accepted Offer</string>
+    <string name="date">DATE</string>
+    <string name="ok">OK -></string>
+    <string name="acceptedjob">Get Accepted Job</string>
+    <string name="title_activity_track_labor_on_map">Map</string>
+    <string name="companyname">COMPANY NAME*</string>
+    <string name="location">LOCATION*</string>
+    <string name="pincode">PINCODE</string>
+    <string name="email">ENTER EMAIL*</string>
+    <string name="geninfo">GENERAL INFORMATION</string>
+    <string name="name">NAME</string>
+    <string name="rating">RATING</string>
+    <string name="wage">WAGE</string>
+    <string name="nos">NOs</string>
+    <string name="type">TYPE</string>
+    <string name="contractorprofile">CONTRACTOR PROFILE</string>
+    <string name="submit">SUBMIT</string>
+    <string name="applyjob">APPLY JOB</string>
+    <string name="appliedjob">APPLIED JOB</string>
+
+    <string name="jobstatus">JOB STATUS</string>
+    <string name="payment">PAYMENT</string>
+    <string name="minwagerate">MIN WAGE RATE*</string>
+    <string name="birthday">DATE OF BIRTH*</string>
+    <string name="female">FEMALE</string>
+    <string name="male">MALE</string>
+    <string name="aadharnum">AADHAR NUMBER</string>
+    <string name="labourprofile">LABOUR PROFILE</string>
+    <string name="getpayment">GET PAYMENT</string>
+    <string name="payrequest">PAYMENT REQUEST</string>
+    <string name="datetime">DATE AND TIME</string>
+    <string name="already">ALREADY MEMBER?</string>
+    <string name="stopwork">STOP WORK</string>
+    <string name="starttracking">START TRACKING</string>
+    <string name="stoptrack">STOP TRACKING</string>
+    <string name="consolidated">CONSOLIDATED</string>
+    <string name="categorywise">CATEGORY WISE</string>
+    <string name="giverating">GIVE RATING</string>
+    <string name="sure">Are You Sure About Logout?</string>
+    <string name="alert">CONFIRMATION ALERT</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="count">COUNT</string>
+    <string name="thankyou">THANK YOU</string>
+    <string name="rpay">REQUEST PAY</string>
+    <string name="conloc">CONFIRM LOCATION</string>
+    <string name="select">LANGUAGE</string>
+    <string name="choose">CHOOSE ROLE</string>
+    <string name="contractor">CONTRACTOR</string>
+    <string name="labour">LABOUR</string>
+    <string name="architect">ARCHITECT</string>
+    <string name="engineer">ENGINEER</string>
+    <string name="supplier">SUPPLIER</string>
+    <string name="otherservice">OTHER SERVICES</string>
+    <string name="owner">OWNER</string>
+    <string name="developer">DEVELOPER</string>
+    <string name="associate">ASSOCIATE</string>
+    <string name="text">Thank You For Registering with BUILDUDE! We Will get back to you with this functionality very soon!</string>
+
+    <string name="no_geocoder_available">No geocoder available</string>
+
+    <string name="fetch_address">Fetch address</string>
+
+    <string name="address_found">Address found</string>
+
+    <string name="no_address_found">Sorry, no address found</string>
+    <string name="no_location_data_provided">No location data provided</string>
+    <string name="service_not_available">Sorry, the service is not available</string>
+    <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
+
+
 </resources>

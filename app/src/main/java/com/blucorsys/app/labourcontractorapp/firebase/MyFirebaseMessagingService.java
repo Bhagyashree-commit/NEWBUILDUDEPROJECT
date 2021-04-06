@@ -1,4 +1,4 @@
-package com.blucorsys.app.firebase;
+package com.blucorsys.app.labourcontractorapp.firebase;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -15,11 +15,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
+import  com.blucorsys.app.labourcontractorapp.ForgetPassword;
+
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 
-import com.blucorsys.app.labourcontractorapp.Choose_RoleActivity;
 import com.blucorsys.app.labourcontractorapp.LoginActivity;
 import com.blucorsys.app.labourcontractorapp.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -76,8 +77,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
       }
     }
 
-
-
   }
 
 
@@ -118,7 +117,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
 
         Intent intent = null;
-        intent=new Intent(getApplicationContext(), Choose_RoleActivity.class);
+        intent=new Intent(getApplicationContext(), LoginActivity.class);
+
           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 

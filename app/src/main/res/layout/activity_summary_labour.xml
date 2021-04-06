@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blue_100"
+    android:layout_height="match_parent"
+    tools:context=".Labour.SummaryLabour">
+    <LinearLayout
+        android:background="@color/red_900"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/white"
+            android:drawablePadding="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp"
+            android:textSize="@dimen/_15sdp"
+            android:layout_width="wrap_content"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:layout_height="@dimen/_40sdp"
+            android:text="@string/summary"></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <LinearLayout
+            android:background="@color/green_100"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <Spinner
+                android:spinnerMode="dropdown"
+                android:backgroundTint="@color/green_200"
+                android:background="@drawable/square_box"
+                android:id="@+id/spin_loc"
+                android:layout_alignParentLeft="true"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/white"
+                android:drawablePadding="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
+                android:layout_width="@dimen/_180sdp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_height="@dimen/_35sdp"
+                android:text="Location"></Spinner>
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/red_100"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_sdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sdate"
+                android:textColor="@color/black"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_12sdp"></TextView>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:background="@color/red_100"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_edate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="date"
+                android:textColor="@color/black"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_12sdp"></TextView>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/orange_800"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ok"
+                android:textColor="@color/black"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_12sdp"></TextView>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_summlab"></androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

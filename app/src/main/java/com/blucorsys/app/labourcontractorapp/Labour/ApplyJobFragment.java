@@ -2,15 +2,12 @@ package com.blucorsys.app.labourcontractorapp.Labour;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,11 +37,8 @@ import com.blucorsys.app.CustomComponent.CustomLoader;
 import com.blucorsys.app.CustomComponent.JobModel;
 import com.blucorsys.app.ServerCall.AppConfig;
 import com.blucorsys.app.ServerCall.Preferences;
-import com.blucorsys.app.labourcontractorapp.Contractor.ContractorConsole;
-import com.blucorsys.app.labourcontractorapp.Contractor.MapsActivityTwo;
-import com.blucorsys.app.labourcontractorapp.Contractor.PostJob;
+import com.blucorsys.app.labourcontractorapp.MapsActivity;
 import com.blucorsys.app.labourcontractorapp.R;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,9 +56,11 @@ public class ApplyJobFragment extends Fragment {
 RecyclerView rv_applyjob;
 Preferences pref;
 CustomLoader loader;
-    Spinner catspin,spin_loc,spin_date;
+    Spinner catspin,spin_loc;
     private ArrayList<String> categoryEng;
     private ArrayList<String> categoryID;
+    private ArrayList<String> categoryMar;
+    private ArrayList<String> categoryHin;
     private ArrayList<String> loca;
     private ArrayList<String> date;
     private ArrayList<String> jobid;
@@ -73,11 +69,11 @@ CustomLoader loader;
 
     public static List<String> joblisttt  = new ArrayList<>();
     ArrayList<HashMap<String,String>> arrayList=new ArrayList<>();
-    TextView tv_applyjob,tv_appliedjob,btn_apply;
+    TextView tv_applyjob,tv_appliedjob,btn_apply,tv_date;
     TextView tv_ok;
     EditText et_wages;
     ArrayList<JobModel> joblist;
-    String create_datetime,location,cattype_id;
+    String location,cattype_id,credate;
 
     public ApplyJobFragment() {
         // Required empty public constructor
@@ -94,7 +90,7 @@ CustomLoader loader;
        // hitApplyJobs();
         catspin=v.findViewById(R.id.spincategory);
         spin_loc=v.findViewById(R.id.spin_loc);
-        spin_date=v.findViewById(R.id.spin_date);
+        tv_date=v.findViewById(R.id.tv_date);
         tv_applyjob=v.findViewById(R.id.tv_applyjob);
         tv_appliedjob=v.findViewById(R.id.tv_appliedjob);
         et_wages=v.findViewById(R.id.tv_wages);
@@ -103,6 +99,8 @@ CustomLoader loader;
 
         categoryEng = new ArrayList<String>();
         categoryID = new ArrayList<String>();
+        categoryMar = new ArrayList<String>();
+        categoryHin = new ArrayList<String>();
         loca = new ArrayList<String>();
         jobid = new ArrayList<String>();
         date = new ArrayList<String>();
@@ -110,25 +108,27 @@ CustomLoader loader;
 
 
 
-        spin_date.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                create_datetime=spin_date.getSelectedItem().toString();
-                Log.e("nishaaa1",""+create_datetime);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
+//        spin_date.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+//                create_datetime=spin_date.getSelectedItem().toString();
+//                Log.e("nishaaa1",""+create_datetime);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parentView) {
+//                // your code here
+//            }
+//
+//        });
 
         spin_loc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                credate=date.get(position);
                 location=spin_loc.getSelectedItem().toString();
                 Log.e("nishaaa2",""+location);
+                tv_date.setText(credate);
             }
 
             @Override
@@ -140,6 +140,7 @@ CustomLoader loader;
         catspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
                 cattype_id=catspin.getSelectedItem().toString();
                 Log.e("nishaaa3",""+cattype_id);
             }
@@ -159,7 +160,7 @@ CustomLoader loader;
                 String wage=et_wages.getText().toString();
                 // cattype_id="Unskilled Labour Female";
                 if (!wage.isEmpty()){
-                    hitAPI(location,create_datetime,wage,cattype_id);
+                    hitAPI(location,credate,wage,cattype_id);
                 }
                 else
                 {
@@ -177,13 +178,13 @@ CustomLoader loader;
             public void onClick(View v) {
                 String id=pref.get(Constants.USERID);
                 String jsonarr="";
-                hipApplyJob(id, String.valueOf(array));
+                String type="LABOUR";
+                hipApplyJob(id, String.valueOf(array),type);
             }
         });
 
         getCategory();
         getLocation();
-        getDate();
         return v;
     }
 
@@ -233,12 +234,24 @@ CustomLoader loader;
                 //Adding the name of the student to array list
                 categoryID.add(json.getString(Constants.CATID));
                 categoryEng.add(json.getString(Constants.CATENG));
+                categoryMar.add(json.getString(Constants.CATMAR));
+                categoryHin.add(json.getString(Constants.CATHIN));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryEng));
-    }
+        if(pref.get(Constants.Lang).equals("ENGLISH")){
+            catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryEng));
+
+        }
+        else if(pref.get(Constants.Lang).equals("हिंदी")){
+            catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryHin));
+
+        }
+        else {
+            catspin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categoryMar));
+
+        }     }
 
     private void getLocation() {
         loader.show();
@@ -286,6 +299,7 @@ CustomLoader loader;
                 //Adding the name of the student to array list
                 loca.add(json.getString(Constants.LOC));
                 jobid.add(json.getString(Constants.JOBID));
+                date.add(json.getString(Constants.careda));
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -310,7 +324,7 @@ CustomLoader loader;
                     JSONArray jsonArray= j.getJSONArray(Constants.DATE);
 
                     //Calling method getStudents to get the students from the JSON Array
-                    getDatess(jsonArray);
+                  //  getDatess(jsonArray);
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
@@ -330,23 +344,23 @@ CustomLoader loader;
         requestQueue.add(strReq);
     }
 
-    private void getDatess(JSONArray j){
-        //Traversing through all the items in the json array
-        for(int i=0;i<j.length();i++){
-            try {
-                //Getting json object
-                JSONObject json = j.getJSONObject(i);
-
-                //Adding the name of the student to array list
-                date.add(json.getString(Constants.DATE1));
-                jobid.add(json.getString(Constants.JOBID));
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        spin_date.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, date));
-    }
+//    private void getDatess(JSONArray j){
+//        //Traversing through all the items in the json array
+//        for(int i=0;i<j.length();i++){
+//            try {
+//                //Getting json object
+//                JSONObject json = j.getJSONObject(i);
+//
+//                //Adding the name of the student to array list
+//                date.add(json.getString(Constants.DATE1));
+//                jobid.add(json.getString(Constants.JOBID));
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        spin_date.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, date));
+//    }
 
 
 
@@ -386,7 +400,10 @@ CustomLoader loader;
             holder.mapmarker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), MapsActivity.class);
+                    Intent intent = new Intent(getContext(), LabourMapActivity.class);
+                    intent.putExtra("lat",pu.getLatitude());
+                    intent.putExtra("lng",pu.getLongitude());
+                    intent.putExtra("address",pu.getLocation());
                     startActivity(intent);
 
                  /// getaddress(address);
@@ -399,24 +416,17 @@ CustomLoader loader;
                     if(b){
 
                          selectedjob= pu.getJobid_details();
-                        Log.e("AMOLf777",""+selectedjob);
                         joblisttt.add(selectedjob);
                         HashMap<String,String> map;
                         map=new HashMap<>();
 
                         map.put("jobid_details",""+selectedjob);
                         arrayList.add(map);
-
                          array = new JSONArray(arrayList);
-                        Log.e("AMOLf",""+array);
-
                     }
                     else{
                        joblisttt.remove(selectedjob);
-                        Log.e("AMOL",""+selectedjob);
-
                     }
-
                 }
             });
 
@@ -495,6 +505,8 @@ CustomLoader loader;
                                 jobmodel.setCat_english(job.getString("cat_english"));
                                 jobmodel.setCat_hindi(job.getString("cat_hindi"));
                                 jobmodel.setCat_marathi(job.getString("cat_marathi"));
+                                jobmodel.setLatitude(job.getString("latitude"));
+                                jobmodel.setLongitude(job.getString("longitude"));
 
                                 joblist.add(jobmodel);
                             }
@@ -525,7 +537,7 @@ CustomLoader loader;
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("location",location);
-                params.put("create_datetime", create_datetime);
+                params.put("create_datetime", credate);
                 params.put("wage", wage);
                 params.put("cattype_id", cattype_id);
                 Log.e("",""+params);
@@ -559,7 +571,7 @@ public  void getaddress(String address){
 
 }
 
-    private void hipApplyJob(final String id,final String json) {
+    private void hipApplyJob(final String id,final String json,final String type) {
         loader.show();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.APPLIEDJOB, new Response.Listener<String>() {
@@ -573,7 +585,7 @@ public  void getaddress(String address){
                     JSONObject object = new JSONObject(response);
 
                     if(object.getString("Success").equalsIgnoreCase("true")) {
-                        btn_apply.setVisibility(View.VISIBLE);
+                        btn_apply.setVisibility(View.INVISIBLE);
 
                             Log.d(TAG, array.toString());
 
@@ -600,9 +612,9 @@ public  void getaddress(String address){
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("ruserid",id);
+                params.put("ruserid",pref.get(Constants.USERID));
                 params.put("job_applied_id", json);
-                params.put("usertype", "Labour");
+                params.put("usertype",type);
 
                 Log.e("",""+params);
                 return params;
