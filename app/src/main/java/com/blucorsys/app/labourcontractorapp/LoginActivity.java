@@ -109,12 +109,10 @@ private boolean isPasswordVisible;
                 }
             }
         });
-
-
         List<String> list = new ArrayList();
         List<String> list1 = new ArrayList();
         List<String> list2 = new ArrayList();
-        list.add("");
+        list.add(" ");
         list.add(getString(R.string.contractor));
         list.add(getString(R.string.labour));
         list.add(getString(R.string.architect));
@@ -145,15 +143,16 @@ private boolean isPasswordVisible;
                 }
             });
 
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        role.setAdapter(adapter);
-        customNew=new CustomNew(LoginActivity.this,list);
-        role.setAdapter(customNew);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        role.setAdapter(adapter);
+//        customNew=new CustomNew(LoginActivity.this,list);
+//        role.setAdapter(customNew);
 
         role.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                  usertype = String.valueOf(role.getSelectedItemPosition());
+
                   type= list1.get(Integer.parseInt(usertype));
                //  String userrole=date.get(position);
                 Log.e("new role", "" + type);
@@ -228,7 +227,7 @@ private boolean isPasswordVisible;
                         // Log and toast
                         String  msg = token;
                         Log.e("msg", msg);
-                      //  Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
     TextView btn_info;
     Preferences pref;
     Locale myLocale;
-    String lang;
-    String currentLanguage;
+    String lang="";
+    String currentLanguage,currentLang;
     ImageView share;
     LinearLayout openLink;
 
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         btn_info=findViewById(R.id.btn_info);
         share=findViewById(R.id.share);
         openLink=findViewById(R.id.ll_shantal);
-
-
+        pref=new Preferences(this);
+        currentLanguage = getIntent().getStringExtra(currentLanguage);
         ObjectAnimator anim = ObjectAnimator.ofInt(openLink, "backgroundColor", Color.WHITE, Color.RED,
                 Color.WHITE);
         anim.setDuration(1500);
@@ -91,23 +91,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btncontinue.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Log.e("ttttttt11", lang);
-                if (lang.equalsIgnoreCase(pref.get(Constants.Lang))) {
-                    Toast.makeText(MainActivity.this, "please select any one language", Toast.LENGTH_LONG).show();
-                } else {
-                    MainActivity.this.startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                }
-            }
-        });
+
         List<String> list = new ArrayList();
-        list.add("LANGUAGE");
+        list.add(getString(R.string.select));
         list.add("ENGLISH");
         list.add("हिंदी");
         list.add("मराठी");
 
-        pref=new Preferences(this);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         langspinner.setAdapter(adapter);
@@ -115,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         langspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 lang =langspinner.getSelectedItem().toString();
+             //   langspinner.setSelection(position);
 //                MainActivity.this.pref.set(Constants.Lang, lang);
 //                MainActivity.this.pref.commit();
 
@@ -123,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case 1:
-                        MainActivity.this.pref.set(Constants.Lang, lang);
+                        MainActivity.this.pref.set(Constants.Lang,lang);
                         MainActivity.this.pref.commit();
 //                        pref.set("Lang","en");
 //                        pref.commit();
@@ -164,6 +156,23 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent("android.intent.action.VIEW");
                 intent.setDataAndType(Uri.parse("http://example.i-tech.consulting/Buildude/dist/media/1613458569City_Gateway_Brochure.pdf"), "text/html");
                 MainActivity.this.startActivity(intent);
+            }
+        });
+
+        btncontinue.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.e("ttttttt11", lang);
+
+                if (langspinner.getSelectedItem().equals("LANGUAGE")) {
+                    Toast.makeText(MainActivity.this, "please select any one language", Toast.LENGTH_LONG).show();
+                }
+
+//                else if (lang.equals("भाषा")) {
+//                    Toast.makeText(MainActivity.this, "please select any one language", Toast.LENGTH_LONG).show();
+//                }
+                else {
+                    MainActivity.this.startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
             }
         });
 
